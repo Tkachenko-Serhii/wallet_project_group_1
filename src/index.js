@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import store from "./redux/store";
+// import store from "./redux/store";
 
 import { defaultModules } from "@pnotify/core";
 import "@pnotify/core/dist/PNotify.css";
@@ -17,9 +17,9 @@ defaults.width = "400px";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    {/* <Provider store={store}> */}
+    <App />
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
