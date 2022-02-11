@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { transactionApi } from "./transactions/transactionsSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { transactionApi } from './transactions/transactionsSlice';
 
 const store = configureStore({
   reducer: {
