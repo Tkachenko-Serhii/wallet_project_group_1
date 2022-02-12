@@ -1,12 +1,13 @@
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { InputAdornment, TextField, Button } from '@mui/material';
-import { Email as EmailIcon, Lock as LockIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+import * as yup from 'yup';
 import styles from './LoginForm.module.css';
-import { emailRegExp, passwordRegExp } from '../../utils';
 
 import Logo from '../Logo';
+import { EmailInputWithFormik, PasswordInputWithFormik } from '../Inputs';
+
+import { emailRegExp, passwordRegExp } from '../../utils';
 
 const initialValues = {
 	email: '',
@@ -18,7 +19,7 @@ export default function LoginForm() {
 	const validationSchema = yup.object().shape({
 		email: yup
 			.string('Enter your email')
-			.matches(emailRegExp, 'Enter valid email')
+			.matches(emailRegExp, 'Enter valid email such as emample@mail.com')
 			.required('Email is required'),
 		password: yup
 			.string('Enter your password')
@@ -33,6 +34,7 @@ export default function LoginForm() {
 		validationSchema,
 		onSubmit: (values) => console.log(values)
 	});
+
 	return (
 		<div className={styles.blurBackgroundWrapper}>
 			<div className={styles.formWrapper}>
@@ -42,44 +44,8 @@ export default function LoginForm() {
 					onSubmit={formik.handleSubmit}
 					autoComplete="off"
 				>
-					<TextField
-						fullWidth
-						type="email"
-						id="email"
-						name="email"
-						placeholder="Email"
-						variant="standard"
-						onChange={formik.handleChange}
-						value={formik.values.email}
-						error={formik.touched.email && Boolean(formik.errors.email)}
-						helperText={formik.touched.email && formik.errors.email}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<EmailIcon />
-								</InputAdornment>
-							)
-						}}
-					/>
-					<TextField
-						fullWidth
-						type="password"
-						id="password"
-						name="password"
-						placeholder="Password"
-						variant="standard"
-						onChange={formik.handleChange}
-						value={formik.values.password}
-						error={formik.touched.password && Boolean(formik.errors.password)}
-						helperText={formik.touched.password && formik.errors.password}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<LockIcon />
-								</InputAdornment>
-							)
-						}}
-					/>
+					<EmailInputWithFormik formik={formik} autoFocus={true} />
+					<PasswordInputWithFormik formik={formik} />
 					<div className={styles.btnGroup}>
 						<Button color="primary" fullWidth type="submit" variant="contained">
 							Login
