@@ -1,0 +1,49 @@
+.bgImage {
+	width: 274px;
+	height: 250px;
+
+	background-image: url('../../images/tablet/registerPage/frame-register-tablet-1x.png');
+}
+
+@media (min-device-pixel-ratio: 2),
+	(min-resolution: 192dpi),
+	(min-resolution: 2dppx) {
+	.bgImage {
+		background-image: url('../../images/tablet/registerPage/frame-register-tablet-2x.png');
+	}
+}
+
+@media (min-device-pixel-ratio: 3),
+	(min-resolution: 288dpi),
+	(min-resolution: 3dppx) {
+	.bgImage {
+		background-image: url('../../images/tablet/registerPage/frame-register-tablet-3x.png');
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.bgImage {
+		background-image: url('../../images/desktop/registerPage/frame-register-1x.png');
+
+		width: 452px;
+		height: 413px;
+
+		background-size: contain;
+	}
+
+	@media (min-device-pixel-ratio: 2),
+		(min-resolution: 192dpi),
+		(min-resolution: 2dppx) {
+		.bgImage {
+			background-image: url('../../images/desktop/registerPage/frame-register-2x.png');
+		}
+	}
+
+	@media (min-device-pixel-ratio: 3),
+		(min-resolution: 288dpi),
+		(min-resolution: 3dppx) {
+		.bgImage {
+			background-image: url('../../images/desktop/registerPage/frame-register-3x.png');
+		}
+	}
+}
