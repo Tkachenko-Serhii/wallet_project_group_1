@@ -11,7 +11,7 @@ export default function Logo() {
 				width="40"
 				height="40"
 			/>
-			<p className={styles.logoText}>Wallet</p>
+			<h1 className={styles.logoText}>Wallet</h1>
 		</div>
 	);
 }

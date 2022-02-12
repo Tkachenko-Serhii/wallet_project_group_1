@@ -22,6 +22,11 @@ const CustomTextFiledStyled = styled(TextField)({
 	'&:hover svg, &:focus-within svg': {
 		fill: '#000',
 		transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
+	},
+	'@media screen and (min-width: 768px)': {
+		'&  svg:last-child': {
+			marginRight: '20px'
+		}
 	}
 });
 

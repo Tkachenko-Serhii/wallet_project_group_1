@@ -1,22 +1,59 @@
-@media screen and (min-width: 320px) {
-	.blurBackgroundWrapper {
-		position: relative;
-		height: 100vh;
+.blurBackgroundWrapper {
+	position: relative;
 
-		background-color: transparent;
+	height: 100vh;
+
+	background-color: transparent;
+}
+.formWrapper {
+	padding-inline: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	width: 100%;
+
+	transform: translate(-50%, -50%);
+
+	background-color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+	.blurBackgroundWrapper {
+		position: static;
 	}
 	.formWrapper {
-		padding-inline: 20px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		margin-inline: auto;
+		padding-top: 40px;
+		padding-bottom: 60px;
+		padding-inline: 65px;
 
-		width: 100%;
+		position: static;
+
+		width: 540px;
+
+		transform: translate(0);
+
+		border-radius: 20px;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.blurBackgroundWrapper {
+		position: relative;
+		background-color: rgba(255, 255, 255, 0.4);
+		backdrop-filter: blur(50px);
+	}
+
+	.formWrapper {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
 
-		background-color: #fff;
+		transform: translate(-50%, -50%);
 	}
 }
