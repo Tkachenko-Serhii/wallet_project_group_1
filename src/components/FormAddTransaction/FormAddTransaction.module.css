@@ -1,0 +1,123 @@
+/* The form */
+.form {
+  width: 540px;
+  height: 540px;
+  padding: 40px;
+
+  background-color: #fff;
+  border-radius: 15px;
+
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  margin-bottom: 40px;
+  font-size: 30px;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* The switch */
+.swichContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  margin: 0 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 34px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 42px;
+  width: 42px;
+  left: -1px;
+  bottom: -2px;
+  background-color: #24cca7;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(36, 204, 167, 0.25);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(36, 204, 167, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(36, 204, 167, 0.25);
+  border-radius: 50%;
+
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider:before {
+  background-color: #ff6596;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(255, 101, 150, 0.25);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(255, 101, 150, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(255, 101, 150, 0.25);
+
+  -webkit-transform: translateX(40px);
+  -ms-transform: translateX(40px);
+  transform: translateX(40px);
+}
+
+.dateContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+}
+
+.labelForm {
+  margin-bottom: 50px;
+}
+
+.inputForm {
+  width: 190px;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 100%;
+  color: #bdbdbd;
+  outline: 0;
+  outline-offset: 0;
+}
+
+.inputComment {
+  composes: inputForm;
+  width: 410px;
+  margin: auto;
+  display: block;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
+
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+}
