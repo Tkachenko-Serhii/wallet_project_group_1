@@ -1,8 +1,16 @@
 import { TextField, styled } from '@mui/material';
 
 const CustomTextFiledStyled = styled(TextField)({
-	'&::placeholder': {
-		color: '#e0e0e0'
+	'& > div': {
+		paddingBottom: '10px'
+	},
+	'& input': {
+		padding: 0,
+		fontSize: '18px',
+		lineHeight: '27px'
+	},
+	'& input::placeholder': {
+		color: '#bdbdbd'
 	},
 	'&  svg': {
 		fill: '#e0e0e0'

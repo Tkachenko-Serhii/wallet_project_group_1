@@ -6,7 +6,7 @@ export default function EmailInputWithFormik({ formik, autoFocus = false }) {
 	return (
 		<CustomTextFiledStyled
 			fullWidth
-			type="text"
+			type="email"
 			id="email"
 			name="email"
 			placeholder="Email"
