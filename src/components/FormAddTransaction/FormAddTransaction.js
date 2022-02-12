@@ -17,7 +17,9 @@ export default function FormAddTransaction(props) {
 
 
     const handleInputChange = event => {
+        console.log(event.currentTarget.value)
         const { name, value } = event.currentTarget;
+        console.log(event.currentTarget)
 
         switch (name) {
             case 'income':
@@ -40,6 +42,15 @@ export default function FormAddTransaction(props) {
                 return;
         }
     }
+
+    const resetForm = (event) => {
+        event.preventDefault();
+        setIncome('');
+        setAmount('');
+        setComment('');
+        setDate('');
+    }
+
 
     return (
 
@@ -69,6 +80,7 @@ export default function FormAddTransaction(props) {
                         name="amount"
                         placeholder='0.00'
                         className={styles.inputForm}
+                        onChange={handleInputChange}
                         required />
                 </label>
                 <DatePicker />
@@ -80,10 +92,14 @@ export default function FormAddTransaction(props) {
                     name="comment"
                     placeholder='Коментарий'
                     className={styles.inputComment}
+                    onChange={handleInputChange}
                     required />
             </label>
             <Button text="Добавить" color="green" />
-            <Button text="Отмена" color="white" />
+            <Button
+                text="Отмена"
+                color="white"
+                onClick={resetForm} />
         </form >
     )
 }
