@@ -8,7 +8,13 @@ import {
 
 import CustomTextFieldStyled from './CustomTextFiledStyled';
 
-export default function PasswordInputWithFormik({ formik }) {
+export default function PasswordInputWithFormik({
+	onChange,
+	value,
+	error,
+	helperText,
+	placeholder
+}) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -20,12 +26,12 @@ export default function PasswordInputWithFormik({ formik }) {
 			type={showPassword ? 'text' : 'password'}
 			id="password"
 			name="password"
-			placeholder="Password"
+			placeholder={placeholder}
 			variant="standard"
-			onChange={formik.handleChange}
-			value={formik.values.password}
-			error={formik.touched.password && Boolean(formik.errors.password)}
-			helperText={formik.touched.password && formik.errors.password}
+			onChange={onChange}
+			value={value}
+			error={error}
+			helperText={helperText}
 			InputProps={{
 				startAdornment: (
 					<InputAdornment position="start">

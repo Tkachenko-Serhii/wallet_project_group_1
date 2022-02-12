@@ -9,7 +9,7 @@ const CustomTextFiledStyled = styled(TextField)({
 	},
 	'&:hover svg, &:focus-within svg': {
 		fill: '#000',
-		transition: 'fill 250ms ease'
+		transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
 	}
 });
 
