@@ -1,1 +1,1 @@
-export { default as AuthPageWrapper } from './AuthPageWrapper';
+export { default } from './AuthPageWrapper';
