@@ -2,6 +2,7 @@ import { TextField, styled } from '@mui/material';
 
 const CustomTextFiledStyled = styled(TextField)({
 	'& > div': {
+		paddingLeft: '13px',
 		paddingBottom: '10px'
 	},
 	'& input': {
@@ -14,6 +15,9 @@ const CustomTextFiledStyled = styled(TextField)({
 	},
 	'&  svg': {
 		fill: '#e0e0e0'
+	},
+	'&  svg:not(:first-child)': {
+		marginRight: '22px'
 	},
 	'&:hover svg, &:focus-within svg': {
 		fill: '#000',
