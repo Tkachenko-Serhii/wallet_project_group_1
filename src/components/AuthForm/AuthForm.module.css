@@ -1,0 +1,16 @@
+@media screen and (min-width: 320px) {
+	.authForm {
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 40px;
+		width: 100%;
+	}
+	.btnGroup {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 100%;
+	}
+}

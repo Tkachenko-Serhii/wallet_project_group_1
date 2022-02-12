@@ -16,7 +16,7 @@ const CustomTextFiledStyled = styled(TextField)({
 	'&  svg': {
 		fill: '#e0e0e0'
 	},
-	'&  svg:not(:first-child)': {
+	'&  svg:last-child': {
 		marginRight: '22px'
 	},
 	'&:hover svg, &:focus-within svg': {

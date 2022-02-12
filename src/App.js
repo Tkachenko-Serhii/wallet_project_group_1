@@ -1,5 +1,5 @@
 import './App.css';
-import LoginForm from './components/LoginForm';
+import LoginPage from './pages/LoginPage/LoginPage';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 		<div className="App">
 			<Routes>
 				<Route path="/" element={<Navigate to="/login" />} />
-				<Route path="/login" element={<LoginForm />} />
+				<Route path="/login" element={<LoginPage />} />
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 		</div>
