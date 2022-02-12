@@ -9,6 +9,8 @@ import {
 import CustomTextFieldStyled from './CustomTextFiledStyled';
 
 export default function PasswordInputWithFormik({
+	id,
+	name,
 	onChange,
 	value,
 	error,
@@ -24,8 +26,8 @@ export default function PasswordInputWithFormik({
 		<CustomTextFieldStyled
 			fullWidth
 			type={showPassword ? 'text' : 'password'}
-			id="password"
-			name="password"
+			id={id}
+			name={name}
 			placeholder={placeholder}
 			variant="standard"
 			onChange={onChange}

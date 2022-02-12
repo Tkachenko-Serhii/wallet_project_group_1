@@ -2,7 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import styles from './AuthForm.module.css';
 
-export default function AuthForm({ formik, children }) {
+export default function AuthForm({
+	formik,
+	children,
+	primaryBtnText,
+	secondaryBtnText,
+	navigateTo
+}) {
 	const navigate = useNavigate();
 	return (
 		<form
@@ -13,16 +19,16 @@ export default function AuthForm({ formik, children }) {
 			{children}
 			<div className={styles.btnGroup}>
 				<Button color="primary" fullWidth type="submit" variant="contained">
-					Login
+					{primaryBtnText}
 				</Button>
 				<Button
 					color="primary"
 					fullWidth
 					type="button"
 					variant="outlined"
-					onClick={() => navigate('/register')}
+					onClick={() => navigate(navigateTo)}
 				>
-					Register
+					{secondaryBtnText}
 				</Button>
 			</div>
 		</form>
