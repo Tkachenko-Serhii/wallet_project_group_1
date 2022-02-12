@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import Button from '../Button';
 import styles from './AuthForm.module.css';
 
 export default function AuthForm({
@@ -10,6 +10,7 @@ export default function AuthForm({
 	navigateTo
 }) {
 	const navigate = useNavigate();
+
 	return (
 		<form
 			className={styles.authForm}
@@ -18,18 +19,13 @@ export default function AuthForm({
 		>
 			{children}
 			<div className={styles.btnGroup}>
-				<Button color="primary" fullWidth type="submit" variant="contained">
-					{primaryBtnText}
-				</Button>
+				<Button text={primaryBtnText} />
 				<Button
-					color="primary"
-					fullWidth
 					type="button"
-					variant="outlined"
+					text={secondaryBtnText}
+					color="white"
 					onClick={() => navigate(navigateTo)}
-				>
-					{secondaryBtnText}
-				</Button>
+				/>
 			</div>
 		</form>
 	);
