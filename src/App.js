@@ -1,14 +1,17 @@
-import "./App.css";
-import Container from "./components/Container";
-import Button from "./components/Button";
+import './App.css';
+import LoginPage from './pages/LoginPage/LoginPage';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-  return <div className='App'>
-    <Container>
-      <Button text="Добавить" color="green" />
-      <Button text="Отмена" color="white" />
-    </Container>
-  </div>;
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/" element={<Navigate to="/login" />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="*" element={<Navigate to="/" />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
