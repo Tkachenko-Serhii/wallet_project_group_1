@@ -25,7 +25,7 @@ export default function LoginForm() {
 			.string('Enter your password')
 			.matches(
 				passwordRegExp,
-				'Password should contains minimum 8 and maximum 12 characters and at least one uppercase letter, one lowercase letter, one number and one special character'
+				'Password should contains minimum 8 and maximum 12 characters and at least one uppercase letter, one lowercase letter, one number and one special character of @, $, !, %, *, ?, &'
 			)
 			.required('Password is required')
 	});
@@ -45,7 +45,13 @@ export default function LoginForm() {
 					autoComplete="off"
 				>
 					<EmailInputWithFormik formik={formik} autoFocus={true} />
-					<PasswordInputWithFormik formik={formik} />
+					<PasswordInputWithFormik
+						onChange={formik.handleChange}
+						value={formik.values.password}
+						error={formik.touched.password && Boolean(formik.errors.password)}
+						helperText={formik.touched.password && formik.errors.password}
+						placeholder="Password"
+					/>
 					<div className={styles.btnGroup}>
 						<Button color="primary" fullWidth type="submit" variant="contained">
 							Login
