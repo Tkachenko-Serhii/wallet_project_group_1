@@ -4,7 +4,6 @@ import RegisterPage from './pages/RegisterPage';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-<<<<<<< Updated upstream
   return (
     <div className="App">
       <Routes>
@@ -15,12 +14,6 @@ function App() {
       </Routes>
     </div>
   );
-=======
-  return <div className='App'>
-    <Container>
-    </Container>
-  </div>;
->>>>>>> Stashed changes
 }
 
 export default App;
