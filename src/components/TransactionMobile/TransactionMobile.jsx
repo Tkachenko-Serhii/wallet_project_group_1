@@ -39,9 +39,11 @@ export default function TransactionMobile(props) {
       balance: 56789876,
     },
   ];
+
   return operations.map((operation) => {
     return (
       <ul
+        key={operation.id}
         className={s.transactionDetailsMobile}
         style={{
           borderLeft: operation.type

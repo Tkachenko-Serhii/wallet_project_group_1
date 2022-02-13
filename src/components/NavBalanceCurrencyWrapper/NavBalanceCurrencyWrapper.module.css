@@ -11,5 +11,6 @@
 @media screen and (min-width: 1280px) {
   .wrapper {
     flex-direction: column;
+    margin-right: 30px;
   }
 }

@@ -26,7 +26,7 @@ export default function TransactionTable(props) {
     {
       field: 'category',
       headerName: 'Category',
-      type: 'text',
+      type: 'string',
       width: 130,
       sortable: false,
       editable: false,
@@ -34,7 +34,7 @@ export default function TransactionTable(props) {
     {
       field: 'comment',
       headerName: 'Comment',
-      type: 'text',
+      type: 'string',
       width: 150,
       sortable: false,
       editable: false,

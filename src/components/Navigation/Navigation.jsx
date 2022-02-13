@@ -10,7 +10,7 @@ export default function Navigation() {
     <ul className={s.navigation}>
       <li className={s.iconWrapper}>
         <NavLink
-          to="/"
+          to="/home"
           className={({ isActive }) =>
             isActive ? s.iconNavLinkActive : s.iconNavLink
           }
@@ -19,7 +19,7 @@ export default function Navigation() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? s.navLinkActive : s.navLink)}
-          to="/"
+          to="/home"
         >
           Главная
         </NavLink>
