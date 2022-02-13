@@ -11,6 +11,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
+
+	position: relative;
+
+	width: 100%;
 }
 .btnGroup {
 	display: flex;

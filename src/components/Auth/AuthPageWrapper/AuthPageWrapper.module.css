@@ -18,5 +18,7 @@
 	.authPageSection {
 		padding: 0;
 		flex-direction: row;
+
+		gap: 0;
 	}
 }
