@@ -1,11 +1,15 @@
 import { useFormik } from 'formik';
-import AuthPageWrapper from '../../components/AuthPageWrapper';
-import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
-import AuthForm from '../../components/AuthForm';
+import Media from 'react-media';
+import AuthMedia from '../../components/Auth/AuthMedia';
+import AuthPageWrapper from '../../components/Auth/AuthPageWrapper';
+import AuthFormWrapper from '../../components/Auth/AuthFormWrapper';
+import AuthForm from '../../components/Auth/AuthForm';
 import {
 	EmailInputWithFormik,
 	PasswordInputWithFormik
 } from '../../components/Inputs';
+
+import styles from './LoginPage.module.css';
 
 import { loginFormValidationSchema } from '../../utils';
 
@@ -22,6 +26,10 @@ export default function LoginPage() {
 
 	return (
 		<AuthPageWrapper>
+			<Media
+				query="(min-width: 768px)"
+				render={() => <AuthMedia className={styles.bgImage} />}
+			/>
 			<AuthFormWrapper>
 				<AuthForm
 					formik={formik}
