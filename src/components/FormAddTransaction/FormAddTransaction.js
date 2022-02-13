@@ -1,20 +1,41 @@
 
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
-
+import Select from 'react-select'
+import { stylesSelect } from './stylesForSelect' 
+import { ReactComponent as Plus } from '../../icons/plus.svg'
+import { ReactComponent as Minus } from '../../icons/minus.svg'
+import { ReactComponent as CalendarIcon } from '../../icons/calendar.svg'
 
 import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
 
 export default function FormAddTransaction(props) {
-    const [income, setIncome] = useState(true);
+
+    const [income, setIncome] = useState(false);
     const [amount, setAmount] = useState(0);
     const [date, setDate] = useState("");
     const [comment, setComment] = useState("");
+
+    const [category, setCategory] = useState(" ");
+
     // const dispatch = useDispatch();
 
+    // const [transactionType , setTransactionType] = useState('-')
 
+    const categories = [
+        {value: "Main" , label: "Основной"},
+        {value: "Food" , label: "Еда"},
+        {value: "Car" , label: "Авто"},
+        {value: "Development" , label: "Развитие"},
+        {value: "Children" , label: "Дети"},
+        {value: "Home" , label: "Дом"},
+        {value: "Education" , label: "Образование"},
+        {value: "Other" , label: "Остальные"},
+    ]
+
+   console.log(income);
 
     const handleInputChange = event => {
         console.log(event.currentTarget.value)
@@ -23,7 +44,14 @@ export default function FormAddTransaction(props) {
 
         switch (name) {
             case 'income':
-                setIncome(value);
+                if(income === false){
+                    setIncome(true);
+                }
+                else{
+                    setIncome(false);
+                }
+                
+                
                 break;
 
             case 'amount':
@@ -67,11 +95,31 @@ export default function FormAddTransaction(props) {
                     <input
                         type="checkbox"
                         name="income"
-                        onChange={handleInputChange} />
-                    <span className={styles.slider}></span>
+                        onChange={handleInputChange}
+                        checked={!income}
+                         />
+                    <div className={styles.slider}>
+                        <div className={styles.indicator}>
+                            { income ?  <Plus /> : <Minus/> }
+                        </div>
+                    </div>
                 </label>
                 <span className={styles.swichTitle}>Расход</span>
             </div>
+
+               
+             { !income ? <div className={styles.categoriesContainer}>
+                            <Select 
+                                    placeholder="Выберите категорию" 
+                                    options={categories} 
+                                    styles={stylesSelect()}
+                                    onChange={(option) => {
+                                        setCategory(option.value)
+                                      }}/>
+                         </div> 
+                        : null
+            }
+                
 
             <div className={styles.dateContainer}>
                 <label className={styles.labelForm}>
@@ -83,7 +131,12 @@ export default function FormAddTransaction(props) {
                         onChange={handleInputChange}
                         required />
                 </label>
-                <DatePicker />
+
+                <div className={styles.datepickerContainer}>
+                    <DatePicker  />
+                    <CalendarIcon  className={styles.calendarIcon}  />
+                </div>
+               
             </div>
 
             <label className={styles.labelForm}>

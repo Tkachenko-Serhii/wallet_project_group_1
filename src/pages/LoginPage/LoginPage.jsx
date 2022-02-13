@@ -8,6 +8,7 @@ import {
 } from '../../components/Inputs';
 
 import { loginFormValidationSchema } from '../../utils';
+import FormAddTransaction from '../../components/FormAddTransaction'
 
 const initialValues = {
 	email: '',
@@ -40,6 +41,7 @@ export default function LoginPage() {
 						placeholder="Password"
 					/>
 				</AuthForm>
+				<FormAddTransaction></FormAddTransaction>
 			</AuthFormWrapper>
 		</AuthPageWrapper>
 	);
