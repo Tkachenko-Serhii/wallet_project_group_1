@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 // import store from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
 
 import { defaultModules } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
@@ -18,7 +19,9 @@ defaults.width = '400px';
 ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
     {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')

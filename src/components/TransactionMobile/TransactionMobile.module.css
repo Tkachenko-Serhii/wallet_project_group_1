@@ -1,6 +1,9 @@
 .transactionDetailsMobile {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1.2pt;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   border-radius: 10px;
   background-color: #fff;
 }
@@ -15,17 +18,15 @@
 .transactionDetailsRowLabelMobile {
   margin-left: 20px;
   margin-right: 5px;
+
   font-size: 18px;
   font-weight: 700;
   line-height: 1.5;
-
-  font-family: 'Poppins';
 }
 .transactionDetailsRowValueMobile {
   margin-right: 20px;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  overflow-x: scroll;
-  font-family: 'Poppins';
+  /* overflow-x: scroll; */
 }

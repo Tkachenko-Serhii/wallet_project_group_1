@@ -1,10 +1,10 @@
-import Dashboard from './components/Dashboard/Dashboard';
+import HomeTab from './components/HomeTab/HomeTab';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <Dashboard />
+      <HomeTab />
     </div>
   );
 }
