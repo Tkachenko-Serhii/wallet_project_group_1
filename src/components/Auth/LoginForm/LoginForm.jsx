@@ -15,7 +15,10 @@ export default function LoginForm() {
 	const formik = useFormik({
 		initialValues,
 		validationSchema: loginFormValidationSchema,
-		onSubmit: (values) => console.log(values)
+		onSubmit: (values) => {
+			console.log(values);
+			formik.handleReset();
+		}
 	});
 
 	return (

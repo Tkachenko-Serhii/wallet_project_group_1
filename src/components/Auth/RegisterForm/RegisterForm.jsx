@@ -15,16 +15,35 @@ import styles from './RegisterForm.module.css';
 import { registerFormValidationSchema } from '../../../utils';
 
 export default function RegisterForm() {
-	//========== Formik logic=============
-	const initialValues = {
+	const INITIAL_FORM_VALUES = {
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: ''
 	};
 
+	const INITIAL_IS_FIELD_FILLED_VALUES = {
+		name: false,
+		email: false,
+		password: false,
+		confirmPassword: false
+	};
+
+	const PROGRESS_VALUES = {
+		zero: 0,
+		diff: 25,
+		hundred: 100
+	};
+
+	const [progress, setProgress] = useState(PROGRESS_VALUES.zero);
+	const [isFieldFilled, setFieldFilled] = useState(
+		INITIAL_IS_FIELD_FILLED_VALUES
+	);
+
+	//========== Formik logic=============
+
 	const formik = useFormik({
-		initialValues,
+		initialValues: INITIAL_FORM_VALUES,
 		validationSchema: registerFormValidationSchema,
 		onSubmit: (values) => {
 			const { name, email, password } = values;
@@ -33,28 +52,19 @@ export default function RegisterForm() {
 				email,
 				password
 			});
+			formik.handleReset();
+			setProgress(0);
+			setFieldFilled(INITIAL_IS_FIELD_FILLED_VALUES);
 		}
 	});
+
 	//========== end of Formik logic ==========
 
 	//========== progress bar logic ===========
-	const PROGRESS_VALUE = {
-		zero: 0,
-		diff: 25,
-		hundred: 100
-	};
-
-	const [progress, setProgress] = useState(PROGRESS_VALUE.zero);
-	const [isFieldFilled, setFieldFilled] = useState({
-		name: false,
-		email: false,
-		password: false,
-		confirmPassword: false
-	});
 
 	const increaseProgress = (objKey, inputName) => {
 		if (!formik.values[inputName].trim()) {
-			setProgress(progress - PROGRESS_VALUE.diff);
+			setProgress(progress - PROGRESS_VALUES.diff);
 			setFieldFilled((prevState) => ({
 				...prevState,
 				[objKey]: !prevState[objKey]
@@ -64,7 +74,7 @@ export default function RegisterForm() {
 
 	const decreaseProgress = (objKey, inputName) => {
 		if (formik.values[inputName].trim()) {
-			setProgress(progress + PROGRESS_VALUE.diff);
+			setProgress(progress + PROGRESS_VALUES.diff);
 			setFieldFilled((prevState) => ({
 				...prevState,
 				[objKey]: !prevState[objKey]
@@ -81,12 +91,12 @@ export default function RegisterForm() {
 			}
 		}
 
-		if (progress < PROGRESS_VALUE.zero) {
-			setProgress(PROGRESS_VALUE.zero);
+		if (progress < PROGRESS_VALUES.zero) {
+			setProgress(PROGRESS_VALUES.zero);
 		}
 
-		if (progress > PROGRESS_VALUE.hundred) {
-			setProgress(PROGRESS_VALUE.hundred);
+		if (progress > PROGRESS_VALUES.hundred) {
+			setProgress(PROGRESS_VALUES.hundred);
 		}
 	};
 
