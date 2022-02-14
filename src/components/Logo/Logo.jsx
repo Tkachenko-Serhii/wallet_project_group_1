@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import logoImg from '../../images/logo/logoImg.png';
+import logoImg from '../../images/logo.svg';
 import styles from './Logo.module.css';
 
 export default function Logo() {
@@ -14,6 +14,7 @@ export default function Logo() {
 					width="40"
 					height="40"
 				/>
+
 				<h1 className={styles.logoText}>Wallet</h1>
 			</div>
 		</Link>
