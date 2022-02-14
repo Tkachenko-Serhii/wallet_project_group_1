@@ -1,8 +1,23 @@
+.modalContainer{
+  position: relative;
+}
+.modalOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  background-color:rgba(0, 0, 0, 0.25);;
+  z-index: 9999;
+}
 /* The form */
 .form {
-  width: 540px;
-  height: 540px;
-  padding: 40px;
+  max-width: 540px;
+  padding: 40px 80px 60px;
 
   background-color: #fff;
   border-radius: 15px;
@@ -90,9 +105,8 @@ input:checked + .slider .indicator{
   width: 410px;
 }
 .dateContainer {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-evenly;
+ margin-right: 30px;
+ 
 }
 
 .labelForm {
@@ -133,6 +147,25 @@ select {
   display: flex;
   align-items: center;
 }
+.amountAndDateContainer{
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dateTimeInput{
+  width: 190px;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  text-align: left;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  font-size: 18px;
+  line-height: 100%;
+  color: #000000;
+  outline: 0;
+  outline-offset: 0;
+}
 
 .calendarIcon{
   position: absolute;
@@ -144,3 +177,28 @@ select {
   width: 410px;
   margin-bottom: 40px;
 }
+
+.openButton{ 
+    position: absolute;
+    right: 6%;
+    bottom: 40px;
+    width: 44px;
+    height: 44px;
+    background-color: #24CCA7;
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .closeButton{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+  }

@@ -5,16 +5,17 @@ import moment from "moment";
 import styles from './DataPicker.module.css';
 
 
-export default function DatePicker(props) {
-    const [date, setDate] = useState({ date: moment(new Date()).format('DD-MM-YYYY')});
-
-    console.log('date',date);
+export default function DatePicker({date , updateDate}) {
+    
     return (
         <Datetime
             className={styles.input}
             dateFormat="DD-MM-YYYY"
             timeFormat={false}
             value={date}
-            onChange={(date) => setDate(date)} />
+            onChange={(moment) => {
+                updateDate('date', moment._d)
+            }} 
+            />
     )
 }
