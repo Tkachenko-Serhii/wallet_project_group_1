@@ -12,6 +12,7 @@ export default function PasswordInputWithFormik({
 	id,
 	name,
 	onChange,
+	onBlur,
 	value,
 	error,
 	helperText,
@@ -31,6 +32,7 @@ export default function PasswordInputWithFormik({
 			placeholder={placeholder}
 			variant="standard"
 			onChange={onChange}
+			onBlur={onBlur}
 			value={value}
 			error={error}
 			helperText={helperText}

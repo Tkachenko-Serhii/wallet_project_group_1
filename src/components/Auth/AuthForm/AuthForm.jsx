@@ -17,7 +17,7 @@ export default function AuthForm({
 			onSubmit={formik.handleSubmit}
 			autoComplete="off"
 		>
-			{children}
+			<div className={styles.inputsWrapper}>{children}</div>
 			<div className={styles.btnGroup}>
 				<Button text={primaryBtnText} />
 				<Button
