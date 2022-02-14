@@ -6,6 +6,16 @@
 	gap: 40px;
 	width: 100%;
 }
+
+.inputsWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+
+	position: relative;
+
+	width: 100%;
+}
 .btnGroup {
 	display: flex;
 	flex-direction: column;
@@ -18,7 +28,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 40px;
+		gap: 50px;
 		width: 100%;
 	}
 	.btnGroup {
