@@ -1,16 +1,4 @@
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  height: 100vh;
-
-  background-color: #e7eaf2;
-  border: solid 1px black;
-}
 @media screen and (max-width: 767px) {
-  .container {
-    padding: 0 20px;
-    width: 320px;
-  }
   .navigation {
     padding: 10px;
     display: flex;
@@ -42,21 +30,5 @@
   .balanceSum {
     font-size: 30px;
     font-weight: 400;
-    /* line-height: 1.5; */
-  }
-}
-
-@media screen and (min-width: 767px) and (max-width: 1279px) {
-  .container {
-    padding: 20px 40px 0;
-    width: 768px;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 85px 0;
-    width: 1280px;
   }
 }
