@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
@@ -13,32 +14,35 @@ import ProgressBar from '../../ProgressBar';
 import styles from './RegisterForm.module.css';
 
 import { registerFormValidationSchema } from '../../../utils';
+import { userOperations, userSelectors } from '../../../redux/user';
+
+const INITIAL_FORM_VALUES = {
+	name: '',
+	email: '',
+	password: '',
+	confirmPassword: ''
+};
+
+const INITIAL_IS_FIELD_FILLED_VALUES = {
+	name: false,
+	email: false,
+	password: false,
+	confirmPassword: false
+};
+
+const PROGRESS_VALUES = {
+	zero: 0,
+	diff: 25,
+	hundred: 100
+};
 
 export default function RegisterForm() {
-	const INITIAL_FORM_VALUES = {
-		name: '',
-		email: '',
-		password: '',
-		confirmPassword: ''
-	};
-
-	const INITIAL_IS_FIELD_FILLED_VALUES = {
-		name: false,
-		email: false,
-		password: false,
-		confirmPassword: false
-	};
-
-	const PROGRESS_VALUES = {
-		zero: 0,
-		diff: 25,
-		hundred: 100
-	};
-
 	const [progress, setProgress] = useState(PROGRESS_VALUES.zero);
 	const [isFieldFilled, setFieldFilled] = useState(
 		INITIAL_IS_FIELD_FILLED_VALUES
 	);
+	const serverError = useSelector(userSelectors.getUserServerError);
+	const dispatch = useDispatch();
 
 	//========== Formik logic=============
 
@@ -47,11 +51,13 @@ export default function RegisterForm() {
 		validationSchema: registerFormValidationSchema,
 		onSubmit: (values) => {
 			const { name, email, password } = values;
-			console.log({
-				name,
-				email,
-				password
-			});
+			dispatch(
+				userOperations.register({
+					name,
+					email,
+					password
+				})
+			);
 			formik.handleReset();
 			setProgress(0);
 			setFieldFilled(INITIAL_IS_FIELD_FILLED_VALUES);
@@ -62,32 +68,36 @@ export default function RegisterForm() {
 
 	//========== progress bar logic ===========
 
-	const increaseProgress = (objKey, inputName) => {
+	const increaseProgress = (isFieldFilledKey, inputName) => {
 		if (!formik.values[inputName].trim()) {
 			setProgress(progress - PROGRESS_VALUES.diff);
 			setFieldFilled((prevState) => ({
 				...prevState,
-				[objKey]: !prevState[objKey]
+				[isFieldFilledKey]: !prevState[isFieldFilledKey]
 			}));
 		}
 	};
 
-	const decreaseProgress = (objKey, inputName) => {
+	const decreaseProgress = (isFieldFilledKey, inputName) => {
 		if (formik.values[inputName].trim()) {
 			setProgress(progress + PROGRESS_VALUES.diff);
 			setFieldFilled((prevState) => ({
 				...prevState,
-				[objKey]: !prevState[objKey]
+				[isFieldFilledKey]: !prevState[isFieldFilledKey]
 			}));
 		}
 	};
 
-	const handleProgressChange = (objKey, objKeyValue, inputName) => {
-		if (objKey.includes(inputName)) {
-			if (objKeyValue) {
-				increaseProgress(objKey, inputName);
+	const handleProgressChange = (
+		isFieldFilledKey,
+		isFieldFilledKeyValue,
+		inputName
+	) => {
+		if (isFieldFilledKey.includes(inputName)) {
+			if (isFieldFilledKeyValue) {
+				increaseProgress(isFieldFilledKey, inputName);
 			} else {
-				decreaseProgress(objKey, inputName);
+				decreaseProgress(isFieldFilledKey, inputName);
 			}
 		}
 
