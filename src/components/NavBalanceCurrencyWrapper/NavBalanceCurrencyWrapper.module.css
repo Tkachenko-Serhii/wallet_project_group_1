@@ -1,4 +1,5 @@
 .wrapper {
+  justify-content: center;
   display: flex;
 }
 
@@ -12,5 +13,6 @@
   .wrapper {
     flex-direction: column;
     margin-right: 30px;
+    justify-content: left;
   }
 }

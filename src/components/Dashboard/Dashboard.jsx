@@ -1,6 +1,44 @@
 import s from './Dashboard.module.css';
 
 import { DataGrid } from '@mui/x-data-grid';
+import { styled } from '@mui/system';
+import Typography from '@mui/material/Typography';
+
+const StyledGrid = styled(DataGrid)({
+  border: 'none',
+  '& .root': { border: 'solid 3px red' },
+
+  '& .MuiDataGrid-columnHeaders': {
+    backgroundColor: '#fff',
+    color: '#000',
+
+    borderRadius: '30px',
+  },
+  '& 	.MuiDataGrid-iconSeparator': {
+    display: 'none',
+  },
+  '& 	.MuiDataGrid-columnHeaderTitle ': {
+    fontWeight: 700,
+  },
+
+  '& .MuiDataGrid-cell': {
+    borderBottom: 0,
+
+    '&:nth-of-type(5)': {
+      color: 'green',
+    },
+  },
+
+  '& .MuiDataGrid-cell:focus-within': {
+    outline: 'none',
+  },
+
+  '& .MuiDataGrid-row:not(:last-child)': {
+    borderBottom: 'solid 1px #DCDCDF',
+
+    boxShadow: '0px 1px 0px rgba(255, 255, 255, 0.6)',
+  },
+});
 
 export default function TransactionTable(props) {
   const columns = [
@@ -21,6 +59,7 @@ export default function TransactionTable(props) {
       sortable: true,
       editable: false,
       disableColumnMenu: true,
+      align: 'center',
       valueGetter: (params) => `${params.row.type ? '+' : '-'}`,
     },
     {
@@ -38,7 +77,6 @@ export default function TransactionTable(props) {
       width: 150,
       sortable: false,
       editable: false,
-      // disableColumnMenu: true,
     },
     {
       field: 'value',
@@ -47,7 +85,7 @@ export default function TransactionTable(props) {
       width: 100,
       sortable: true,
       editable: false,
-      // disableColumnMenu: true,
+      disableColumnMenu: true,
     },
     {
       field: 'balance',
@@ -64,10 +102,10 @@ export default function TransactionTable(props) {
       id: 1,
       date: '13.12.12',
       type: true,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
+      category: 'qwssdfsdf sdf oooo',
+      comment: 'asdf dsf  fsdfs fsdfg',
+      value: 2146535544567,
+      balance: 567846546579876,
     },
     {
       id: 2,
@@ -118,12 +156,12 @@ export default function TransactionTable(props) {
 
   return (
     <div className={s.wrapper}>
-      <DataGrid
+      <StyledGrid
+        border={0}
         rows={rows}
-        autoHeight={true}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        disableColumnSelector
+        hideFooter={true}
       />
     </div>
   );
