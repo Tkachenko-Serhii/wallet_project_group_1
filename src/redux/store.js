@@ -1,12 +1,37 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import { transactionApi } from "./transactions/transactionsSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import {
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { userSlice } from './user';
 
-// const store = configureStore({
-//   reducer: {
-//     [transactionApi.reducerPath]: transactionApi.reducer,
-//   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(transactionApi.middleware),
-// });
+const middleware = (getDefaultMiddleware) => [
+	...getDefaultMiddleware({
+		serializableCheck: {
+			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+		}
+	})
+];
 
-// export default store;
+const userPersistConfig = {
+	key: 'session',
+	storage,
+	whitelist: ['token']
+};
+
+export const store = configureStore({
+	reducer: {
+		session: persistReducer(userPersistConfig, userSlice)
+	},
+	middleware,
+	devTools: process.env.NODE_ENV === 'development'
+});
+
+export const persistor = persistStore(store);
