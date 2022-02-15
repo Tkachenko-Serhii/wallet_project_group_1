@@ -14,30 +14,36 @@ import styles from './RegisterForm.module.css';
 
 import { registerFormValidationSchema } from '../../../utils';
 
-const PROGRESS_VALUE = {
-	zero: 0,
-	diff: 25,
-	hundred: 100
-};
-
 export default function RegisterForm() {
-	const [progressState, setProgressState] = useState({
-		progress: PROGRESS_VALUE.zero,
-		isNameFilled: false,
-		isEmailFilled: false,
-		isPasswordFilled: false,
-		isConfirmPasswordFilled: false
-	});
-
-	const initialValues = {
+	const INITIAL_FORM_VALUES = {
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: ''
 	};
 
+	const INITIAL_IS_FIELD_FILLED_VALUES = {
+		name: false,
+		email: false,
+		password: false,
+		confirmPassword: false
+	};
+
+	const PROGRESS_VALUES = {
+		zero: 0,
+		diff: 25,
+		hundred: 100
+	};
+
+	const [progress, setProgress] = useState(PROGRESS_VALUES.zero);
+	const [isFieldFilled, setFieldFilled] = useState(
+		INITIAL_IS_FIELD_FILLED_VALUES
+	);
+
+	//========== Formik logic=============
+
 	const formik = useFormik({
-		initialValues,
+		initialValues: INITIAL_FORM_VALUES,
 		validationSchema: registerFormValidationSchema,
 		onSubmit: (values) => {
 			const { name, email, password } = values;
@@ -46,49 +52,65 @@ export default function RegisterForm() {
 				email,
 				password
 			});
+			formik.handleReset();
+			setProgress(0);
+			setFieldFilled(INITIAL_IS_FIELD_FILLED_VALUES);
 		}
 	});
 
-	const handleProgressChange = (isFieldFilled, inputValue) => {
-		if (progressState[isFieldFilled]) {
-			if (!formik.values[inputValue].trim()) {
-				setProgressState((prevState) => ({
-					...prevState,
-					progress: prevState.progress - PROGRESS_VALUE.diff,
-					[isFieldFilled]: !prevState[isFieldFilled]
-				}));
-			}
-		} else {
-			if (formik.values[inputValue].trim()) {
-				setProgressState((prevState) => ({
-					...prevState,
-					progress: prevState.progress + PROGRESS_VALUE.diff,
-					[isFieldFilled]: !prevState[isFieldFilled]
-				}));
-			}
-		}
+	//========== end of Formik logic ==========
 
-		if (progressState.progress < PROGRESS_VALUE.zero) {
-			setProgressState((prevState) => ({
-				...prevState,
-				progress: PROGRESS_VALUE.zero
-			}));
-		}
+	//========== progress bar logic ===========
 
-		if (progressState.progress > PROGRESS_VALUE.hundred) {
-			setProgressState((prevState) => ({
+	const increaseProgress = (objKey, inputName) => {
+		if (!formik.values[inputName].trim()) {
+			setProgress(progress - PROGRESS_VALUES.diff);
+			setFieldFilled((prevState) => ({
 				...prevState,
-				progress: PROGRESS_VALUE.hundred
+				[objKey]: !prevState[objKey]
 			}));
 		}
 	};
 
-	const handleBlur = () => {
-		handleProgressChange('isNameFilled', 'name');
-		handleProgressChange('isEmailFilled', 'email');
-		handleProgressChange('isPasswordFilled', 'password');
-		handleProgressChange('isConfirmPasswordFilled', 'confirmPassword');
+	const decreaseProgress = (objKey, inputName) => {
+		if (formik.values[inputName].trim()) {
+			setProgress(progress + PROGRESS_VALUES.diff);
+			setFieldFilled((prevState) => ({
+				...prevState,
+				[objKey]: !prevState[objKey]
+			}));
+		}
 	};
+
+	const handleProgressChange = (objKey, objKeyValue, inputName) => {
+		if (objKey.includes(inputName)) {
+			if (objKeyValue) {
+				increaseProgress(objKey, inputName);
+			} else {
+				decreaseProgress(objKey, inputName);
+			}
+		}
+
+		if (progress < PROGRESS_VALUES.zero) {
+			setProgress(PROGRESS_VALUES.zero);
+		}
+
+		if (progress > PROGRESS_VALUES.hundred) {
+			setProgress(PROGRESS_VALUES.hundred);
+		}
+	};
+
+	const handleBlur = (event) => {
+		const { name: inputName } = event.target;
+
+		for (const key in isFieldFilled) {
+			if (Object.hasOwnProperty.call(isFieldFilled, key)) {
+				const keyValue = isFieldFilled[key];
+				handleProgressChange(key, keyValue, inputName);
+			}
+		}
+	};
+	//================ end of progress bar logic ===============
 
 	return (
 		<AuthFormWrapper>
@@ -126,7 +148,7 @@ export default function RegisterForm() {
 					placeholder="Confirm your password"
 				/>
 				<div className={styles.progressBarWrapper}>
-					<ProgressBar progress={progressState.progress} />
+					<ProgressBar progress={progress} />
 				</div>
 			</AuthForm>
 		</AuthFormWrapper>

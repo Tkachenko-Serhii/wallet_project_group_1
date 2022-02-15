@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 import { InputAdornment, IconButton } from '@mui/material';
 import {
@@ -56,3 +58,14 @@ export default function PasswordInputWithFormik({
 		/>
 	);
 }
+
+PasswordInputWithFormik.propTypes = {
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+	onBlur: PropTypes.func,
+	value: PropTypes.string.isRequired,
+	error: PropTypes.bool,
+	helperText: PropTypes.string,
+	placeholder: PropTypes.string.isRequired
+};

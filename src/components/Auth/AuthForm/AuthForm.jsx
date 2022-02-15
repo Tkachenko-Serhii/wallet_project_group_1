@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Button';
 import styles from './AuthForm.module.css';
@@ -30,3 +32,10 @@ export default function AuthForm({
 		</form>
 	);
 }
+
+AuthForm.propTypes = {
+	formik: PropTypes.shape({}).isRequired,
+	primaryBtnText: PropTypes.string.isRequired,
+	secondaryBtnText: PropTypes.string.isRequired,
+	navigateTo: PropTypes.string.isRequired
+};

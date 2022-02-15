@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { InputAdornment } from '@mui/material';
 import { AccountBox as AccountBoxIcon } from '@mui/icons-material';
 
@@ -32,3 +34,9 @@ export default function NameInputWithFormik({
 		/>
 	);
 }
+
+NameInputWithFormik.propTypes = {
+	formik: PropTypes.shape({}).isRequired,
+	autoFocus: PropTypes.bool,
+	onBlur: PropTypes.func.isRequired
+};
