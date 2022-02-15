@@ -5,8 +5,8 @@ import './App.css';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+// import PrivateRoute from './components/PrivateRoute';
 import { userOperations } from './redux/user';
 
 function App() {
@@ -41,14 +41,7 @@ function App() {
 						</PublicRoute>
 					}
 				/>
-				<Route
-					path="/home/*"
-					element={
-						<PrivateRoute redirectTo="/">
-							<DashboardPage />
-						</PrivateRoute>
-					}
-				/>
+				<Route path="/home/*" element={<DashboardPage />} />
 				{/* пока установил path='/home' . должно редиректить при успешной авторизации на защищенный path='/' */}
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>

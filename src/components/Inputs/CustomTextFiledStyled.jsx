@@ -8,6 +8,7 @@ const CustomTextFiledStyled = styled(TextField)({
 	'& input': {
 		padding: 0,
 		height: '25px',
+		fontFamily: 'Circe',
 		fontSize: '18px',
 		lineHeight: '1.5'
 	},
@@ -28,7 +29,8 @@ const CustomTextFiledStyled = styled(TextField)({
 		'&  svg:last-child': {
 			marginRight: '20px'
 		}
-	}
+	},
+	'& p': { fontFamily: 'Segoe UI' }
 });
 
 export default CustomTextFiledStyled;
