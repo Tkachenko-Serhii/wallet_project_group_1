@@ -7,7 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
 import TransactionMobile from './components/TransactionMobile';
-import { Routes, Route, Navigate } from 'react-router-dom';
+
 import PublicRoute from './components/PublicRoute';
 // import PrivateRoute from './components/PrivateRoute';
 import { userOperations } from './redux/user';
@@ -15,7 +15,7 @@ import { useMediaQuery } from '@mui/material';
 
 function App() {
 	const dispatch = useDispatch();
-  const matches = useMediaQuery('(min-width:768px)');
+	const matches = useMediaQuery('(min-width:768px)');
 	useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
 
 	return (
@@ -46,21 +46,22 @@ function App() {
 					}
 				/>
 				{!matches && (
-          <Route path="/home" element={<DashboardPage />}>
-            <Route path="/home/" element={<TransactionMobile />} />
-            <Route path="/home/chart" element={<TransactionMobile />} />
-            <Route path="/home/currency" element={<TransactionMobile />} />
-          </Route>
-        )}
-        {matches && (
-          <Route path="/home" element={<DashboardPage />}>
-            <Route path="/home/" element={<Dashboard />} />
-            <Route path="/home/chart" element={<Dashboard />} />
-          </Route>
+					<Route path="/home" element={<DashboardPage />}>
+						<Route path="/home/" element={<TransactionMobile />} />
+						<Route path="/home/chart" element={<TransactionMobile />} />
+						<Route path="/home/currency" element={<TransactionMobile />} />
+					</Route>
+				)}
+				{matches && (
+					<Route path="/home" element={<DashboardPage />}>
+						<Route path="/home/" element={<Dashboard />} />
+						<Route path="/home/chart" element={<Dashboard />} />
+					</Route>
+				)}
 				{/* пока установил path='/home' . должно редиректить при успешной авторизации на защищенный path='/' */}
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 		</div>
 	);
-
+}
 export default App;
