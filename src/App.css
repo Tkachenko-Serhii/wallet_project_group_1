@@ -1,9 +1,9 @@
 @media screen and (min-width: 768px) {
     .App {
-      background-image: url(/src/pictures/bg/bgEllipse.png),
-        url(/src/pictures/bg/bgEllipse2.png);
+      background-image: url(/src/images/bg/bgEllipse.png),
+        url(/src/images/bg/bgEllipse2.png);
       background-repeat: no-repeat;
-      background-color: #e7eaf2;
+      background-color: var(--background-color);
       background-position-x: -54px, 350px;
       background-position-y: 520px, -253px;
     }

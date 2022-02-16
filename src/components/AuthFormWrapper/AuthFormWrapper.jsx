@@ -1,5 +1,4 @@
 import styles from './AuthFormWrapper.module.css';
-
 import Logo from '../Logo';
 
 export default function AuthFormWrapper({ children }) {

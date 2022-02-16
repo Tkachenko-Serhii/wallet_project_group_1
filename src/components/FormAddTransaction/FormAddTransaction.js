@@ -1,8 +1,6 @@
 
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
-
-
 import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
@@ -13,8 +11,6 @@ export default function FormAddTransaction(props) {
     const [date, setDate] = useState("");
     const [comment, setComment] = useState("");
     // const dispatch = useDispatch();
-
-
 
     const handleInputChange = event => {
         console.log(event.currentTarget.value)
@@ -50,19 +46,13 @@ export default function FormAddTransaction(props) {
         setComment('');
         setDate('');
     }
-
-
     return (
-
         <form
             // onSubmit={handleSubmit}
             className={styles.form} >
             <h4 className={styles.title}>Добавить транзакцию</h4>
-
-
             <div className={styles.swichContainer}>
                 <span className={styles.swichTitle}>Доход</span>
-
                 <label className={styles.switch}>
                     <input
                         type="checkbox"
@@ -72,7 +62,6 @@ export default function FormAddTransaction(props) {
                 </label>
                 <span className={styles.swichTitle}>Расход</span>
             </div>
-
             <div className={styles.dateContainer}>
                 <label className={styles.labelForm}>
                     <input
@@ -85,7 +74,6 @@ export default function FormAddTransaction(props) {
                 </label>
                 <DatePicker />
             </div>
-
             <label className={styles.labelForm}>
                 <input
                     type="text"
