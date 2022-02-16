@@ -4,7 +4,10 @@ import userOperations from './userOperations';
 const initialState = {
 	token: null,
 	isLoggedIn: false,
-	serverError: null,
+	serverError: {
+		status: null,
+		message: null
+	},
 	user: { name: null, email: null }
 };
 
@@ -35,30 +38,54 @@ const userSlice = createSlice({
 			if (payload) {
 				state.token = null;
 				state.isLoggedIn = false;
-				state.serverError = payload;
+				state.serverError = {
+					status: payload.status,
+					message: payload.message
+				};
 				state.user = { name: null, email: null };
 			}
 		},
 		[userOperations.register.rejected](state, { payload }) {
-			state.serverError = payload;
+			state.serverError = {
+				status: payload.status,
+				message: payload.message
+			};
 		},
 		[userOperations.login.rejected](state, { payload }) {
-			state.serverError = payload;
+			state.serverError = {
+				status: payload.status,
+				message: payload.message
+			};
 		},
 		[userOperations.logout.rejected](state, { payload }) {
-			state.serverError = payload;
+			state.serverError = {
+				status: payload.status,
+				message: payload.message
+			};
 		},
 		[userOperations.fetchCurrentUser.pending](state) {
-			state.serverError = null;
+			state.serverError = {
+				status: null,
+				message: null
+			};
 		},
 		[userOperations.register.pending](state) {
-			state.serverError = null;
+			state.serverError = {
+				status: null,
+				message: null
+			};
 		},
 		[userOperations.login.pending](state) {
-			state.serverError = null;
+			state.serverError = {
+				status: null,
+				message: null
+			};
 		},
 		[userOperations.logout.pending](state) {
-			state.serverError = null;
+			state.serverError = {
+				status: null,
+				message: null
+			};
 		}
 	}
 });
