@@ -1,9 +1,15 @@
+import PropTypes from 'prop-types';
+
 import { InputAdornment } from '@mui/material';
 import { AccountBox as AccountBoxIcon } from '@mui/icons-material';
 
 import CustomTextFiledStyled from './CustomTextFiledStyled';
 
-export default function NameInputWithFormik({ formik, autoFocus = false }) {
+export default function NameInputWithFormik({
+	formik,
+	autoFocus = false,
+	onBlur
+}) {
 	return (
 		<CustomTextFiledStyled
 			fullWidth
@@ -13,6 +19,7 @@ export default function NameInputWithFormik({ formik, autoFocus = false }) {
 			placeholder="Your name"
 			variant="standard"
 			onChange={formik.handleChange}
+			onBlur={onBlur}
 			value={formik.values.name}
 			error={formik.touched.name && Boolean(formik.errors.name)}
 			helperText={formik.touched.name && formik.errors.name}
@@ -27,3 +34,9 @@ export default function NameInputWithFormik({ formik, autoFocus = false }) {
 		/>
 	);
 }
+
+NameInputWithFormik.propTypes = {
+	formik: PropTypes.shape({}).isRequired,
+	autoFocus: PropTypes.bool,
+	onBlur: PropTypes.func.isRequired
+};

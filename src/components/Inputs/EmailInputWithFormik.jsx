@@ -1,8 +1,14 @@
+import PropTypes from 'prop-types';
+
 import { InputAdornment } from '@mui/material';
 import CustomTextFiledStyled from './CustomTextFiledStyled';
 import { Email as EmailIcon } from '@mui/icons-material';
 
-export default function EmailInputWithFormik({ formik, autoFocus = false }) {
+export default function EmailInputWithFormik({
+	formik,
+	autoFocus = false,
+	onBlur
+}) {
 	return (
 		<CustomTextFiledStyled
 			fullWidth
@@ -12,6 +18,7 @@ export default function EmailInputWithFormik({ formik, autoFocus = false }) {
 			placeholder="E-mail"
 			variant="standard"
 			onChange={formik.handleChange}
+			onBlur={onBlur}
 			value={formik.values.email}
 			error={formik.touched.email && Boolean(formik.errors.email)}
 			helperText={formik.touched.email && formik.errors.email}
@@ -26,3 +33,9 @@ export default function EmailInputWithFormik({ formik, autoFocus = false }) {
 		/>
 	);
 }
+
+EmailInputWithFormik.propTypes = {
+	formik: PropTypes.shape({}).isRequired,
+	autoFocus: PropTypes.bool,
+	onBlur: PropTypes.func
+};

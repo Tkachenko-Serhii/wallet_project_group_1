@@ -1,0 +1,16 @@
+@media screen and (max-width: 767px) {
+  .wrapper {
+    background-color: #e7eaf2;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    height: 100%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    height: 100vh;
+    display: flex;
+  }
+}

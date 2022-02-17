@@ -3,12 +3,14 @@ import { TextField, styled } from '@mui/material';
 const CustomTextFiledStyled = styled(TextField)({
 	'& > div': {
 		paddingLeft: '13px',
-		paddingBottom: '10px'
+		paddingBottom: '9px'
 	},
 	'& input': {
 		padding: 0,
+		height: '25px',
+		fontFamily: 'Circe',
 		fontSize: '18px',
-		lineHeight: '27px'
+		lineHeight: '1.5'
 	},
 	'& input::placeholder': {
 		color: '#bdbdbd'
@@ -27,7 +29,8 @@ const CustomTextFiledStyled = styled(TextField)({
 		'&  svg:last-child': {
 			marginRight: '20px'
 		}
-	}
+	},
+	'& p': { fontFamily: 'Segoe UI' }
 });
 
 export default CustomTextFiledStyled;
