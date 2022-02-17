@@ -17,6 +17,21 @@ import waveDesktop from '../../images/waves/wave-desktop.svg';
 import fetchCurrency from '../../API/fetchCurrency/fetchCurrency';
 
 const useStyles = makeStyles({
+  currency_section: {
+    position: 'relative',
+    width: '280px',
+    height: '174px',
+    borderRadius: '30px',
+    ['@media (min-width: 768px) and (max-width: 1279px)']: {
+      width: '334px'
+    },
+
+    ['@media (min-width: 1280px)']: {
+      width: '348px',
+      height: '348px'
+    }
+  },
+
   currency_table_container: {
     boxSizing: 'border-box',
     backgroundColor: '#4a56e2',
@@ -42,13 +57,19 @@ const useStyles = makeStyles({
   },
 
   currency_header_bg: {
-    position: 'fixed',
+    position: 'absolute',
     height: '50px',
-    width: '100%',
+    width: '280px',
+    borderRadius: '30px 30px 0px 0px',
+
     backgroundColor: '#ffff',
     opacity: '0.2',
+    ['@media (min-width: 768px) and (max-width: 1279px)']: {
+      width: '334px'
+    },
     ['@media (min-width: 1280px)']: {
-      height: '60px'
+      height: '60px',
+      width: '348px'
     }
   },
 
