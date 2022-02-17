@@ -92,8 +92,6 @@ export default function ModalAddTransaction(props) {
         // closeModal()
         // dispatch(showModal())
     }
-
-
     return (
 
         <>

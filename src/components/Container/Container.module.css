@@ -9,6 +9,8 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+  background-color: var(--blur-backgroud-color);
+  /*backdrop-filter: blur(50px);*/
   position: relative;
 }
 
