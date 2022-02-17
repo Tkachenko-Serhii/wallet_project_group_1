@@ -7,10 +7,13 @@
   .wrapper {
     flex-direction: row;
     justify-content: space-between;
+
+    margin-top: 20px;
   }
 }
 @media screen and (min-width: 1280px) {
   .wrapper {
+    margin-top: 40px;
     flex-direction: column;
     margin-right: 30px;
     justify-content: left;

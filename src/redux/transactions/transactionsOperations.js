@@ -8,7 +8,6 @@ const getTransactions = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('/transactions');
-
       return data;
     } catch (error) {
       return handleError(error, rejectWithValue);
@@ -21,7 +20,6 @@ const createTransaction = createAsyncThunk(
   async (newTransaction, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/transactions/create', newTransaction);
-
       return data;
     } catch (error) {
       return handleError(error, rejectWithValue);

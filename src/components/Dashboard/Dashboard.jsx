@@ -1,9 +1,9 @@
 import s from './Dashboard.module.css';
 
-import { DataGrid, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { styled } from '@mui/system';
-import Typography, { TypographyProps } from '@mui/material/Typography';
-import { GridRowParams } from '@mui/x-data-grid';
+import { useSelector } from 'react-redux';
+import { transactionsSelectors } from '../../redux/transactions';
 
 const StyledGrid = styled(DataGrid)({
   border: 'none',
@@ -42,6 +42,24 @@ const StyledGrid = styled(DataGrid)({
 });
 
 export default function TransactionTable(props) {
+  const allTransactions = useSelector(transactionsSelectors.getTransactions);
+  const rows = allTransactions.map((row) => {
+    const date = new Date(row.createdAt);
+    return {
+      id: row._id,
+      date: date.toLocaleString({
+        year: '2-digit',
+        month: 'numeric',
+        day: 'numeric',
+      }),
+      type: row.type,
+      category: row.category,
+      comment: row.comment,
+      sum: row.sum,
+      balance: row.balance,
+    };
+  });
+  console.log(rows);
   const columns = [
     {
       headerClassName: 'super-app-theme--header',
@@ -80,8 +98,8 @@ export default function TransactionTable(props) {
       editable: false,
     },
     {
-      field: 'value',
-      headerName: 'Value',
+      field: 'sum',
+      headerName: 'Sum',
       type: 'number',
       width: 100,
       sortable: true,
@@ -109,85 +127,15 @@ export default function TransactionTable(props) {
       disableColumnMenu: true,
     },
   ];
-  const rows = [
-    {
-      id: 1,
-      date: '13.12.12',
-      type: true,
-      category: 'qwssdfsdf sdf oooo',
-      comment: 'asdf dsf  fsdfs fsdfg',
-      value: 2146535544567,
-      balance: 567846546579876,
-    },
-    {
-      id: 2,
-      date: '12.12.12',
-      type: true,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 3,
-      date: '15.12.12',
-      type: false,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 4,
-      date: '16.12.12',
-      type: false,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 5,
-      date: '17.12.12',
-      type: false,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 6,
-      date: '18.12.12',
-      type: true,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-  ];
 
   return (
     <div className={s.wrapper}>
       <StyledGrid
-        // onRowDoubleClick={(
-        //   params: GridRowParams,
-        //   event: MuiEvent<React.MouseEvent>
-        // ) => console.log(GridRowParams)}
         border={0}
         rows={rows}
         columns={columns}
         disableColumnSelector
         hideFooter={true}
-        sx={{
-          '& .MuiDataGrid-cell': {
-            '&:nth-of-type(5)': {
-              // valueGetter: (params) => (`${params.row.type}` ? 'red' : 'green'),
-
-              // color: 'red',
-              fontWeight: 700,
-            },
-          },
-        }}
       />
     </div>
   );

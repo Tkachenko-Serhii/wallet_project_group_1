@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
+import Currency from './components/Currency';
 import TransactionMobile from './components/TransactionMobile';
 import Modal from './components/Modal';
 import Form from './components/FormAddTransaction';
@@ -18,7 +19,7 @@ import { useMediaQuery } from '@mui/material';
 function App() {
   const dispatch = useDispatch();
   const matches = useMediaQuery('(min-width:768px)');
-  const showModal = useSelector(state => state.modal.modal);
+  const showModal = useSelector((state) => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
 
   return (
@@ -78,7 +79,7 @@ function App() {
               path="currency"
               element={
                 <PrivateRoute>
-                  <TransactionMobile />
+                  <Currency />
                 </PrivateRoute>
               }
             />
@@ -116,11 +117,13 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
-{showModal && (
-				<Modal>
-					<Form />
-				</Modal>
-			)}
+    // {
+    //     showModal && (
+    //       <Modal>
+    //         <Form />
+    //       </Modal>
+    //     )
+    //   }
   );
 }
 

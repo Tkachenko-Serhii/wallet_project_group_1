@@ -1,83 +1,91 @@
 import { createSlice } from '@reduxjs/toolkit';
-import userOperations from './userOperations';
+import transactionsOperations from './transactionsOperations';
 
 const initialState = {
   all: [],
-  balance: 0,
-  byMontn: [],
+  byMonth: [],
+  isLoading: false,
+  serverError: {
+    status: null,
+    message: null,
+  },
 };
 
 const transactionSlice = createSlice({
-  name: 'finance', 
+  name: 'transactions',
   initialState,
   extraReducers: {
-    [userOperations.fetchCurrentUser.fulfilled](state, { payload }) {
-      state.user = payload.user;
-      state.isLoggedIn = true;
+    [transactionsOperations.getTransactions.fulfilled](state, { payload }) {
+      state.all = payload;
     },
-    [userOperations.register.fulfilled](state, { payload }) {
-      state.token = payload.token;
-      state.isLoggedIn = true;
-      state.user = payload.user;
+    [transactionsOperations.createTransaction.fulfilled](state, { payload }) {
+      state.all = [payload, ...state.all];
     },
-    [userOperations.login.fulfilled](state, { payload }) {
-      state.token = payload.token;
-      state.isLoggedIn = true;
-      state.user = payload.user;
+    [transactionsOperations.editTransaction.fulfilled](state, { payload }) {
+      state.all = state.map((item) =>
+        item.id !== payload.id ? item : payload
+      );
     },
-    [userOperations.logout.fulfilled](state) {
-      state.token = null;
-      state.isLoggedIn = false;
-      state.user = { name: null, email: null };
+    [transactionsOperations.deleteTransaction.fulfilled](state, { payload }) {
+      state.all = [
+        ...state.all.filter((transaction) => transaction.id !== payload.id),
+      ];
     },
-    [userOperations.fetchCurrentUser.rejected](state, { payload }) {
-      if (payload) {
-        state.token = null;
-        state.isLoggedIn = false;
-        state.serverError = {
-          status: payload.status,
-          message: payload.message,
-        };
-        state.user = { name: null, email: null };
-      }
-    },
-    [userOperations.register.rejected](state, { payload }) {
+
+    [transactionsOperations.getTransactions.rejected](state, { payload }) {
       state.serverError = {
         status: payload.status,
         message: payload.message,
       };
     },
-    [userOperations.login.rejected](state, { payload }) {
+    [transactionsOperations.createTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
       state.serverError = {
         status: payload.status,
         message: payload.message,
       };
     },
-    [userOperations.logout.rejected](state, { payload }) {
+    [transactionsOperations.editTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
       state.serverError = {
         status: payload.status,
         message: payload.message,
       };
     },
-    [userOperations.fetchCurrentUser.pending](state) {
+    [transactionsOperations.deleteTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
+      state.serverError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+
+    [transactionsOperations.getTransactions.pending](state, { payload }) {
+      state.isLoading = true;
       state.serverError = {
         status: null,
         message: null,
       };
     },
-    [userOperations.register.pending](state) {
+    [transactionsOperations.createTransaction.pending](state, { payload }) {
+      state.isLoading = true;
       state.serverError = {
         status: null,
         message: null,
       };
     },
-    [userOperations.login.pending](state) {
+    [transactionsOperations.editTransaction.pending](state, { payload }) {
+      state.isLoading = true;
       state.serverError = {
         status: null,
         message: null,
       };
     },
-    [userOperations.logout.pending](state) {
+    [transactionsOperations.deleteTransaction.pending](state, { payload }) {
+      state.isLoading = true;
       state.serverError = {
         status: null,
         message: null,

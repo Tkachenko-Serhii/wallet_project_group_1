@@ -6,7 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableCell
+  TableCell,
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,14 +22,16 @@ const useStyles = makeStyles({
     width: '280px',
     height: '174px',
     borderRadius: '30px',
-    ['@media (min-width: 768px) and (max-width: 1279px)']: {
-      width: '334px'
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    '@media (min-width: 768px) and (max-width: 1279px)': {
+      width: '334px',
     },
 
-    ['@media (min-width: 1280px)']: {
+    '@media (min-width: 1280px)': {
       width: '348px',
-      height: '348px'
-    }
+      height: '348px',
+    },
   },
 
   currency_table_container: {
@@ -42,18 +44,18 @@ const useStyles = makeStyles({
     backgroundSize: 'contain',
     backgroundPosition: 'bottom',
     backgroundRepeat: 'no-repeat',
-    ['@media (max-width: 767px)']: {
-      backgroundImage: `url(${waveMobile})`
+    '@media (max-width: 767px)': {
+      backgroundImage: `url(${waveMobile})`,
     },
-    ['@media (min-width: 768px) and (max-width: 1279px)']: {
+    '@media (min-width: 768px) and (max-width: 1279px)': {
       width: '334px',
-      backgroundImage: `url(${waveTablet})`
+      backgroundImage: `url(${waveTablet})`,
     },
 
-    ['@media (min-width: 1280px)']: {
+    '@media (min-width: 1280px)': {
       width: '348px',
-      height: '348px'
-    }
+      height: '348px',
+    },
   },
 
   currency_header_bg: {
@@ -64,20 +66,20 @@ const useStyles = makeStyles({
 
     backgroundColor: '#ffff',
     opacity: '0.2',
-    ['@media (min-width: 768px) and (max-width: 1279px)']: {
-      width: '334px'
+    '@media (min-width: 768px) and (max-width: 1279px)': {
+      width: '334px',
     },
-    ['@media (min-width: 1280px)']: {
+    '@media (min-width: 1280px)': {
       height: '60px',
-      width: '348px'
-    }
+      width: '348px',
+    },
   },
 
   currency_head: {
     height: '50px',
-    ['@media (min-width: 1280px)']: {
-      height: '60px'
-    }
+    '@media (min-width: 1280px)': {
+      height: '60px',
+    },
   },
 
   currency_header: {
@@ -86,7 +88,7 @@ const useStyles = makeStyles({
     fontSize: '18px',
     padding: '0px, 0px, 0px, 12px',
     color: '#ffff',
-    borderBottom: '0px'
+    borderBottom: '0px',
   },
 
   currency_item: {
@@ -96,22 +98,22 @@ const useStyles = makeStyles({
     color: '#ffff',
     borderBottom: '0px',
     paddingTop: '10px',
-    ['@media (min-width:1280px)']: {
-      paddingTop: '20px'
-    }
+    '@media (min-width:1280px)': {
+      paddingTop: '20px',
+    },
   },
 
   currency_waves: {
     display: 'none',
-    ['@media (min-width:1280px)']: {
+    '@media (min-width:1280px)': {
       display: 'block',
       height: '134px',
       width: '100%',
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: `url(${waveDesktop})`
-    }
-  }
+      backgroundImage: `url(${waveDesktop})`,
+    },
+  },
 });
 
 function createData(name, buy, sale) {
@@ -121,7 +123,7 @@ function createData(name, buy, sale) {
 const rows = [
   createData('USD', 27.55, 27.65),
   createData('EUR', 30.0, 30.1),
-  createData('RUB', 12.0, 12.05)
+  createData('RUB', 12.0, 12.05),
 ];
 
 const Currency = () => {
@@ -154,17 +156,17 @@ const Currency = () => {
       <div className={styles.currency_section}>
         <div className={styles.currency_header_bg}></div>
         <TableContainer className={styles.currency_table_container}>
-          <Table className={styles.currency_table} size='small'>
+          <Table className={styles.currency_table} size="small">
             <TableHead className={styles.currency_head}>
               <TableRow className={styles.currency_head_row}>
                 <TableCell className={styles.currency_header}>
                   Currency
                 </TableCell>
 
-                <TableCell align='center' className={styles.currency_header}>
+                <TableCell align="center" className={styles.currency_header}>
                   Buy
                 </TableCell>
-                <TableCell align='center' className={styles.currency_header}>
+                <TableCell align="center" className={styles.currency_header}>
                   Sale
                 </TableCell>
               </TableRow>
@@ -173,17 +175,17 @@ const Currency = () => {
               {currency?.map((element) => (
                 <TableRow key={element.ccy}>
                   <TableCell
-                    component='th'
-                    scope='row'
-                    align='left'
+                    component="th"
+                    scope="row"
+                    align="left"
                     className={styles.currency_item}
                   >
                     {element.ccy}
                   </TableCell>
-                  <TableCell align='center' className={styles.currency_item}>
+                  <TableCell align="center" className={styles.currency_item}>
                     {Math.floor(element.buy * 100) / 100}
                   </TableCell>
-                  <TableCell align='center' className={styles.currency_item}>
+                  <TableCell align="center" className={styles.currency_item}>
                     {Math.floor(element.sale * 100) / 100}
                   </TableCell>
                 </TableRow>
