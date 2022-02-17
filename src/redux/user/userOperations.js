@@ -3,6 +3,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
+const ERROR_STATUS = {
+	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
+	NOT_FOUND: 404,
+	CONFLICT: 409,
+	SERVER_ERROR: 500
+};
+
 const token = {
 	set(token) {
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -34,7 +42,6 @@ const login = createAsyncThunk(
 			const { data } = await axios.post('/users/login', credentials);
 
 			token.set(data.token);
-
 			return data;
 		} catch (error) {
 			return handleError(error, rejectWithValue);
@@ -73,13 +80,7 @@ const fetchCurrentUser = createAsyncThunk(
 );
 
 function handleError(error, rejectWithValue) {
-	const { status } = error.response;
-	const { message } = error.response.data;
-	const resError = {
-		status,
-		message
-	};
-	return rejectWithValue(resError);
+	return rejectWithValue(error.message);
 }
 
 const userOperations = {

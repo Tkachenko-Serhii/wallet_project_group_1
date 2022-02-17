@@ -1,15 +1,14 @@
 import { useFormik } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
 import { EmailInputWithFormik, PasswordInputWithFormik } from '../../Inputs';
 
 import { loginFormValidationSchema } from '../../../utils';
-import { userOperations, userSelectors } from '../../../redux/user';
+import { userOperations } from '../../../redux/user';
 
 export default function LoginForm() {
-	const serverError = useSelector(userSelectors.getUserServerError);
 	const dispatch = useDispatch();
 
 	const initialValues = {
