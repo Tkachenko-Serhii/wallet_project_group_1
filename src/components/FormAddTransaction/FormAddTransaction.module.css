@@ -1,7 +1,7 @@
-.modalContainer{
+.modalContainer {
   position: relative;
 }
-.modalOverlay{
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,13 +11,14 @@
   align-items: center;
   justify-content: center;
 
-  background-color:rgba(0, 0, 0, 0.25);;
+  background-color: rgba(0, 0, 0, 0.25);
   z-index: 9999;
 }
 /* The form */
 .form {
   max-width: 540px;
   padding: 40px 80px 60px;
+  position: relative;
 
   background-color: #fff;
   border-radius: 15px;
@@ -90,7 +91,7 @@
   transition: 0.4s;
 }
 
-input:checked + .slider .indicator{
+input:checked + .slider .indicator {
   background-color: #ff6596;
   -webkit-box-shadow: 0px 4px 4px 0px rgba(255, 101, 150, 0.25);
   -moz-box-shadow: 0px 4px 4px 0px rgba(255, 101, 150, 0.25);
@@ -101,12 +102,11 @@ input:checked + .slider .indicator{
   transform: translateX(40px);
 }
 
-.wrapperForInputs{
+.wrapperForInputs {
   width: 410px;
 }
 .dateContainer {
- margin-right: 30px;
- 
+  margin-right: 30px;
 }
 
 .labelForm {
@@ -142,18 +142,18 @@ select {
   -webkit-appearance: none;
 }
 
-.datepickerContainer{
+.datepickerContainer {
   position: relative;
   display: flex;
   align-items: center;
 }
-.amountAndDateContainer{
+.amountAndDateContainer {
   display: flex;
   align-items: center;
   margin-bottom: 40px;
 }
 
-.dateTimeInput{
+.dateTimeInput {
   width: 190px;
   border: none;
   border-bottom: 2px solid #e0e0e0;
@@ -167,38 +167,38 @@ select {
   outline-offset: 0;
 }
 
-.calendarIcon{
+.calendarIcon {
   position: absolute;
   right: 20px;
   bottom: 13px;
 }
 
-.categoriesContainer{
+.categoriesContainer {
   width: 410px;
   margin-bottom: 40px;
 }
 
-.openButton{ 
-    position: absolute;
-    right: 6%;
-    bottom: 40px;
-    width: 44px;
-    height: 44px;
-    background-color: #24CCA7;
-    border-radius: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
-    border: 0;
-    cursor: pointer;
-  }
-  
-  .closeButton{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    border: 0;
-    background-color: transparent;
-  }
+.openButton {
+  position: absolute;
+  right: 6%;
+  bottom: 40px;
+  width: 44px;
+  height: 44px;
+  background-color: #24cca7;
+  border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
+  border: 0;
+  cursor: pointer;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
