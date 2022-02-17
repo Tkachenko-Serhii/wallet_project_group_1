@@ -32,7 +32,7 @@ export default function authErrorHandler(error, rejectWithValue) {
 	}
 
 	if (errorStatus === ERROR_STATUS.CONFLICT) {
-		errorMessage = 'This email already in use, please enter another email ';
+		errorMessage = 'This email is already in use, please enter another email';
 		errorNotification(errorMessage);
 	}
 
