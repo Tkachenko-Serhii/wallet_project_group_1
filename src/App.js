@@ -1,12 +1,14 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
 import TransactionMobile from './components/TransactionMobile';
+import Modal from './components/Modal';
+import Form from './components/FormAddTransaction';
 
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -16,6 +18,7 @@ import { useMediaQuery } from '@mui/material';
 function App() {
   const dispatch = useDispatch();
   const matches = useMediaQuery('(min-width:768px)');
+  const showModal = useSelector(state => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
 
   return (
@@ -113,6 +116,11 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
+{showModal && (
+				<Modal>
+					<Form />
+				</Modal>
+			)}
   );
 }
 
