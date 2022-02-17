@@ -12,6 +12,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { userSlice } from './user';
 
+import modalReduser from './modal/modalReduser';
+
 const middleware = (getDefaultMiddleware) => [
 	...getDefaultMiddleware({
 		serializableCheck: {
@@ -28,7 +30,8 @@ const userPersistConfig = {
 
 export const store = configureStore({
 	reducer: {
-		session: persistReducer(userPersistConfig, userSlice)
+		session: persistReducer(userPersistConfig, userSlice),
+		modal: modalReduser,
 	},
 	middleware,
 	devTools: process.env.NODE_ENV === 'development'
