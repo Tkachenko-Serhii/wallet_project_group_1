@@ -1,15 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
+import { authErrorHandler } from '../../utils';
 
-const ERROR_STATUS = {
-	BAD_REQUEST: 400,
-	UNAUTHORIZED: 401,
-	NOT_FOUND: 404,
-	CONFLICT: 409,
-	SERVER_ERROR: 500
-};
+axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
 const token = {
 	set(token) {
@@ -30,7 +24,7 @@ const register = createAsyncThunk(
 
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -44,7 +38,7 @@ const login = createAsyncThunk(
 			token.set(data.token);
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -56,7 +50,7 @@ const logout = createAsyncThunk(
 			await axios.post('/users/logout');
 			token.reset();
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -74,14 +68,10 @@ const fetchCurrentUser = createAsyncThunk(
 			const { data } = await axios.get('/users/current');
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
-
-function handleError(error, rejectWithValue) {
-	return rejectWithValue(error.message);
-}
 
 const userOperations = {
 	register,
