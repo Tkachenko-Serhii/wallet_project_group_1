@@ -1,12 +1,14 @@
 
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Select from 'react-select'
-import { stylesSelect } from './stylesForSelect' 
+import { stylesSelect } from './stylesForSelect'
 import "react-datetime/css/react-datetime.css";
-import Modal from 'react-modal'
-import Datetime from "react-datetime";
-import moment from "moment";
+
+import showModal from '../../redux/modal/modalActions';
+// import Modal from 'react-modal'
+// import Datetime from "react-datetime";
+
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 import { ReactComponent as Minus } from '../../icons/minus.svg'
 import { ReactComponent as CalendarIcon } from '../../icons/calendar.svg'
@@ -16,7 +18,7 @@ import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
 
-Modal.setAppElement('#root')
+// Modal.setAppElement('#root')
 
 export default function ModalAddTransaction(props) {
 
@@ -26,51 +28,52 @@ export default function ModalAddTransaction(props) {
         date: new Date(),
         comment: '',
         category: '',
-      }
+    }
 
     const [transaction, setTransaction] = useState(defaultTransactionState);
-    const [modalIsOpen, setIsOpen] = useState(false)
+    const dispatch = useDispatch();
+    // const [modalIsOpen, setIsOpen] = useState(false)
 
 
     const categories = [
-        {value: "Main" , label: "Основной"},
-        {value: "Food" , label: "Еда"},
-        {value: "Car" , label: "Авто"},
-        {value: "Development" , label: "Развитие"},
-        {value: "Children" , label: "Дети"},
-        {value: "Home" , label: "Дом"},
-        {value: "Education" , label: "Образование"},
-        {value: "Other" , label: "Остальные"},
+        { value: "Main", label: "Основной" },
+        { value: "Food", label: "Еда" },
+        { value: "Car", label: "Авто" },
+        { value: "Development", label: "Развитие" },
+        { value: "Children", label: "Дети" },
+        { value: "Home", label: "Дом" },
+        { value: "Education", label: "Образование" },
+        { value: "Other", label: "Остальные" },
     ]
 
-    function openModal() {
-        setIsOpen(true)
-      }
-    
-      function closeModal() {
-        setIsOpen(false)
-      }
+    // function openModal() {
+    //     setIsOpen(true)
+    // }
+
+    // function closeModal() {
+    //     setIsOpen(false)
+    // }
 
     const handleInputChange = event => {
         const { name, value } = event.currentTarget;
 
         switch (name) {
             case 'income':
-                if(transaction.income === false){
-                    updateTransaction(name , true)
+                if (transaction.income === false) {
+                    updateTransaction(name, true)
                 }
-                else{
-                    updateTransaction(name , false)
+                else {
+                    updateTransaction(name, false)
                 }
-                
+
                 break;
 
             case 'amount':
-                updateTransaction(name , value)
+                updateTransaction(name, value)
                 break;
 
             case 'comment':
-                updateTransaction(name , value)
+                updateTransaction(name, value)
                 break;
 
             default:
@@ -78,110 +81,112 @@ export default function ModalAddTransaction(props) {
         }
     }
 
-      const updateTransaction = (name, value) => {
+    const updateTransaction = (name, value) => {
         setTransaction((prev) => ({ ...prev, [name]: value }))
-      }
+    }
 
     const resetForm = (event) => {
         event.preventDefault();
 
         setTransaction(defaultTransactionState)
-        closeModal()
+        // closeModal()
+        // dispatch(showModal())
     }
 
 
     return (
 
         <>
-          <button className={styles.openButton} onClick={openModal}>
+            {/* <button className={styles.openButton} onClick={openModal}>
                 <Plus />
-          </button>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            overlayClassName={styles.modalOverlay}
-            contentLabel="Example Modal"
-            className={styles.modalContainer}
-            htmlOpenClassName="no-scroll"
-      >
-        <form
-            // onSubmit={handleSubmit}
-            className={styles.form} >
+            </button>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                overlayClassName={styles.modalOverlay}
+                contentLabel="Example Modal"
+                className={styles.modalContainer}
+                htmlOpenClassName="no-scroll"
+            > */}
 
-        <button className={styles.closeButton} onClick={closeModal}>
-                <Close />
-        </button>
-            <h4 className={styles.title}>Добавить транзакцию</h4>
+            <form
+                // onSubmit={handleSubmit}
+                className={styles.form} >
+
+                <button className={styles.closeButton} onClick={(event) => dispatch(showModal())}>
+                    <Close />
+                </button>
+                <h4 className={styles.title}>Добавить транзакцию</h4>
 
 
-            <div className={styles.swichContainer}>
-                <span className={styles.swichTitle}>Доход</span>
+                <div className={styles.swichContainer}>
+                    <span className={styles.swichTitle}>Доход</span>
 
-                <label className={styles.switch}>
-                    <input
-                        type="checkbox"
-                        name="income"
-                        onChange={handleInputChange}
-                        checked={!transaction.income}
-                         />
-                    <div className={styles.slider}>
-                        <div className={styles.indicator}>
-                            { transaction.income ?  <Plus /> : <Minus/> }
+                    <label className={styles.switch}>
+                        <input
+                            type="checkbox"
+                            name="income"
+                            onChange={handleInputChange}
+                            checked={!transaction.income}
+                        />
+                        <div className={styles.slider}>
+                            <div className={styles.indicator}>
+                                {transaction.income ? <Plus /> : <Minus />}
+                            </div>
                         </div>
-                    </div>
-                </label>
-                <span className={styles.swichTitle}>Расход</span>
-            </div>
+                    </label>
+                    <span className={styles.swichTitle}>Расход</span>
+                </div>
 
-               
-             { !transaction.income ? <div className={styles.categoriesContainer}>
-                            <Select 
-                                    placeholder="Выберите категорию" 
-                                    options={categories} 
-                                    styles={stylesSelect()}
-                                    onChange={(option) => {
-                                        updateTransaction('category', option.value)
-                                      }}/>
-                         </div> 
-                        : null
-            }
-                
-         <div className={styles.amountAndDateContainer}>
-            <div className={styles.dateContainer}>
+
+                {!transaction.income ? <div className={styles.categoriesContainer}>
+                    <Select
+                        placeholder="Выберите категорию"
+                        options={categories}
+                        styles={stylesSelect()}
+                        onChange={(option) => {
+                            updateTransaction('category', option.value)
+                        }} />
+                </div>
+                    : null
+                }
+
+                <div className={styles.amountAndDateContainer}>
+                    <div className={styles.dateContainer}>
+                        <label className={styles.labelForm}>
+                            <input
+                                type="text"
+                                name="amount"
+                                placeholder='0.00'
+                                className={styles.inputForm}
+                                onChange={handleInputChange}
+                                required />
+                        </label>
+                    </div>
+
+                    <div className={styles.datepickerContainer}>
+                        <DatePicker date={transaction.date} updateDate={updateTransaction} />
+                        <CalendarIcon className={styles.calendarIcon} />
+                    </div>
+
+                </div>
+
                 <label className={styles.labelForm}>
                     <input
                         type="text"
-                        name="amount"
-                        placeholder='0.00'
-                        className={styles.inputForm}
+                        name="comment"
+                        placeholder='Коментарий'
+                        className={styles.inputComment}
                         onChange={handleInputChange}
                         required />
                 </label>
-                </div>
-
-                <div className={styles.datepickerContainer}>
-                    <DatePicker date={transaction.date} updateDate={updateTransaction} />
-                    <CalendarIcon  className={styles.calendarIcon}  />
-                </div>
-               
-                </div>
-
-            <label className={styles.labelForm}>
-                <input
-                    type="text"
-                    name="comment"
-                    placeholder='Коментарий'
-                    className={styles.inputComment}
-                    onChange={handleInputChange}
-                    required />
-            </label>
-            <Button text="Добавить" color="green" />
-            <Button
-                text="Отмена"
-                color="white"
-                onClick={resetForm} />
-        </form >
-        </Modal>
+                <Button text="Добавить" color="green" />
+                <Button
+                    text="Отмена"
+                    color="white"
+                    onClick={resetForm} />
+            </form >
+            {/* </Modal> */}
         </>
     )
 }

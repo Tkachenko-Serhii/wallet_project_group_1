@@ -9,6 +9,7 @@ export default function Navigation() {
     <ul className={s.navigation}>
       <li className={s.iconWrapper}>
         <NavLink
+          end
           to="/home"
           className={({ isActive }) =>
             isActive ? s.iconNavLinkActive : s.iconNavLink
@@ -18,6 +19,7 @@ export default function Navigation() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? s.navLinkActive : s.navLink)}
+          end
           to="/home"
         >
           Главная
@@ -25,7 +27,7 @@ export default function Navigation() {
       </li>
       <li className={s.iconWrapper}>
         <NavLink
-          to="/chart"
+          to="chart"
           className={({ isActive }) =>
             isActive ? s.iconNavLinkActive : s.iconNavLink
           }
@@ -34,14 +36,14 @@ export default function Navigation() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? s.navLinkActive : s.navLink)}
-          to="/chart"
+          to="chart"
         >
           Статистика
         </NavLink>
       </li>
       <li className={s.iconWrapper}>
         <NavLink
-          to="/currency"
+          to="currency"
           className={({ isActive }) =>
             isActive ? s.iconNavLinkActive : s.iconNavLink
           }
