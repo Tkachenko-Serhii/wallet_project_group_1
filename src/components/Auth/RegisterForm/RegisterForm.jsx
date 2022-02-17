@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { alert } from '@pnotify/core';
+import { passwordAttention } from '../../../utils';
 
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
@@ -46,12 +46,11 @@ export default function RegisterForm() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		alert({
-			title: 'Attention!',
-			text: 'Password should contains minimum 6 and maximum 12 characters and at least one uppercase letter, one lowercase letter, one number and one special character of @, $, !, %, *, ?, &',
-			animation: 'fade',
-			delay: 4000
-		});
+		const id = setTimeout(() => {
+			passwordAttention();
+		}, 600);
+
+		return () => clearTimeout(id);
 	}, []);
 
 	//========== Formik logic=============
