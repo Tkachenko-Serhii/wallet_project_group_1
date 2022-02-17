@@ -1,8 +1,9 @@
 import s from './Dashboard.module.css';
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridRenderCellParams } from '@mui/x-data-grid';
 import { styled } from '@mui/system';
-import Typography from '@mui/material/Typography';
+import Typography, { TypographyProps } from '@mui/material/Typography';
+import { GridRowParams } from '@mui/x-data-grid';
 
 const StyledGrid = styled(DataGrid)({
   border: 'none',
@@ -24,9 +25,9 @@ const StyledGrid = styled(DataGrid)({
   '& .MuiDataGrid-cell': {
     borderBottom: 0,
 
-    '&:nth-of-type(5)': {
-      color: 'green',
-    },
+    // '&:nth-of-type(5)': {
+    //   color: 'green',
+    // },
   },
 
   '& .MuiDataGrid-cell:focus-within': {
@@ -86,6 +87,17 @@ export default function TransactionTable(props) {
       sortable: true,
       editable: false,
       disableColumnMenu: true,
+      // sx: {
+      //   '& .MuiDataGrid-cell': {
+      //     '&:nth-of-type(5)': {
+      //       valueGetter: (params) => (`${params.row.type}` ? 'red' : 'green'),
+
+      //       // color: 'red',
+      //       fontWeight: 700,
+      //     },
+      //   },
+      //   // color: 'red',
+      // },
     },
     {
       field: 'balance',
@@ -157,11 +169,25 @@ export default function TransactionTable(props) {
   return (
     <div className={s.wrapper}>
       <StyledGrid
+        // onRowDoubleClick={(
+        //   params: GridRowParams,
+        //   event: MuiEvent<React.MouseEvent>
+        // ) => console.log(GridRowParams)}
         border={0}
         rows={rows}
         columns={columns}
         disableColumnSelector
         hideFooter={true}
+        sx={{
+          '& .MuiDataGrid-cell': {
+            '&:nth-of-type(5)': {
+              // valueGetter: (params) => (`${params.row.type}` ? 'red' : 'green'),
+
+              // color: 'red',
+              fontWeight: 700,
+            },
+          },
+        }}
       />
     </div>
   );
