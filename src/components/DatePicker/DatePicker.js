@@ -5,8 +5,7 @@ import moment from "moment";
 import styles from './DataPicker.module.css';
 
 
-export default function DatePicker({date , updateDate}) {
-    
+export default function DatePicker({ date, updateDate }) {
     return (
         <Datetime
             className={styles.input}
@@ -15,7 +14,7 @@ export default function DatePicker({date , updateDate}) {
             value={date}
             onChange={(moment) => {
                 updateDate('date', moment._d)
-            }} 
-            />
+            }}
+        />
     )
 }
