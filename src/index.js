@@ -20,7 +20,10 @@ defaults.width = '400px';
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<PersistGate loading={<p>...Loading...</p>} persistor={persistor}>
+			<PersistGate
+				loading={<p>...Loading...</p>} //Should be change to Spinner component
+				persistor={persistor}
+			>
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>
