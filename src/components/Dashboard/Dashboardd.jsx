@@ -44,9 +44,14 @@ const StyledGrid = styled(DataGrid)({
 export default function TransactionTable(props) {
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
   const rows = allTransactions.map((row) => {
+    const date = new Date(row.createdAt);
     return {
       id: row._id,
-      date: row.date,
+      date: date.toLocaleString({
+        year: '2-digit',
+        month: 'numeric',
+        day: 'numeric',
+      }),
       type: row.type,
       category: row.category,
       comment: row.comment,
