@@ -1,7 +1,5 @@
-import { useState } from "react";
 import "react-datetime/css/react-datetime.css";
 import Datetime from "react-datetime";
-import moment from "moment";
 import styles from './DataPicker.module.css';
 
 
