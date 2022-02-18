@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 
 import showModal from '../../redux/modal/modalActions';
 
-
 import styles from "./Modal.module.css"
 
 const modalRoot = document.querySelector('#modal-root');
@@ -13,7 +12,7 @@ const modalRoot = document.querySelector('#modal-root');
 export default function Modal({ children, onClose }) {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-  }, []);
+  });
 
   useEffect(() => {
     return () => {
