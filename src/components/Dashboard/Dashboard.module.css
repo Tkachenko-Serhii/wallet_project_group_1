@@ -2,6 +2,47 @@
   width: 688px;
   height: 60vh;
 }
+.tableitems {
+  min-height: 58px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.tableHeader {
+  font-weight: 700;
+  height: 58px;
+  align-items: center;
+  display: flex;
+  border-radius: 30px;
+  background-color: var(--main-background-color);
+}
+.tableHeaderItemDate {
+  text-align: left;
+  width: 60px;
+  margin-left: 20px;
+}
+.tableHeaderItemType {
+  width: 80px;
+  text-align: center;
+}
+.tableHeaderItemCategory {
+  text-align: center;
+  width: 140px;
+}
+.tableHeaderItemComment {
+  text-align: center;
+  width: 160px;
+}
+.tableHeaderItemAmount {
+  text-align: right;
+  width: 80px;
+}
+.tableHeaderItemBalance {
+  text-align: right;
+  width: 120px;
+
+  margin-right: 20px;
+}
 @media screen and (min-width: 1280px) {
   .wrapper {
     width: 700px;

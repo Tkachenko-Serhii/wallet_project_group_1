@@ -50,6 +50,7 @@
   .navigation {
     flex-direction: column;
     /* align-items: left; */
+    margin-bottom: 26px;
   }
   .iconWrapper {
     display: flex;
@@ -59,11 +60,12 @@
     display: none;
   }
   .iconWrapper:not(:first-child) {
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .iconWrapper svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+    display: block;
   }
   .navLink {
     text-decoration: none;
@@ -77,5 +79,10 @@
     margin-left: 20px;
     font-size: 18px;
     font-weight: 700;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .navigation {
+    margin-bottom: 30px;
   }
 }
