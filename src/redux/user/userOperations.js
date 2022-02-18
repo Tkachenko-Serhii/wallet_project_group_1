@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import { authErrorHandler, authSuccessNotification } from '../../utils';
+
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
 const token = {
@@ -15,14 +17,17 @@ const token = {
 const register = createAsyncThunk(
 	'user/register',
 	async (credentials, { rejectWithValue }) => {
+		let successMessage = 'You have successfully registered';
 		try {
 			const { data } = await axios.post('/users/signup', credentials);
 
 			token.set(data.token);
 
+			authSuccessNotification(successMessage, data.user.name);
+
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -30,14 +35,17 @@ const register = createAsyncThunk(
 const login = createAsyncThunk(
 	'user/login',
 	async (credentials, { rejectWithValue }) => {
+		let successMessage = 'You have successfully logged in';
 		try {
 			const { data } = await axios.post('/users/login', credentials);
 
 			token.set(data.token);
 
+			authSuccessNotification(successMessage, data.user.name);
+
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -45,11 +53,15 @@ const login = createAsyncThunk(
 const logout = createAsyncThunk(
 	'user/logout',
 	async (_, { rejectWithValue }) => {
+		let successMessage = 'You have successfully logged out';
 		try {
 			await axios.post('/users/logout');
+
 			token.reset();
+
+			authSuccessNotification(successMessage);
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
@@ -59,28 +71,20 @@ const fetchCurrentUser = createAsyncThunk(
 	async (_, { getState, rejectWithValue }) => {
 		const state = getState();
 		const persistedToken = state.session.token;
+		let successMessage = 'Welcome back, glad to see you again';
 
 		if (persistedToken === null) return rejectWithValue();
 
 		token.set(persistedToken);
 		try {
 			const { data } = await axios.get('/users/current');
+			authSuccessNotification(successMessage, data.user.name);
 			return data;
 		} catch (error) {
-			return handleError(error, rejectWithValue);
+			return authErrorHandler(error, rejectWithValue);
 		}
 	}
 );
-
-function handleError(error, rejectWithValue) {
-	const { status } = error.response;
-	const { message } = error.response.data;
-	const resError = {
-		status,
-		message
-	};
-	return rejectWithValue(resError);
-}
 
 const userOperations = {
 	register,

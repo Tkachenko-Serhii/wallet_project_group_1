@@ -2,13 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import userOperations from './userOperations';
 
 const initialState = {
+	user: { name: null, email: null },
 	token: null,
 	isLoggedIn: false,
-	serverError: {
-		status: null,
-		message: null
-	},
-	user: { name: null, email: null }
+	serverError: null
 };
 
 const userSlice = createSlice({
@@ -20,72 +17,48 @@ const userSlice = createSlice({
 			state.isLoggedIn = true;
 		},
 		[userOperations.register.fulfilled](state, { payload }) {
+			state.user = payload.user;
 			state.token = payload.token;
 			state.isLoggedIn = true;
-			state.user = payload.user;
 		},
 		[userOperations.login.fulfilled](state, { payload }) {
+			state.user = payload.user;
 			state.token = payload.token;
 			state.isLoggedIn = true;
-			state.user = payload.user;
 		},
 		[userOperations.logout.fulfilled](state) {
+			state.user = { name: null, email: null };
 			state.token = null;
 			state.isLoggedIn = false;
-			state.user = { name: null, email: null };
 		},
 		[userOperations.fetchCurrentUser.rejected](state, { payload }) {
 			if (payload) {
+				state.user = { name: null, email: null };
 				state.token = null;
 				state.isLoggedIn = false;
-				state.serverError = {
-					status: payload.status,
-					message: payload.message
-				};
-				state.user = { name: null, email: null };
+				state.serverError = payload;
 			}
 		},
 		[userOperations.register.rejected](state, { payload }) {
-			state.serverError = {
-				status: payload.status,
-				message: payload.message
-			};
+			state.serverError = payload;
 		},
 		[userOperations.login.rejected](state, { payload }) {
-			state.serverError = {
-				status: payload.status,
-				message: payload.message
-			};
+			state.serverError = payload;
 		},
 		[userOperations.logout.rejected](state, { payload }) {
-			state.serverError = {
-				status: payload.status,
-				message: payload.message
-			};
+			state.serverError = payload;
 		},
 		[userOperations.fetchCurrentUser.pending](state) {
-			state.serverError = {
-				status: null,
-				message: null
-			};
+			state.serverError = null;
 		},
 		[userOperations.register.pending](state) {
-			state.serverError = {
-				status: null,
-				message: null
-			};
+			state.serverError = null;
 		},
 		[userOperations.login.pending](state) {
-			state.serverError = {
-				status: null,
-				message: null
-			};
+			state.serverError = null;
 		},
 		[userOperations.logout.pending](state) {
-			state.serverError = {
-				status: null,
-				message: null
-			};
+			state.serverError = null;
 		}
 	}
 });
