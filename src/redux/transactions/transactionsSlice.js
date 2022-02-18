@@ -1,0 +1,97 @@
+import { createSlice } from '@reduxjs/toolkit';
+import transactionsOperations from './transactionsOperations';
+
+const initialState = {
+  all: [],
+  byMonth: [],
+  isLoading: false,
+  serverError: {
+    status: null,
+    message: null,
+  },
+};
+
+const transactionSlice = createSlice({
+  name: 'transactions',
+  initialState,
+  extraReducers: {
+    [transactionsOperations.getTransactions.fulfilled](state, { payload }) {
+      state.all = payload;
+    },
+    [transactionsOperations.createTransaction.fulfilled](state, { payload }) {
+      state.all = [payload, ...state.all];
+    },
+    [transactionsOperations.editTransaction.fulfilled](state, { payload }) {
+      state.all = state.map((item) =>
+        item.id !== payload.id ? item : payload
+      );
+    },
+    [transactionsOperations.deleteTransaction.fulfilled](state, { payload }) {
+      state.all = [
+        ...state.all.filter((transaction) => transaction.id !== payload.id),
+      ];
+    },
+
+    [transactionsOperations.getTransactions.rejected](state, { payload }) {
+      state.serverError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+    [transactionsOperations.createTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
+      state.serverError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+    [transactionsOperations.editTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
+      state.serverError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+    [transactionsOperations.deleteTransaction.rejected](state, { payload }) {
+      state.all = [];
+      state.isLoading = false;
+      state.serverError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+
+    [transactionsOperations.getTransactions.pending](state, { payload }) {
+      state.isLoading = true;
+      state.serverError = {
+        status: null,
+        message: null,
+      };
+    },
+    [transactionsOperations.createTransaction.pending](state, { payload }) {
+      state.isLoading = true;
+      state.serverError = {
+        status: null,
+        message: null,
+      };
+    },
+    [transactionsOperations.editTransaction.pending](state, { payload }) {
+      state.isLoading = true;
+      state.serverError = {
+        status: null,
+        message: null,
+      };
+    },
+    [transactionsOperations.deleteTransaction.pending](state, { payload }) {
+      state.isLoading = true;
+      state.serverError = {
+        status: null,
+        message: null,
+      };
+    },
+  },
+});
+
+export default transactionSlice.reducer;

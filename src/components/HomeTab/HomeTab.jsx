@@ -1,4 +1,5 @@
 import BalanceBox from '../BalanceBox';
+import Currency from '../Currency';
 import Navigation from '../Navigation';
 import NavBalanceWrapper from '../NavBalanceWrapper';
 import NavBalanceCurrencyWrapper from '../NavBalanceCurrencyWrapper';
@@ -13,19 +14,7 @@ export default function HomeTab() {
         <Navigation />
         <BalanceBox />
       </NavBalanceWrapper>
-      {matches && (
-        <div
-          name="currency block here"
-          style={{
-            width: '334px',
-            height: '174px',
-            backgroundColor: '#000',
-            color: '#fff',
-          }}
-        >
-          currency
-        </div>
-      )}
+      {matches && <Currency />}
     </NavBalanceCurrencyWrapper>
   );
 }

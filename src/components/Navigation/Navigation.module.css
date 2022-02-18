@@ -22,6 +22,7 @@
 
 @media screen and (max-width: 767px) {
   .navigation {
+    margin-top: 10px;
     padding: 10px;
     justify-content: center;
   }
@@ -57,7 +58,7 @@
   .iconWrapper:last-child {
     display: none;
   }
-  .iconWrapper {
+  .iconWrapper:not(:first-child) {
     margin-top: 10px;
   }
   .iconWrapper svg {
