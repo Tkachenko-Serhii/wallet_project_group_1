@@ -2,6 +2,12 @@
   width: 688px;
   height: 60vh;
 }
+.tableitems {
+  min-height: 58px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 .tableHeader {
   font-weight: 700;
   height: 58px;

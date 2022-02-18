@@ -5,8 +5,9 @@ import { transactionsSelectors } from '../../redux/transactions';
 import DashboardItem from '../DashboardItem';
 
 export default function Dashboard(props) {
+  // const allTransactions = [];
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
-  console.log(allTransactions);
+
   return (
     <div className={s.wrapper}>
       <ul className={s.table}>
@@ -22,11 +23,15 @@ export default function Dashboard(props) {
         </li>
 
         <li className={s.tableitems}>
-          <ul className={s.transactionsList}>
-            {allTransactions.map((row) => {
-              return <DashboardItem key={row._id} row={row} />;
-            })}
-          </ul>
+          {allTransactions.length < 1 ? (
+            'The list is empty'
+          ) : (
+            <ul className={s.transactionsList}>
+              {allTransactions.map((row) => {
+                return <DashboardItem key={row._id} row={row} />;
+              })}
+            </ul>
+          )}
         </li>
       </ul>
     </div>

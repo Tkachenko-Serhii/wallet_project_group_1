@@ -16,9 +16,11 @@ export default function DashboardItem(props) {
           className={s.transactionCellSum}
           style={row.type ? { color: 'green' } : { color: 'red' }}
         >
-          {row.sum}
+          {row.sum.toLocaleString().replace(/,/i, '.')}
         </li>
-        <li className={s.transactionCellBalance}>{row.balance}</li>
+        <li className={s.transactionCellBalance}>
+          {row.balance.toLocaleString().replace(/,/i, '.')}
+        </li>
       </ul>
     </li>
   );
