@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
 import Currency from './components/Currency';
@@ -15,6 +14,8 @@ import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
 import { userOperations } from './redux/user';
 import { useMediaQuery } from '@mui/material';
+
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,16 @@ function App() {
           path="/register"
           element={
             <PublicRoute restricted redirectTo="/home">
-              <RegisterPage />
+              <Suspense
+                fallback={
+                  <>
+                    <p>...Loading...</p>{' '}
+                    {/*Should be change to Spinner component */}
+                  </>
+                }
+              >
+                <RegisterPage />
+              </Suspense>
             </PublicRoute>
           }
         />
