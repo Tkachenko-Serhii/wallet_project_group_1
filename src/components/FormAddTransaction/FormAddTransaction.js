@@ -97,8 +97,6 @@ export default function ModalAddTransaction(props) {
         event.preventDefault();
         setTransaction(defaultTransactionState)
     }
-
-
     return (
         <form
             onSubmit={handleSubmit}

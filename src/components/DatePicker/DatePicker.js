@@ -4,7 +4,6 @@ import styles from './DataPicker.module.css';
 
 
 export default function DatePicker({ date, updateDate }) {
-
     return (
         <Datetime
             className={styles.input}

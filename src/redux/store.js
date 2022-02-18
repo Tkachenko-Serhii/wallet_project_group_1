@@ -1,32 +1,33 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
-	persistStore,
-	persistReducer,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userSlice } from './user';
+import { transactionsSlice } from './transactions';
 
 import modalReduser from './modal/modalReduser';
 import formReducer from './form/formRedusers';
 
 const middleware = (getDefaultMiddleware) => [
-	...getDefaultMiddleware({
-		serializableCheck: {
-			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-		}
-	})
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
 ];
 
 const userPersistConfig = {
-	key: 'session',
-	storage,
-	whitelist: ['token']
+  key: 'session',
+  storage,
+  whitelist: ['token'],
 };
 
 const transactionsPersistConfig = {

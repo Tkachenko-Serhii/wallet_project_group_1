@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { passwordAttention } from '../../../utils';
 
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
@@ -14,7 +15,7 @@ import ProgressBar from '../../ProgressBar';
 import styles from './RegisterForm.module.css';
 
 import { registerFormValidationSchema } from '../../../utils';
-import { userOperations, userSelectors } from '../../../redux/user';
+import { userOperations } from '../../../redux/user';
 
 const INITIAL_FORM_VALUES = {
 	name: '',
@@ -41,8 +42,16 @@ export default function RegisterForm() {
 	const [isFieldFilled, setFieldFilled] = useState(
 		INITIAL_IS_FIELD_FILLED_VALUES
 	);
-	const serverError = useSelector(userSelectors.getUserServerError);
+
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const id = setTimeout(() => {
+			passwordAttention();
+		}, 600);
+
+		return () => clearTimeout(id);
+	}, []);
 
 	//========== Formik logic=============
 
@@ -68,23 +77,24 @@ export default function RegisterForm() {
 
 	//========== progress bar logic ===========
 
-	const increaseProgress = (isFieldFilledKey, inputName) => {
-		if (!formik.values[inputName].trim()) {
-			setProgress(progress - PROGRESS_VALUES.diff);
-			setFieldFilled((prevState) => ({
-				...prevState,
-				[isFieldFilledKey]: !prevState[isFieldFilledKey]
-			}));
-		}
+	const handleFieldFilledStatus = (isFieldFilledKey) => {
+		setFieldFilled((prevState) => ({
+			...prevState,
+			[isFieldFilledKey]: !prevState[isFieldFilledKey]
+		}));
 	};
 
 	const decreaseProgress = (isFieldFilledKey, inputName) => {
+		if (!formik.values[inputName].trim()) {
+			setProgress(progress - PROGRESS_VALUES.diff);
+			handleFieldFilledStatus(isFieldFilledKey);
+		}
+	};
+
+	const increaseProgress = (isFieldFilledKey, inputName) => {
 		if (formik.values[inputName].trim()) {
 			setProgress(progress + PROGRESS_VALUES.diff);
-			setFieldFilled((prevState) => ({
-				...prevState,
-				[isFieldFilledKey]: !prevState[isFieldFilledKey]
-			}));
+			handleFieldFilledStatus(isFieldFilledKey);
 		}
 	};
 
@@ -95,10 +105,10 @@ export default function RegisterForm() {
 	) => {
 		if (isFieldFilledKey.includes(inputName)) {
 			if (isFieldFilledKeyValue) {
-				increaseProgress(isFieldFilledKey, inputName);
-			} else {
-				decreaseProgress(isFieldFilledKey, inputName);
+				return decreaseProgress(isFieldFilledKey, inputName);
 			}
+
+			increaseProgress(isFieldFilledKey, inputName);
 		}
 
 		if (progress < PROGRESS_VALUES.zero) {
