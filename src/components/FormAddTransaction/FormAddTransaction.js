@@ -6,8 +6,8 @@ import { stylesSelect } from './stylesForSelect'
 import "react-datetime/css/react-datetime.css";
 
 import showModal from '../../redux/modal/modalActions';
-// import Modal from 'react-modal'
-// import Datetime from "react-datetime";
+import addTransaction from "../../redux/form/formOperations";
+
 
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 import { ReactComponent as Minus } from '../../icons/minus.svg'
@@ -23,11 +23,11 @@ import styles from './FormAddTransaction.module.css';
 export default function ModalAddTransaction(props) {
 
     const defaultTransactionState = {
-        income: false,
-        amount: '',
+        type: true,
+        sum: '',
         date: new Date(),
         comment: '',
-        category: '',
+        category: 'Вasic costs',
     }
 
     const [transaction, setTransaction] = useState(defaultTransactionState);
@@ -36,7 +36,7 @@ export default function ModalAddTransaction(props) {
 
 
     const categories = [
-        { value: "Main", label: "Основной" },
+        { value: "Main", label: "Вasic costs" },
         { value: "Food", label: "Еда" },
         { value: "Car", label: "Авто" },
         { value: "Development", label: "Развитие" },
@@ -58,8 +58,8 @@ export default function ModalAddTransaction(props) {
         const { name, value } = event.currentTarget;
 
         switch (name) {
-            case 'income':
-                if (transaction.income === false) {
+            case 'type':
+                if (transaction.type === false) {
                     updateTransaction(name, true)
                 }
                 else {
@@ -68,7 +68,7 @@ export default function ModalAddTransaction(props) {
 
                 break;
 
-            case 'amount':
+            case 'sum':
                 updateTransaction(name, value)
                 break;
 
@@ -85,12 +85,28 @@ export default function ModalAddTransaction(props) {
         setTransaction((prev) => ({ ...prev, [name]: value }))
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newTransaction = {
+            type: transaction.type,
+            sum: transaction.sum,
+            date: transaction.date.toLocaleDateString(),
+            month: transaction.date.getMonth() + 1,
+            year: transaction.date.getFullYear(),
+            comment: transaction.comment,
+            category: transaction.category,
+
+        }
+        console.log(newTransaction)
+
+        // dispatch(addTransaction(newTransaction));
+        resetForm();
+    }
+
     const resetForm = (event) => {
         event.preventDefault();
-
         setTransaction(defaultTransactionState)
         // closeModal()
-        // dispatch(showModal())
     }
 
 
@@ -110,38 +126,38 @@ export default function ModalAddTransaction(props) {
             > */}
 
             <form
-                // onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
                 className={styles.form} >
 
                 <button className={styles.closeButton} onClick={(event) => dispatch(showModal())}>
                     <Close />
                 </button>
-                <h4 className={styles.title}>Добавить транзакцию</h4>
+                <h4 className={styles.title}>Add transaction</h4>
 
 
                 <div className={styles.swichContainer}>
-                    <span className={styles.swichTitle}>Доход</span>
+                    <span className={styles.swichTitle}>Expense</span>
 
                     <label className={styles.switch}>
                         <input
                             type="checkbox"
-                            name="income"
+                            name="type"
                             onChange={handleInputChange}
-                            checked={!transaction.income}
+                            checked={!transaction.type}
                         />
                         <div className={styles.slider}>
                             <div className={styles.indicator}>
-                                {transaction.income ? <Plus /> : <Minus />}
+                                {transaction.type ? <Plus /> : <Minus />}
                             </div>
                         </div>
                     </label>
-                    <span className={styles.swichTitle}>Расход</span>
+                    <span className={styles.swichTitle}>Income</span>
                 </div>
 
 
-                {!transaction.income ? <div className={styles.categoriesContainer}>
+                {!transaction.type ? <div className={styles.categoriesContainer}>
                     <Select
-                        placeholder="Выберите категорию"
+                        placeholder="Select a category "
                         options={categories}
                         styles={stylesSelect()}
                         onChange={(option) => {
@@ -156,7 +172,7 @@ export default function ModalAddTransaction(props) {
                         <label className={styles.labelForm}>
                             <input
                                 type="text"
-                                name="amount"
+                                name="sum"
                                 placeholder='0.00'
                                 className={styles.inputForm}
                                 onChange={handleInputChange}
@@ -175,14 +191,14 @@ export default function ModalAddTransaction(props) {
                     <input
                         type="text"
                         name="comment"
-                        placeholder='Коментарий'
+                        placeholder='Comment'
                         className={styles.inputComment}
                         onChange={handleInputChange}
                         required />
                 </label>
-                <Button text="Добавить" color="green" />
+                <Button type="submit" text="Add" color="green" />
                 <Button
-                    text="Отмена"
+                    text="Cancel"
                     color="white"
                     onClick={resetForm} />
             </form >

@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import { userSlice } from './user';
 
 import modalReduser from './modal/modalReduser';
+import formReducer from './form/formRedusers';
 
 const middleware = (getDefaultMiddleware) => [
 	...getDefaultMiddleware({
@@ -28,9 +29,15 @@ const userPersistConfig = {
 	whitelist: ['token']
 };
 
+const transactionsPersistConfig = {
+	key: 'transactions',
+	storage,
+}
+
 export const store = configureStore({
 	reducer: {
 		session: persistReducer(userPersistConfig, userSlice),
+		transactions: persistReducer(transactionsPersistConfig, formReducer),
 		modal: modalReduser,
 	},
 	middleware,
