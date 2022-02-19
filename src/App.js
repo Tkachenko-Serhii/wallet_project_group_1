@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import Loader from './components/Loader/Loader';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
@@ -25,8 +26,35 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        <Routes>
+    <div className="App">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoute restricted redirectTo="/home">
+              <Navigate to="/login" />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute restricted redirectTo="/home">
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute restricted redirectTo="/home">
+              <Suspense fallback={<Loader />}>
+                <RegisterPage />
+              </Suspense>
+            </PublicRoute>
+          }
+        />
+        {!matches && (
           <Route
             path="/"
             element={

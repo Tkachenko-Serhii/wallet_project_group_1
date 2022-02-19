@@ -16,7 +16,7 @@ const transactionSlice = createSlice({
   initialState,
   extraReducers: {
     [transactionsOperations.getTransactions.fulfilled](state, { payload }) {
-      state.all = payload;
+      state.all = [...payload];
     },
     [transactionsOperations.createTransaction.fulfilled](state, { payload }) {
       state.all = [payload, ...state.all];

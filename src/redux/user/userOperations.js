@@ -11,7 +11,7 @@ const token = {
   },
   reset() {
     axios.defaults.headers.common.Authorization = ``;
-  },
+  }
 };
 
 const register = createAsyncThunk(
@@ -69,14 +69,13 @@ const fetchCurrentUser = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     const state = getState();
     const persistedToken = state.session.token;
-    let successMessage = 'Welcome back, glad to see you again';
 
     if (persistedToken === null) return rejectWithValue();
 
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/users/current');
-      authSuccessNotification(successMessage, data.user.name);
+
       return data;
     } catch (error) {
       return authErrorHandler(error, rejectWithValue);
@@ -88,7 +87,7 @@ const userOperations = {
   register,
   login,
   logout,
-  fetchCurrentUser,
+  fetchCurrentUser
 };
 
 export default userOperations;

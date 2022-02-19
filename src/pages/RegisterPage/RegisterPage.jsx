@@ -7,12 +7,12 @@ import RegisterForm from '../../components/Auth/RegisterForm';
 import styles from './RegisterPage.module.css';
 
 export default function RegisterPage() {
-	const matches = useMediaQuery('(min-width:768px)');
+  const matches = useMediaQuery('(min-width:768px)');
 
-	return (
-		<AuthPageWrapper>
-			{matches && <AuthMedia className={styles.bgImage} />}
-			<RegisterForm />
-		</AuthPageWrapper>
-	);
+  return (
+    <AuthPageWrapper>
+      {matches && <AuthMedia className={styles.bgImage} />}
+      <RegisterForm />
+    </AuthPageWrapper>
+  );
 }

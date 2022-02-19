@@ -5,7 +5,6 @@ import { transactionsSelectors } from '../../redux/transactions';
 import DashboardItem from '../DashboardItem';
 
 export default function Dashboard(props) {
-  // const allTransactions = [];
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
 
   return (
