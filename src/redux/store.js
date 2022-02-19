@@ -7,7 +7,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
+  REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userSlice } from './user';
@@ -19,15 +19,15 @@ import formReducer from './form/formRedusers';
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+    }
+  })
 ];
 
 const userPersistConfig = {
   key: 'session',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token']
 };
 
 const transactionsPersistConfig = {

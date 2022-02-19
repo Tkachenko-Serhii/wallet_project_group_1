@@ -7,10 +7,10 @@ const getUserServerError = (state) => state.session.serverError;
 const getLoginStatus = (state) => state.session.isLoggedIn;
 
 const userSelectors = {
-	getUserName,
-	getUserEmail,
-	getUserServerError,
-	getLoginStatus
+  getUserName,
+  getUserEmail,
+  getUserServerError,
+  getLoginStatus
 };
 
 export default userSelectors;
