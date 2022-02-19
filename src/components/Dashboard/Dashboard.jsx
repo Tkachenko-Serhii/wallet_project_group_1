@@ -5,7 +5,6 @@ import { transactionsSelectors } from '../../redux/transactions';
 import DashboardItem from '../DashboardItem';
 
 export default function Dashboard(props) {
-  // const allTransactions = [];
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
 
   return (
@@ -22,7 +21,7 @@ export default function Dashboard(props) {
           </ul>
         </li>
 
-        <li className={s.tableitems}>
+        {/* <li className={s.tableitems}>
           {allTransactions.length < 1 ? (
             'The list is empty'
           ) : (
@@ -32,7 +31,7 @@ export default function Dashboard(props) {
               })}
             </ul>
           )}
-        </li>
+        </li> */}
       </ul>
     </div>
   );

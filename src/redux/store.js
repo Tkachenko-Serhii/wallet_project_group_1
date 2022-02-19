@@ -7,7 +7,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
+  REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userSlice } from './user';
@@ -20,31 +20,32 @@ import modalLogoutReduser from './modalLogout/modalLogoutReduser';
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+    }
+  })
 ];
 
 const userPersistConfig = {
   key: 'session',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token']
 };
 
 const transactionsPersistConfig = {
   key: 'transactions',
   storage,
-}
+};
 
 export const store = configureStore({
   reducer: {
     session: persistReducer(userPersistConfig, userSlice),
-    transactions: persistReducer(transactionsPersistConfig, formReducer),
+    // transactions: persistReducer(transactionsPersistConfig, formReducer),
+    transactions: transactionsSlice,
     modal: modalReduser,
-    isModalLogoutOpen: modalLogoutReduser
+  isModalLogoutOpen: modalLogoutReduser
   },
   middleware,
-  devTools: process.env.NODE_ENV === 'development'
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);
