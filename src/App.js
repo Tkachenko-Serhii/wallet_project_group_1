@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import Loader from './components/Loader/Loader';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
@@ -46,14 +47,7 @@ function App() {
           path="/register"
           element={
             <PublicRoute restricted redirectTo="/home">
-              <Suspense
-                fallback={
-                  <>
-                    <p>...Loading...</p>{' '}
-                    {/*Should be change to Spinner component */}
-                  </>
-                }
-              >
+              <Suspense fallback={<Loader />}>
                 <RegisterPage />
               </Suspense>
             </PublicRoute>
