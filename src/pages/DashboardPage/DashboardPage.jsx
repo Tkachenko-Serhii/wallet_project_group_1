@@ -1,17 +1,17 @@
-import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import showModal from '../../redux/modal/modalActions';
+import showModal from "../../redux/modal/modalActions";
 
-import SplitLineDesktop from '../../components/SplitLineDesktop';
-import HomeTabWrapper from '../../components/HomeTabWrapper';
+import SplitLineDesktop from "../../components/SplitLineDesktop";
+import HomeTabWrapper from "../../components/HomeTabWrapper";
 
-import Container from '../../components/Container';
-import HomeTab from '../../components/HomeTab';
-import ButtonAdd from '../../components/ButtonAdd';
-import { transactionsOperations } from '../../redux/transactions';
-import Header from '../../components/Header';
+import Container from "../../components/Container";
+import HomeTab from "../../components/HomeTab";
+import ButtonAdd from "../../components/ButtonAdd";
+import { transactionsOperations } from "../../redux/transactions";
+import Header from "../../components/Header";
 
 export default function DashboardPage() {
   const dispatch = useDispatch();

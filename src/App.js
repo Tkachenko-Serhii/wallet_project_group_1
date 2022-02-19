@@ -28,36 +28,32 @@ function App() {
     <>
       <div className='App'>
         <Routes>
-          {!matches && (
-            <>
-              <Route
-                path='/'
-                element={
-                  <PublicRoute restricted redirectTo='/home'>
-                    <Navigate to='/login' />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path='/login'
-                element={
-                  <PublicRoute restricted redirectTo='/home'>
-                    <LoginPage />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path='/register'
-                element={
-                  <PublicRoute restricted redirectTo='/home'>
-                    <Suspense fallback={<Loader />}>
-                      <RegisterPage />
-                    </Suspense>
-                  </PublicRoute>
-                }
-              />
-            </>
-          )}
+          <Route
+            path='/'
+            element={
+              <PublicRoute restricted redirectTo='/home'>
+                <Navigate to='/login' />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <PublicRoute restricted redirectTo='/home'>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/register'
+            element={
+              <PublicRoute restricted redirectTo='/home'>
+                <Suspense fallback={<Loader />}>
+                  <RegisterPage />
+                </Suspense>
+              </PublicRoute>
+            }
+          />
           {!matches && (
             <Route
               path='/home'

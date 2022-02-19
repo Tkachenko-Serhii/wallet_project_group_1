@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -7,34 +7,34 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { userSlice } from './user';
-import { transactionsSlice } from './transactions';
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { userSlice } from "./user";
+import { transactionsSlice } from "./transactions";
 
-import modalReduser from './modal/modalReduser';
-import formReducer from './form/formRedusers';
-import modalLogoutReduser from './modalLogout/modalLogoutReduser';
+import modalReduser from "./modal/modalReduser";
+// import formReducer from './form/formRedusers';
+import modalLogoutReduser from "./modalLogout/modalLogoutReduser";
 
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-    }
-  })
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
 ];
 
 const userPersistConfig = {
-  key: 'session',
+  key: "session",
   storage,
-  whitelist: ['token']
+  whitelist: ["token"],
 };
 
-const transactionsPersistConfig = {
-  key: 'transactions',
-  storage,
-};
+// const transactionsPersistConfig = {
+//   key: 'transactions',
+//   storage,
+// };
 
 export const store = configureStore({
   reducer: {
@@ -42,10 +42,10 @@ export const store = configureStore({
     // transactions: persistReducer(transactionsPersistConfig, formReducer),
     transactions: transactionsSlice,
     modal: modalReduser,
-  isModalLogoutOpen: modalLogoutReduser
+    isModalLogoutOpen: modalLogoutReduser,
   },
   middleware,
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: process.env.NODE_ENV === "development",
 });
 
 export const persistor = persistStore(store);

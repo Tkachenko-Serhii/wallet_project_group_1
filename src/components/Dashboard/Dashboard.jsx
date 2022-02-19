@@ -1,11 +1,11 @@
-import s from './Dashboard.module.css';
-import { useSelector } from 'react-redux';
-import { transactionsSelectors } from '../../redux/transactions';
+import s from "./Dashboard.module.css";
+// import { useSelector } from 'react-redux';
+// import { transactionsSelectors } from '../../redux/transactions';
 
-import DashboardItem from '../DashboardItem';
+// import DashboardItem from '../DashboardItem';
 
 export default function Dashboard(props) {
-  const allTransactions = useSelector(transactionsSelectors.getTransactions);
+  // const allTransactions = useSelector(transactionsSelectors.getTransactions);
 
   return (
     <div className={s.wrapper}>
