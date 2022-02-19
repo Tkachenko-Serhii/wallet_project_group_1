@@ -29,6 +29,7 @@ export default function ModalAddTransaction(props) {
 
     const [transaction, setTransaction] = useState(defaultTransactionState);
     const dispatch = useDispatch();
+    console.log(transaction.type)
 
     const categories = [
         { value: "Main", label: "Вasic costs", type: false },
