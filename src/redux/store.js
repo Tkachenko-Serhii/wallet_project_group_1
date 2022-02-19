@@ -15,6 +15,7 @@ import { transactionsSlice } from './transactions';
 
 import modalReduser from './modal/modalReduser';
 import formReducer from './form/formRedusers';
+import modalLogoutReduser from './modalLogout/modalLogoutReduser';
 
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
@@ -31,18 +32,19 @@ const userPersistConfig = {
 };
 
 const transactionsPersistConfig = {
-	key: 'transactions',
-	storage,
+  key: 'transactions',
+  storage,
 }
 
 export const store = configureStore({
-	reducer: {
-		session: persistReducer(userPersistConfig, userSlice),
-		transactions: persistReducer(transactionsPersistConfig, formReducer),
-		modal: modalReduser,
-	},
-	middleware,
-	devTools: process.env.NODE_ENV === 'development'
+  reducer: {
+    session: persistReducer(userPersistConfig, userSlice),
+    transactions: persistReducer(transactionsPersistConfig, formReducer),
+    modal: modalReduser,
+    isModalLogoutOpen: modalLogoutReduser
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development'
 });
 
 export const persistor = persistStore(store);
