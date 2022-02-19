@@ -25,6 +25,7 @@ function App() {
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
 
   return (
+    <>
     <div className="App">
       <Routes>
         <Route
@@ -55,79 +56,114 @@ function App() {
         />
         {!matches && (
           <Route
-            path="/home"
+            path="/"
             element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
+              <PublicRoute restricted redirectTo="/home">
+                <Navigate to="/login" />
+              </PublicRoute>
             }
-          >
-            <Route
-              index
-              element={
-                <PrivateRoute>
-                  <TransactionMobile />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="chart"
-              element={
-                <PrivateRoute>
-                  <TransactionMobile />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="currency"
-              element={
-                <PrivateRoute>
-                  <Currency />
-                </PrivateRoute>
-              }
-            />
-          </Route>
-        )}
-        {matches && (
+          />
           <Route
-            path="/home"
+            path="/login"
             element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
+              <PublicRoute restricted redirectTo="/home">
+                <LoginPage />
+              </PublicRoute>
             }
-          >
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute restricted redirectTo="/home">
+                <Suspense
+                  fallback={
+                    <>
+                      <p>...Loading...</p>{' '}
+                      {/*Should be change to Spinner component */}
+                    </>
+                  }
+                >
+                  <RegisterPage />
+                </Suspense>
+              </PublicRoute>
+            }
+          />
+          {!matches && (
             <Route
-              index
+              path="/home"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <DashboardPage />
                 </PrivateRoute>
               }
-            />
-            <Route
-              path="chart"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/home" />} />
-          </Route>
-        )}
+            >
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <TransactionMobile />
+                  </PrivateRoute>
+                }
+              />
 
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </div>
-    // {
-    //     showModal && (
-    //       <Modal>
-    //         <Form />
-    //       </Modal>
-    //     )
-    //   }
+              <Route
+                path="chart"
+                element={
+                  <PrivateRoute>
+                    <TransactionMobile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="currency"
+                element={
+                  <PrivateRoute>
+                    <Currency />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+          )}
+          {matches && (
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            >
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="chart"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Route>
+          )}
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+      {
+        showModal && (
+          <Modal>
+            <Form />
+          </Modal>
+        )
+      }
+    </>
   );
 }
 

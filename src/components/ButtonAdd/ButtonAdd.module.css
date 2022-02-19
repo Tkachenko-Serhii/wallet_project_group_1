@@ -1,7 +1,9 @@
 .button {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
+  position: sticky;
+  bottom: 30px;
+  margin-left: 85%;
+  z-index: 10;
+  cursor: pointer;
 
   width: 44px;
   height: 44px;
@@ -25,4 +27,16 @@
   background-color: #2bdeb6;
   transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    margin-left: 93%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .button {
+    margin-left: 95%;
+  }
 }
