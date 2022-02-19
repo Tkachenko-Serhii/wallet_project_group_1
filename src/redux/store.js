@@ -31,18 +31,18 @@ const userPersistConfig = {
 };
 
 const transactionsPersistConfig = {
-	key: 'transactions',
-	storage,
+  key: 'transactions',
+  storage,
 }
 
 export const store = configureStore({
-	reducer: {
-		session: persistReducer(userPersistConfig, userSlice),
-		transactions: persistReducer(transactionsPersistConfig, formReducer),
-		modal: modalReduser,
-	},
-	middleware,
-	devTools: process.env.NODE_ENV === 'development'
+  reducer: {
+    session: persistReducer(userPersistConfig, userSlice),
+    transactions: transactionsSlice,
+    modal: modalReduser,
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development'
 });
 
 export const persistor = persistStore(store);

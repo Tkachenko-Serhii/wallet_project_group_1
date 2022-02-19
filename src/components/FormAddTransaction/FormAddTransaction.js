@@ -6,7 +6,7 @@ import { stylesSelect } from './stylesForSelect'
 import "react-datetime/css/react-datetime.css";
 
 import showModal from '../../redux/modal/modalActions';
-import addTransaction from "../../redux/form/formOperations";
+import { transactionsOperations } from "../../redux/transactions";
 
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 import { ReactComponent as Minus } from '../../icons/minus.svg'
@@ -89,14 +89,15 @@ export default function ModalAddTransaction(props) {
         }
         console.log(newTransaction)
 
-        // dispatch(addTransaction(newTransaction));
+        dispatch(transactionsOperations.createTransaction(newTransaction));
         resetForm();
     }
 
     const resetForm = (event) => {
-        event.preventDefault();
         setTransaction(defaultTransactionState)
+        dispatch(showModal());
     }
+
     return (
         <form
             onSubmit={handleSubmit}
