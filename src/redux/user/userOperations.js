@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import { authErrorHandler, authSuccessNotification } from '../../utils';
+import isModalLogoutOpen from '../modalLogout/modalLogoutAction';
 
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
@@ -50,15 +51,16 @@ const login = createAsyncThunk(
 
 const logout = createAsyncThunk(
   'user/logout',
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
+
     let successMessage = 'You have successfully logged out';
     try {
-      await axios.post('/users/logout');
-
+      await axios.get('/users/logout');
       token.reset();
-
+      dispatch(isModalLogoutOpen());
       authSuccessNotification(successMessage);
     } catch (error) {
+      dispatch(isModalLogoutOpen());
       return authErrorHandler(error, rejectWithValue);
     }
   }

@@ -15,6 +15,7 @@ import { transactionsSlice } from './transactions';
 
 import modalReduser from './modal/modalReduser';
 import formReducer from './form/formRedusers';
+import modalLogoutReduser from './modalLogout/modalLogoutReduser';
 
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
@@ -41,6 +42,7 @@ export const store = configureStore({
     // transactions: persistReducer(transactionsPersistConfig, formReducer),
     transactions: transactionsSlice,
     modal: modalReduser,
+  isModalLogoutOpen: modalLogoutReduser
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
