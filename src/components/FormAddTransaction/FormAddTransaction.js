@@ -1,75 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select'
-import { stylesSelect } from './stylesForSelect'
+import Select from "react-select";
+import { stylesSelect } from "./stylesForSelect";
 import "react-datetime/css/react-datetime.css";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 
-import showModal from '../../redux/modal/modalActions';
+import showModal from "../../redux/modal/modalActions";
 import { transactionsOperations } from "../../redux/transactions";
-import { categoriesOperations, categoriesSelectors } from "../../redux/categories"
+import {
+    categoriesOperations,
+    categoriesSelectors,
+} from "../../redux/categories";
 
-import { ReactComponent as Plus } from '../../icons/plus.svg'
-import { ReactComponent as Minus } from '../../icons/minus.svg'
-import { ReactComponent as CalendarIcon } from '../../icons/calendar.svg'
-import { ReactComponent as Close } from '../../icons/close.svg'
+import { ReactComponent as Plus } from "../../icons/plus.svg";
+import { ReactComponent as Minus } from "../../icons/minus.svg";
+import { ReactComponent as CalendarIcon } from "../../icons/calendar.svg";
+import { ReactComponent as Close } from "../../icons/close.svg";
 
-import Button from '../Button';
-import DatePicker from '../DatePicker';
-import styles from './FormAddTransaction.module.css';
-import Loader from '../Loader/Loader';
+import Button from "../Button";
+import DatePicker from "../DatePicker";
+import styles from "./FormAddTransaction.module.css";
+import Loader from "../Loader/Loader";
 
-import { formAddTransactionSchema } from '../../utils';
-
-
+import { formAddTransactionSchema } from "../../utils";
 
 export default function ModalAddTransaction(props) {
-
     const DEFAULT_TRANSACTION_STATE = {
         type: false,
-        sum: '',
+        sum: "",
         date: new Date(),
-        comment: '',
-        category: 'Вasic costs',
-    }
+        comment: "",
+        category: "",
+    };
     // const [category, setCategory] = useState('Вasic costs');
 
     const isLoading = useSelector(categoriesSelectors.getIsLoading);
-    const categories = useSelector(categoriesSelectors.getCategories)
+    const categories = useSelector(categoriesSelectors.getCategories);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(categoriesOperations.getCategories())
+        dispatch(categoriesOperations.getCategories());
     }, [dispatch]);
 
     // const updateCategory = (value) => {
     //     setCategory(value)
     // }
 
-    // console.log(category)
-
+    //   console.log(categories);
 
     const formik = useFormik({
         initialValues: DEFAULT_TRANSACTION_STATE,
         validationSchema: formAddTransactionSchema,
         onSubmit: (values) => {
             const { type, category, sum, date, comment } = values;
-            console.log(dispatch(
-                transactionsOperations.createTransaction({
-
-                    type,
-                    sum,
-                    date: date.toLocaleDateString(),
-                    month: date.getMonth() + 1,
-                    year: date.getFullYear(),
-                    comment,
-                    category,
-                })
-            ))
+            console.log(
+                dispatch(
+                    transactionsOperations.createTransaction({
+                        type,
+                        sum,
+                        date: date.toLocaleDateString(),
+                        month: date.getMonth() + 1,
+                        year: date.getFullYear(),
+                        comment,
+                        category,
+                    })
+                )
+            );
             dispatch(
                 transactionsOperations.createTransaction({
-
                     type,
                     sum,
                     date: date.toLocaleDateString(),
@@ -80,18 +79,16 @@ export default function ModalAddTransaction(props) {
                 })
             );
             formik.handleReset();
-        }
+        },
     });
 
-
     return (
-        <form
-            onSubmit={formik.handleSubmit}
-            className={styles.form}
-        >
-
-
-            <button type="button" className={styles.closeButton} onClick={(event) => dispatch(showModal())}>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
+            <button
+                type="button"
+                className={styles.closeButton}
+                onClick={(event) => dispatch(showModal())}
+            >
                 <Close />
             </button>
             <h4 className={styles.title}>Add transaction</h4>
@@ -104,7 +101,17 @@ export default function ModalAddTransaction(props) {
                         type="checkbox"
                         name="type"
                         value={formik.values.type}
-                        onChange={formik.handleChange}
+                        onChange={(e) => {
+                            console.log(e);
+                            formik.handleChange(e);
+                            formik.handleChange({
+                                type: "change",
+                                target: {
+                                    name: "category",
+                                    value: null,
+                                },
+                            });
+                        }}
                     />
                     <div className={styles.slider}>
                         <div className={styles.indicator}>
@@ -118,21 +125,31 @@ export default function ModalAddTransaction(props) {
             <div className={styles.categoriesContainer}>
                 <Select
                     placeholder="Select a category "
-                    options={categories.filter(category => category.type === formik.values.type)}
-
+                    options={categories.filter(
+                        (category) => category.type === formik.values.type
+                    )}
                     styles={stylesSelect()}
-                    onChange={formik.handleChange}
+                    onChange={(e) =>
+                        formik.handleChange({
+                            type: "change",
+                            target: {
+                                name: "category",
+                                value: categories.find(
+                                    (category) => category.value === e.value
+                                ),
+                            },
+                        })
+                    }
                     value={formik.values.category}
                 />
             </div>
-
             <div className={styles.amountAndDateContainer}>
                 <div className={styles.dateContainer}>
                     <label className={styles.labelForm}>
                         <input
                             type="number"
                             name="sum"
-                            placeholder='0.00'
+                            placeholder="0.00"
                             className={styles.inputForm}
                             onChange={formik.handleChange}
                             value={formik.values.sum}
@@ -142,17 +159,19 @@ export default function ModalAddTransaction(props) {
                 </div>
 
                 <div className={styles.datepickerContainer}>
-                    <DatePicker date={formik.values.date} />
+                    <DatePicker
+                        date={formik.values.date}
+                        updateDate={formik.handleChange}
+                    />
                     <CalendarIcon className={styles.calendarIcon} />
                 </div>
-
             </div>
 
             <label className={styles.labelForm}>
                 <input
                     type="text"
                     name="comment"
-                    placeholder='Comment'
+                    placeholder="Comment"
                     className={styles.inputComment}
                     onChange={formik.handleChange}
                     value={formik.values.comment}
@@ -166,6 +185,6 @@ export default function ModalAddTransaction(props) {
                 onClick={formik.handleReset}
             />
             {isLoading && <Loader />}
-        </form >
-    )
+        </form>
+    );
 }
