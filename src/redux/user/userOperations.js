@@ -52,7 +52,6 @@ const login = createAsyncThunk(
 const logout = createAsyncThunk(
   'user/logout',
   async (_, { dispatch, rejectWithValue }) => {
-
     let successMessage = 'You have successfully logged out';
     try {
       await axios.get('/users/logout');
@@ -85,11 +84,24 @@ const fetchCurrentUser = createAsyncThunk(
   }
 );
 
+const fetchCurrentBalance = createAsyncThunk(
+  'user/getBalance',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('/user/balance');
+      return data;
+    } catch (error) {
+      return authErrorHandler(error, rejectWithValue);
+    }
+  }
+);
+
 const userOperations = {
   register,
   login,
   logout,
-  fetchCurrentUser
+  fetchCurrentUser,
+  fetchCurrentBalance
 };
 
 export default userOperations;
