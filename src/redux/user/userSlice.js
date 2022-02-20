@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import userOperations from './userOperations';
 
 const initialState = {
-  user: { name: null, email: null, balance: null },
+  user: { name: '', email: '', balance: 0 },
   token: null,
   isLoggedIn: false,
   serverError: null
@@ -30,13 +30,13 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     [userOperations.logout.fulfilled](state) {
-      state.user = { name: null, email: null, balance: null };
+      state.user = { name: '', email: '', balance: 0 };
       state.token = null;
       state.isLoggedIn = false;
     },
     [userOperations.fetchCurrentUser.rejected](state, { payload }) {
       if (payload) {
-        state.user = { name: null, email: null, balance: null };
+        state.user = { name: '', email: '', balance: 0 };
         state.token = null;
         state.isLoggedIn = false;
         state.serverError = payload;
