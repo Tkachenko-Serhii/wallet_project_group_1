@@ -73,14 +73,16 @@
   width: 42px;
   left: -1px;
   bottom: -2px;
-  background-color: var(--green-color);
-  -webkit-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
-  -moz-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
-  box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: var(--green-color);
+  -webkit-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+  -moz-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+  box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
 
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -96,6 +98,40 @@ input:checked + .slider .indicator {
   -ms-transform: translateX(40px);
   transform: translateX(40px);
 }
+
+/* Стили при использовании формик */
+
+/* .indicator {
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  left: 40px;
+  bottom: -2px;
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--accent-text-color);
+  -webkit-box-shadow: 0px 4px 4px 0px var(--brown-shadow-color);
+  -moz-box-shadow: 0px 4px 4px 0px var(--brown-shadow-color);
+  box-shadow: 0px 4px 4px 0px var(--brown-shadow-color);
+
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider .indicator {
+  background-color: var(--green-color);
+  -webkit-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+  -moz-box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+  box-shadow: 0px 4px 4px 0px var(--green-shadow-color);
+
+  -webkit-transform: translateX(-40px);
+  -ms-transform: translateX(-40px);
+  transform: translateX(-40px);
+} */
 
 .wrapperForInputs {
   width: 410px;

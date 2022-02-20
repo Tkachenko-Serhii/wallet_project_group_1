@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 import { stylesSelect } from './stylesForSelect'
 import "react-datetime/css/react-datetime.css";
-import { useFormik } from 'formik';
+import { useFormik, Field, } from 'formik';
 
 import showModal from '../../redux/modal/modalActions';
 import { transactionsOperations } from "../../redux/transactions";
@@ -169,3 +169,4 @@ export default function ModalAddTransaction(props) {
         </form >
     )
 }
+
