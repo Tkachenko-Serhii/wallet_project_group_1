@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { userSlice } from "./user";
 import { transactionsSlice } from "./transactions";
+import { categoriesSlice } from "./categories";
 
 import modalReduser from "./modal/modalReduser";
 // import formReducer from './form/formRedusers';
@@ -41,6 +42,7 @@ export const store = configureStore({
     session: persistReducer(userPersistConfig, userSlice),
     // transactions: persistReducer(transactionsPersistConfig, formReducer),
     transactions: transactionsSlice,
+    categories: categoriesSlice,
     modal: modalReduser,
     isModalLogoutOpen: modalLogoutReduser,
   },
