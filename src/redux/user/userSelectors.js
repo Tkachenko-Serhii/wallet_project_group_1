@@ -8,12 +8,15 @@ const getUserServerError = (state) => state.session.serverError;
 
 const getLoginStatus = (state) => state.session.isLoggedIn;
 
+const getUserIsLoading = (state) => state.session.isLoading;
+
 const userSelectors = {
   getUserName,
   getUserEmail,
   getUserBalance,
   getUserServerError,
-  getLoginStatus
+  getLoginStatus,
+  getUserIsLoading
 };
 
 export default userSelectors;
