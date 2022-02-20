@@ -1,27 +1,29 @@
 import s from "./Dashboard.module.css";
+import Chart from "./../Chart";
 // import { useSelector } from 'react-redux';
 // import { transactionsSelectors } from '../../redux/transactions';
 
 // import DashboardItem from '../DashboardItem';
 
-export default function Dashboard(props) {
+export default function Dashboard({ chart, ...props }) {
   // const allTransactions = useSelector(transactionsSelectors.getTransactions);
-
   return (
-    <div className={s.wrapper}>
-      <ul className={s.table}>
-        <li>
-          <ul className={s.tableHeader}>
-            <li className={s.tableHeaderItemDate}>Date</li>
-            <li className={s.tableHeaderItemType}>Type</li>
-            <li className={s.tableHeaderItemCategory}>Category</li>
-            <li className={s.tableHeaderItemComment}>Comment</li>
-            <li className={s.tableHeaderItemAmount}>Amount</li>
-            <li className={s.tableHeaderItemBalance}>Balance</li>
-          </ul>
-        </li>
+    <>
+      {!chart && (
+        <div className={s.wrapper}>
+          <ul className={s.table}>
+            <li>
+              <ul className={s.tableHeader}>
+                <li className={s.tableHeaderItemDate}>Date</li>
+                <li className={s.tableHeaderItemType}>Type</li>
+                <li className={s.tableHeaderItemCategory}>Category</li>
+                <li className={s.tableHeaderItemComment}>Comment</li>
+                <li className={s.tableHeaderItemAmount}>Amount</li>
+                <li className={s.tableHeaderItemBalance}>Balance</li>
+              </ul>
+            </li>
 
-        {/* <li className={s.tableitems}>
+            {/* <li className={s.tableitems}>
           {allTransactions.length < 1 ? (
             'The list is empty'
           ) : (
@@ -32,7 +34,10 @@ export default function Dashboard(props) {
             </ul>
           )}
         </li> */}
-      </ul>
-    </div>
+          </ul>
+        </div>
+      )}
+      {chart && <Chart />}
+    </>
   );
 }
