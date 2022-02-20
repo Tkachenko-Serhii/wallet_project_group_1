@@ -13,7 +13,7 @@ export default function BalanceBox(props) {
     <div className={s.balanceBox}>
       <p className={s.balanceLable}>Your balance</p>
       <p className={s.balanceValue}>
-        {uah} {result}
+        <span className={s.uah}>{uah}</span> {result}
       </p>
     </div>
   );
