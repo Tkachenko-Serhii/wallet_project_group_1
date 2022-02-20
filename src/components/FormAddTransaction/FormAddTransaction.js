@@ -1,11 +1,13 @@
+import React, { useEffect } from 'react';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 import { stylesSelect } from './stylesForSelect'
 import "react-datetime/css/react-datetime.css";
 
 import showModal from '../../redux/modal/modalActions';
 import { transactionsOperations } from "../../redux/transactions";
+import { categoriesOperations, categoriesSelectors } from "../../redux/categories"
 
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 import { ReactComponent as Minus } from '../../icons/minus.svg'
@@ -15,6 +17,10 @@ import { ReactComponent as Close } from '../../icons/close.svg'
 import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
+import Loader from '../Loader/Loader';
+
+
+
 
 export default function ModalAddTransaction(props) {
 
@@ -27,20 +33,17 @@ export default function ModalAddTransaction(props) {
     }
 
     const [transaction, setTransaction] = useState(defaultTransactionState);
+    const isLoading = useSelector(categoriesSelectors.getIsLoading);
+    // console.log(isLoading)
+    const categories = useSelector(categoriesSelectors.getCategories)
+    // console.log(categories);
+
+
     const dispatch = useDispatch();
 
-    const categories = [
-        { value: "Main", label: "Вasic costs", type: false },
-        { value: "Food", label: "Food", type: false },
-        { value: "Car", label: "Авто", type: false },
-        { value: "Development", label: "Развитие", type: false },
-        { value: "Children", label: "Дети", type: false },
-        { value: "Home", label: "Дом", type: false },
-        { value: "Education", label: "Образование", type: false },
-        { value: "Other", label: "Остальные", type: false },
-        { value: "Regular income", label: "Regular income", type: true },
-        { value: "Additional income", label: "Additional income", type: true },
-    ]
+    useEffect(() => {
+        dispatch(categoriesOperations.getCategories())
+    }, [dispatch]);
 
     const handleInputChange = event => {
         const { name, value } = event.currentTarget;
@@ -85,8 +88,7 @@ export default function ModalAddTransaction(props) {
             category: transaction.category,
 
         }
-        console.log(newTransaction)
-
+        // console.log(newTransaction)
         dispatch(transactionsOperations.createTransaction(newTransaction));
         resetForm();
     }
@@ -144,6 +146,7 @@ export default function ModalAddTransaction(props) {
                             placeholder='0.00'
                             className={styles.inputForm}
 
+
                             onChange={(event) => {
                                 if (
                                     event.target.value === "" ||
@@ -180,6 +183,7 @@ export default function ModalAddTransaction(props) {
                 color="white"
                 onClick={resetForm}
             />
+            {isLoading && <Loader />}
         </form >
     )
 }
