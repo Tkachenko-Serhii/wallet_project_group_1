@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+
 import DiagramTab from "./DiagramTab";
+import getStatistic from "./../../API/getStatistic";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const inputData = {
-  category: [
+  categories: [
     {
       name: "Машина",
       color: "red",
@@ -44,7 +46,7 @@ const arrName = [];
 const arrTotal = [];
 const arrColor = [];
 
-inputData.category.forEach((item) => {
+inputData.categories.forEach((item) => {
   arrName.push(item.name);
   arrTotal.push(item.total);
   arrColor.push(item.color);
@@ -77,6 +79,12 @@ const options = {
 };
 
 export default function Chart() {
+  const [statistic, setStatistic] = useState([]);
+
+  useEffect(() => {
+    getStatistic().then((data) => setStatistic(data));
+  }, []);
+
   return (
     <>
       <Wrapper>

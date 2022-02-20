@@ -3,7 +3,7 @@ import { styled } from "@mui/material";
 export default function Category({ data }) {
   return (
     <Categories>
-      {data.category.map((item) => (
+      {data.categories.map((item) => (
         <li key={item.name}>
           <Container>
             <LeftTab>
