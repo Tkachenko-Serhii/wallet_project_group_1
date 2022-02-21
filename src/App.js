@@ -38,25 +38,25 @@ function App() {
       <div className='App'>
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
-              <PublicRoute restricted redirectTo='/home'>
-                <Navigate to='/login' />
+              <PublicRoute restricted redirectTo="/home">
+                <Navigate to="/login" />
               </PublicRoute>
             }
           />
           <Route
-            path='/login'
+            path="/login"
             element={
-              <PublicRoute restricted redirectTo='/home'>
+              <PublicRoute restricted redirectTo="/home">
                 <LoginPage />
               </PublicRoute>
             }
           />
           <Route
-            path='/register'
+            path="/register"
             element={
-              <PublicRoute restricted redirectTo='/home'>
+              <PublicRoute restricted redirectTo="/home">
                 <Suspense fallback={<Loader />}>
                   <RegisterPage />
                 </Suspense>
@@ -65,7 +65,7 @@ function App() {
           />
           {!matches && (
             <Route
-              path='/home'
+              path="/home"
               element={
                 <PrivateRoute>
                   <DashboardPage />
@@ -82,15 +82,15 @@ function App() {
               />
 
               <Route
-                path='chart'
+                path="chart"
                 element={
                   <PrivateRoute>
-                    <TransactionMobile />
+                    <Dashboard chart />
                   </PrivateRoute>
                 }
               />
               <Route
-                path='currency'
+                path="currency"
                 element={
                   <PrivateRoute>
                     <Currency />
@@ -101,7 +101,7 @@ function App() {
           )}
           {matches && (
             <Route
-              path='/home'
+              path="/home"
               element={
                 <PrivateRoute>
                   <DashboardPage />
@@ -117,18 +117,18 @@ function App() {
                 }
               />
               <Route
-                path='chart'
+                path="chart"
                 element={
                   <PrivateRoute>
-                    <Dashboard />
+                    <Dashboard chart />
                   </PrivateRoute>
                 }
               />
-              <Route path='*' element={<Navigate to='/home' />} />
+              <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           )}
 
-          <Route path='*' element={<Navigate to='/' />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
       {showModal && (
