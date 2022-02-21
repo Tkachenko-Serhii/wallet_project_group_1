@@ -9,6 +9,13 @@ export default function EmailInputWithFormik({
   autoFocus = false,
   onBlur
 }) {
+  const isInputError =
+    (formik.touched.email || Boolean(formik.values.email)) &&
+    Boolean(formik.errors.email);
+
+  const shouldErrorTextDisplayed =
+    formik.touched.email || Boolean(formik.values.email);
+
   return (
     <CustomTextFiledStyled
       fullWidth
@@ -20,8 +27,8 @@ export default function EmailInputWithFormik({
       onChange={formik.handleChange}
       onBlur={onBlur}
       value={formik.values.email}
-      error={formik.touched.email && Boolean(formik.errors.email)}
-      helperText={formik.touched.email && formik.errors.email}
+      error={isInputError}
+      helperText={shouldErrorTextDisplayed && formik.errors.email}
       autoFocus={autoFocus}
       InputProps={{
         startAdornment: (
