@@ -15,7 +15,6 @@ export default function Modal({ children, onClose }) {
     document.body.style.overflow = "hidden";
   });
 
-
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
   });
