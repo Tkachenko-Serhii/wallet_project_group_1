@@ -10,6 +10,12 @@ import styles from "./Modal.module.css"
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ children, onClose }) {
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  });
+
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
   });
