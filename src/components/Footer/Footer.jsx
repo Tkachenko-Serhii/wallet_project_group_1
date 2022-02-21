@@ -36,7 +36,7 @@ export default function Footer (){
 
     return (
         <footer className={s.footer}>
-             <p className={s.copyright}>&copy; 2021 | All Rights Reserved |</p>
+             <p className={s.copyright}>&copy; 2022 | All Rights Reserved |</p>
              <span>Developed with</span>
                <Love />
              <span>by</span>

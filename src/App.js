@@ -29,7 +29,8 @@ function App() {
   const isLoadingCategories = useSelector(categoriesSelectors.getIsLoading);
   const isLoadingSession = useSelector(userSelectors.getUserIsLoading);
   const isLoadingTransactions = useSelector(transactionsSelectors.getIsLoading);
-  const showLoader = isLoadingCategories || isLoadingSession || isLoadingTransactions;
+  const showLoader =
+    isLoadingCategories || isLoadingSession || isLoadingTransactions;
 
   return (
     <>
