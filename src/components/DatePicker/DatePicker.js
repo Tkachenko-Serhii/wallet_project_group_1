@@ -1,7 +1,6 @@
 import "react-datetime/css/react-datetime.css";
 import Datetime from "react-datetime";
-import styles from './DataPicker.module.css';
-
+import styles from "./DataPicker.module.css";
 
 export default function DatePicker({ date, updateDate }) {
     return (
@@ -11,8 +10,11 @@ export default function DatePicker({ date, updateDate }) {
             timeFormat={false}
             value={date}
             onChange={(moment) => {
-                updateDate('date', moment._d)
+                updateDate({
+                    type: "change",
+                    target: { name: "date", value: moment._d },
+                });
             }}
         />
-    )
+    );
 }

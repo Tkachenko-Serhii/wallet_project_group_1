@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import "./App.css";
 import Loader from "./components/Loader/Loader";
 import LoginPage from "./pages/LoginPage";
@@ -136,6 +139,7 @@ function App() {
           <Form />
         </Modal>
       )}
+      <ToastContainer autoClose={2500} />
     </>
   );
 }

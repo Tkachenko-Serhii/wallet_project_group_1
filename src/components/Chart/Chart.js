@@ -120,6 +120,9 @@ const RightTab = styled("div")`
     align-items: flex-start;
     justify-content: space-between;
     width: 700px;
+  }
+
+  @media screen and (min-width: 1280px) {
     margin-left: 30px;
   }
 `;

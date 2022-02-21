@@ -1,12 +1,18 @@
 .wrapper {
   width: 688px;
-  height: 60vh;
+}
+.table {
+  position: relative;
 }
 .tableitems {
+  height: 60vh;
+  overflow-y: scroll;
   min-height: 58px;
-  align-items: center;
   display: flex;
   justify-content: center;
+}
+.tableHeaderWrapper {
+  position: sticky;
 }
 .tableHeader {
   font-weight: 700;
@@ -39,9 +45,7 @@
 }
 .tableHeaderItemBalance {
   text-align: right;
-  width: 120px;
-
-  margin-right: 20px;
+  width: 125px;
 }
 @media screen and (min-width: 1280px) {
   .wrapper {

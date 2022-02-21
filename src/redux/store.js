@@ -15,7 +15,6 @@ import { transactionsSlice } from "./transactions";
 import { categoriesSlice } from "./categories";
 
 import modalReduser from "./modal/modalReduser";
-// import formReducer from './form/formRedusers';
 import modalLogoutReduser from "./modalLogout/modalLogoutReduser";
 import { teamSlice } from "./team";
 
@@ -33,20 +32,14 @@ const userPersistConfig = {
   whitelist: ["token"],
 };
 
-// const transactionsPersistConfig = {
-//   key: 'transactions',
-//   storage,
-// };
-
 export const store = configureStore({
   reducer: {
     session: persistReducer(userPersistConfig, userSlice),
-    // transactions: persistReducer(transactionsPersistConfig, formReducer),
     transactions: transactionsSlice,
     categories: categoriesSlice,
     modal: modalReduser,
     isModalLogoutOpen: modalLogoutReduser,
-    developers: teamSlice
+    developers: teamSlice,
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
