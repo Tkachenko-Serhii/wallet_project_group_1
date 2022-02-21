@@ -12,7 +12,7 @@ const token = {
   },
   reset() {
     axios.defaults.headers.common.Authorization = ``;
-  }
+  },
 };
 
 const register = createAsyncThunk(
@@ -88,7 +88,7 @@ const fetchCurrentBalance = createAsyncThunk(
   'user/getBalance',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/user/balance');
+      const { data } = await axios.get('/users/balance');
       return data;
     } catch (error) {
       return authErrorHandler(error, rejectWithValue);
@@ -101,7 +101,7 @@ const userOperations = {
   login,
   logout,
   fetchCurrentUser,
-  fetchCurrentBalance
+  fetchCurrentBalance,
 };
 
 export default userOperations;

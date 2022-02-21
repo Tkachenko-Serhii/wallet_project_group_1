@@ -23,6 +23,7 @@ const categoriesSlice = createSlice({
         status: payload.status,
         message: payload.message,
       };
+      state.isLoading = false;
     },
 
     [categoriesOperations.getCategories.pending](state, { payload }) {

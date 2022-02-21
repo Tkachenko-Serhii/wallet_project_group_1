@@ -1,11 +1,11 @@
-import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import showModal from "../../redux/modal/modalActions";
+import showModal from '../../redux/modal/modalActions';
 
-import SplitLineDesktop from "../../components/SplitLineDesktop";
-import HomeTabWrapper from "../../components/HomeTabWrapper";
+import SplitLineDesktop from '../../components/SplitLineDesktop';
+import HomeTabWrapper from '../../components/HomeTabWrapper';
 
 import Container from "../../components/Container";
 import HomeTab from "../../components/HomeTab";
