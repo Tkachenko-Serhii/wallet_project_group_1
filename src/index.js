@@ -7,6 +7,8 @@ import { store, persistor } from './redux/store';
 import App from './App';
 import './index.css';
 
+import Loader from './components/Loader/Loader';
+
 import { defaultModules } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import * as PNotifyMobile from '@pnotify/mobile';
@@ -20,7 +22,7 @@ defaults.width = '400px';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Loader />} persistor={persistor}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
