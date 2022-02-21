@@ -27,7 +27,7 @@ import { formAddTransactionSchema } from "../../utils";
 export default function ModalAddTransaction(props) {
   const DEFAULT_TRANSACTION_STATE = {
     type: false,
-    sum: 0,
+    sum: "",
     date: new Date(),
     comment: "",
     category: "Вasic costs",

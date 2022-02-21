@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { handleError } from "../transactions/transactionsOperations"
 
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 

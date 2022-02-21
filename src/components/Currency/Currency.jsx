@@ -116,22 +116,11 @@ const useStyles = makeStyles({
   },
 });
 
-// function createData(name, buy, sale) {
-//   return { name, buy, sale };
-// }
-
-// const rows = [
-//   createData('USD', 27.55, 27.65),
-//   createData('EUR', 30.0, 30.1),
-//   createData('RUB', 12.0, 12.05),
-// ];
-
 const Currency = () => {
   const [currency, setCurrency] = useState([]);
   const styles = useStyles();
 
   useEffect(() => {
-    // (1) определить в области обратного вызова эффекта
     const fetch = async () => {
       try {
         const data = await fetchCurrency();
@@ -143,10 +132,10 @@ const Currency = () => {
     };
 
     const id = setInterval(() => {
-      fetch(); // <- (3) вызов в интервале обратного вызова
+      fetch();
     }, 300000);
 
-    fetch(); // <- (2) вызываем при монтировании
+    fetch();
 
     return () => clearInterval(id);
   }, []);

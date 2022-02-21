@@ -1,7 +1,6 @@
-// import s from './TransactionMobile.module.css';
-import TransactionMobileItem from '../TransactionMobileItem/TransactionMobileItem';
-import { useSelector } from 'react-redux';
-import { transactionsSelectors } from '../../redux/transactions';
+import TransactionMobileItem from "../TransactionMobileItem/TransactionMobileItem";
+import { useSelector } from "react-redux";
+import { transactionsSelectors } from "../../redux/transactions";
 
 export default function TransactionMobile(props) {
   const allTransactions = useSelector(transactionsSelectors.getTransactions);

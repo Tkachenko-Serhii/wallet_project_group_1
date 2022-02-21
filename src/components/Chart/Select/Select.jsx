@@ -79,7 +79,7 @@ function TableFilters({ setStatistic }) {
       <Select
         styles={selectStyles}
         options={monthOptions}
-        placeholder="Месяц"
+        placeholder="Month"
         onChange={(option) => {
           updateDate("month", option.value);
         }}
@@ -89,7 +89,7 @@ function TableFilters({ setStatistic }) {
       <Select
         styles={selectStyles}
         options={years}
-        placeholder="Год"
+        placeholder="Year"
         onChange={(option) => {
           updateDate("year", option.value);
         }}
