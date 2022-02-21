@@ -18,7 +18,6 @@ import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import { userOperations } from "./redux/user";
 import { useMediaQuery } from "@mui/material";
-import { categoriesSelectors } from "./redux/categories";
 import { userSelectors } from "./redux/user";
 import { transactionsSelectors } from "./redux/transactions";
 
@@ -29,11 +28,9 @@ function App() {
   const matches = useMediaQuery("(min-width:768px)");
   const showModal = useSelector((state) => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
-  const isLoadingCategories = useSelector(categoriesSelectors.getIsLoading);
   const isLoadingSession = useSelector(userSelectors.getUserIsLoading);
   const isLoadingTransactions = useSelector(transactionsSelectors.getIsLoading);
-  const showLoader =
-    isLoadingCategories || isLoadingSession || isLoadingTransactions;
+  const showLoader = isLoadingSession || isLoadingTransactions;
 
   return (
     <>

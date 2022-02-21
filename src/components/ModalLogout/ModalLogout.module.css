@@ -7,6 +7,7 @@
     padding: 20px;
     position: absolute;
 		border-radius: 20px;
+    max-width: 300px;
   }
   
   .overlay {
@@ -44,7 +45,7 @@
       .modal{
         padding-top: 30px;
         padding-bottom: 30px;
-        width: 540px;
+        max-width: 540px;
         border-radius: 20px;
     }
   }
