@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 
 const formAddTransactionSchema = yup.object().shape({
-    // type: yup.boolean().required('type is required'),
+    type: yup.boolean().required('type is required'),
     // category: yup.string(),
     sum: yup.number('enter your sum')
         .min(0, 'sum must be positive')
@@ -11,7 +11,7 @@ const formAddTransactionSchema = yup.object().shape({
     comment: yup.string('enter your comment').max(
         25,
         'no more than 25 characters',
-    ),
+    )
 });
 
 export default formAddTransactionSchema;

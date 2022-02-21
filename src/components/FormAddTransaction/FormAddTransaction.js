@@ -30,9 +30,8 @@ export default function ModalAddTransaction(props) {
         sum: "",
         date: new Date(),
         comment: "",
-        category: "",
+        category: "Вasic costs",
     };
-    // const [category, setCategory] = useState('Вasic costs');
 
     const isLoading = useSelector(categoriesSelectors.getIsLoading);
     const categories = useSelector(categoriesSelectors.getCategories);
@@ -43,11 +42,9 @@ export default function ModalAddTransaction(props) {
         dispatch(categoriesOperations.getCategories());
     }, [dispatch]);
 
-    // const updateCategory = (value) => {
-    //     setCategory(value)
-    // }
-
-    //   console.log(categories);
+    const closeModal = (event) => {
+        dispatch(showModal());
+    }
 
     const formik = useFormik({
         initialValues: DEFAULT_TRANSACTION_STATE,
@@ -58,27 +55,29 @@ export default function ModalAddTransaction(props) {
                 dispatch(
                     transactionsOperations.createTransaction({
                         type,
-                        sum,
+                        sum: sum * 1,
                         date: date.toLocaleDateString(),
                         month: date.getMonth() + 1,
                         year: date.getFullYear(),
-                        comment,
-                        category,
+                        comment: comment ? comment : " ",
+                        category: category.label
                     })
                 )
             );
             dispatch(
                 transactionsOperations.createTransaction({
                     type,
-                    sum,
+                    sum: sum * 1,
                     date: date.toLocaleDateString(),
                     month: date.getMonth() + 1,
                     year: date.getFullYear(),
-                    comment,
-                    category,
+                    comment: comment ? comment : " ",
+                    category: category.label
                 })
             );
             formik.handleReset();
+            closeModal();
+
         },
     });
 
@@ -94,9 +93,9 @@ export default function ModalAddTransaction(props) {
             <h4 className={styles.title}>Add transaction</h4>
 
             <div className={styles.swichContainer}>
-                <span className={styles.swichTitle}>Income</span>
-
                 <label className={styles.switch}>
+                    <span className={styles.swichTitleIncome}>Income</span>
+
                     <input
                         type="checkbox"
                         name="type"
@@ -118,8 +117,9 @@ export default function ModalAddTransaction(props) {
                             {formik.values.type ? <Plus /> : <Minus />}
                         </div>
                     </div>
+                    <span className={styles.swichTitleIncome}>Income</span>
+                    <span className={styles.swichTitleExpense}>Expense</span>
                 </label>
-                <span className={styles.swichTitle}>Expense</span>
             </div>
 
             <div className={styles.categoriesContainer}>
@@ -147,11 +147,20 @@ export default function ModalAddTransaction(props) {
                 <div className={styles.dateContainer}>
                     <label className={styles.labelForm}>
                         <input
-                            type="number"
+                            type="text"
                             name="sum"
                             placeholder="0.00"
                             className={styles.inputForm}
-                            onChange={formik.handleChange}
+                            // onChange={formik.handleChange}
+                            onChange={(event) => {
+                                if (
+                                    event.target.value === '' ||
+                                    /^[0-9]*(\.[0-9]?[0-9]?)?$/.test(event.target.value)
+                                ) {
+                                    formik.handleChange(event)
+                                    console.log(event.target.value)
+                                }
+                            }}
                             value={formik.values.sum}
                             required
                         />
@@ -182,9 +191,10 @@ export default function ModalAddTransaction(props) {
                 type="button"
                 text="Cancel"
                 color="white"
-                onClick={formik.handleReset}
+                onClick={formik.resetForm}
             />
             {isLoading && <Loader />}
         </form>
     );
 }
+
