@@ -10,7 +10,7 @@ export default function Dashboard(props) {
   return (
     <div className={s.wrapper}>
       <ul className={s.table}>
-        <li>
+        <li className={s.tableHeaderWrapper}>
           <ul className={s.tableHeader}>
             <li className={s.tableHeaderItemDate}>Date</li>
             <li className={s.tableHeaderItemType}>Type</li>

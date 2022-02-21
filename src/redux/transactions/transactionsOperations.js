@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { userOperations } from '../../redux/user';
 
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
@@ -17,9 +18,10 @@ const getTransactions = createAsyncThunk(
 
 const createTransaction = createAsyncThunk(
   'transactions/create',
-  async (newTransaction, { rejectWithValue }) => {
+  async (newTransaction, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post('/transactions/create', newTransaction);
+      dispatch(userOperations.fetchCurrentBalance());
       return data;
     } catch (error) {
       return handleError(error, rejectWithValue);
