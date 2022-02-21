@@ -29,8 +29,9 @@ export default function DashboardPage() {
           <HomeTab />
           <SplitLineDesktop />
           <Outlet />
+          <ButtonAdd onClick={(event) => dispatch(showModal())}></ButtonAdd>
         </HomeTabWrapper>
-        <ButtonAdd onClick={(event) => dispatch(showModal())}></ButtonAdd>
+        {/* <ButtonAdd onClick={(event) => dispatch(showModal())}></ButtonAdd> */}
       </Container>
       <Footer />
     </div>
