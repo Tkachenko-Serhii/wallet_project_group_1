@@ -145,7 +145,7 @@ const Currency = () => {
       <div className={styles.currency_section}>
         <div className={styles.currency_header_bg}></div>
         <TableContainer className={styles.currency_table_container}>
-          <Table className={styles.currency_table} size='small'>
+          <Table size='small'>
             <TableHead className={styles.currency_head}>
               <TableRow className={styles.currency_head_row}>
                 <TableCell className={styles.currency_header}>
