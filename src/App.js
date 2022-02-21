@@ -18,6 +18,9 @@ import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import { userOperations } from "./redux/user";
 import { useMediaQuery } from "@mui/material";
+import { categoriesSelectors } from "./redux/categories";
+import { userSelectors } from "./redux/user";
+import { transactionsSelectors } from "./redux/transactions";
 
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 
@@ -26,31 +29,37 @@ function App() {
   const matches = useMediaQuery("(min-width:768px)");
   const showModal = useSelector((state) => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
+  const isLoadingCategories = useSelector(categoriesSelectors.getIsLoading);
+  const isLoadingSession = useSelector(userSelectors.getUserIsLoading);
+  const isLoadingTransactions = useSelector(transactionsSelectors.getIsLoading);
+  const showLoader =
+    isLoadingCategories || isLoadingSession || isLoadingTransactions;
 
   return (
     <>
+      {showLoader && <Loader />}
       <div className='App'>
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
-              <PublicRoute restricted redirectTo='/home'>
-                <Navigate to='/login' />
+              <PublicRoute restricted redirectTo="/home">
+                <Navigate to="/login" />
               </PublicRoute>
             }
           />
           <Route
-            path='/login'
+            path="/login"
             element={
-              <PublicRoute restricted redirectTo='/home'>
+              <PublicRoute restricted redirectTo="/home">
                 <LoginPage />
               </PublicRoute>
             }
           />
           <Route
-            path='/register'
+            path="/register"
             element={
-              <PublicRoute restricted redirectTo='/home'>
+              <PublicRoute restricted redirectTo="/home">
                 <Suspense fallback={<Loader />}>
                   <RegisterPage />
                 </Suspense>
@@ -59,7 +68,7 @@ function App() {
           />
           {!matches && (
             <Route
-              path='/home'
+              path="/home"
               element={
                 <PrivateRoute>
                   <DashboardPage />
@@ -76,15 +85,15 @@ function App() {
               />
 
               <Route
-                path='chart'
+                path="chart"
                 element={
                   <PrivateRoute>
-                    <TransactionMobile />
+                    <Dashboard chart />
                   </PrivateRoute>
                 }
               />
               <Route
-                path='currency'
+                path="currency"
                 element={
                   <PrivateRoute>
                     <Currency />
@@ -95,7 +104,7 @@ function App() {
           )}
           {matches && (
             <Route
-              path='/home'
+              path="/home"
               element={
                 <PrivateRoute>
                   <DashboardPage />
@@ -111,18 +120,18 @@ function App() {
                 }
               />
               <Route
-                path='chart'
+                path="chart"
                 element={
                   <PrivateRoute>
-                    <Dashboard />
+                    <Dashboard chart />
                   </PrivateRoute>
                 }
               />
-              <Route path='*' element={<Navigate to='/home' />} />
+              <Route path="*" element={<Navigate to="/home" />} />
             </Route>
           )}
 
-          <Route path='*' element={<Navigate to='/' />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
       {showModal && (

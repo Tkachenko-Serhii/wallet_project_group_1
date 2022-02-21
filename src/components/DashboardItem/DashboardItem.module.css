@@ -44,8 +44,8 @@
 }
 .transactionCellBalance {
   text-align: right;
-  width: 120px;
+  width: 125px;
   align-self: center;
 
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }

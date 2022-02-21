@@ -17,19 +17,23 @@ const transactionSlice = createSlice({
   extraReducers: {
     [transactionsOperations.getTransactions.fulfilled](state, { payload }) {
       state.all = [...payload];
+      state.isLoading = false;
     },
     [transactionsOperations.createTransaction.fulfilled](state, { payload }) {
       state.all = [payload, ...state.all];
+      state.isLoading = false;
     },
     [transactionsOperations.editTransaction.fulfilled](state, { payload }) {
       state.all = state.map((item) =>
         item.id !== payload.id ? item : payload
       );
+      state.isLoading = false;
     },
     [transactionsOperations.deleteTransaction.fulfilled](state, { payload }) {
       state.all = [
         ...state.all.filter((transaction) => transaction.id !== payload.id),
       ];
+      state.isLoading = false;
     },
 
     [transactionsOperations.getTransactions.rejected](state, { payload }) {
@@ -37,6 +41,7 @@ const transactionSlice = createSlice({
         status: payload.status,
         message: payload.message,
       };
+      state.isLoading = false;
     },
     [transactionsOperations.createTransaction.rejected](state, { payload }) {
       state.all = [];
@@ -45,6 +50,7 @@ const transactionSlice = createSlice({
         status: payload.status,
         message: payload.message,
       };
+      state.isLoading = false;
     },
     [transactionsOperations.editTransaction.rejected](state, { payload }) {
       state.all = [];
@@ -53,6 +59,7 @@ const transactionSlice = createSlice({
         status: payload.status,
         message: payload.message,
       };
+      state.isLoading = false;
     },
     [transactionsOperations.deleteTransaction.rejected](state, { payload }) {
       state.all = [];
@@ -61,6 +68,7 @@ const transactionSlice = createSlice({
         status: payload.status,
         message: payload.message,
       };
+      state.isLoading = false;
     },
 
     [transactionsOperations.getTransactions.pending](state, { payload }) {

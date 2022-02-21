@@ -17,6 +17,7 @@ import { categoriesSlice } from "./categories";
 import modalReduser from "./modal/modalReduser";
 // import formReducer from './form/formRedusers';
 import modalLogoutReduser from "./modalLogout/modalLogoutReduser";
+import { teamSlice } from "./team";
 
 const middleware = (getDefaultMiddleware) => [
   ...getDefaultMiddleware({
@@ -45,6 +46,7 @@ export const store = configureStore({
     categories: categoriesSlice,
     modal: modalReduser,
     isModalLogoutOpen: modalLogoutReduser,
+    developers: teamSlice
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
