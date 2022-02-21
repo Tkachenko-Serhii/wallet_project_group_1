@@ -1,46 +1,22 @@
-import { useFormik } from 'formik';
-import AuthPageWrapper from '../../components/AuthPageWrapper';
-import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
-import AuthForm from '../../components/AuthForm';
-import {
-	EmailInputWithFormik,
-	PasswordInputWithFormik
-} from '../../components/Inputs';
+import { useMediaQuery } from '@mui/material';
 
-import { loginFormValidationSchema } from '../../utils';
+import AuthMedia from '../../components/Auth/AuthMedia';
+import AuthPageWrapper from '../../components/Auth/AuthPageWrapper';
+import LoginForm from '../../components/Auth/LoginForm';
+import Footer from "../../components/Footer"
 
-const initialValues = {
-	email: '',
-	password: ''
-};
+import styles from './LoginPage.module.css';
+
 export default function LoginPage() {
-	const formik = useFormik({
-		initialValues,
-		validationSchema: loginFormValidationSchema,
-		onSubmit: (values) => console.log(values)
-	});
+  const matches = useMediaQuery('(min-width:768px)');
 
-	return (
-		<AuthPageWrapper>
-			<AuthFormWrapper>
-				<AuthForm
-					formik={formik}
-					primaryBtnText="login"
-					secondaryBtnText="register"
-					navigateTo="/register"
-				>
-					<EmailInputWithFormik formik={formik} autoFocus />
-					<PasswordInputWithFormik
-						id="password"
-						name="password"
-						onChange={formik.handleChange}
-						value={formik.values.password}
-						error={formik.touched.password && Boolean(formik.errors.password)}
-						helperText={formik.touched.password && formik.errors.password}
-						placeholder="Password"
-					/>
-				</AuthForm>
-			</AuthFormWrapper>
-		</AuthPageWrapper>
-	);
+  return (
+    <>
+    <AuthPageWrapper>
+      {matches && <AuthMedia className={styles.bgImage} />}
+      <LoginForm />
+    </AuthPageWrapper>
+    <Footer />
+    </>
+  );
 }

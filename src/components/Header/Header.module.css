@@ -1,53 +1,73 @@
 .header {
-    display: flex;
-    align-items: center;
-    height: 60px;
-    background-color: var(--main-background-color);
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: var(--main-background-color);
 }
 
 .inner {
-    display: flex;
-    color: var(--inactive-text-color);
+  display: flex;
+  color: var(--inactive-text-color);
 }
 
 .user {
-    font-size: 18px;
-    line-height: 27px;
-    margin-right: 10px;
-    display: flex;
+  font-size: 18px;
+  line-height: 27px;
+  margin-right: 10px;
+  display: flex;
 }
 .wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 320px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .button {
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.title, .sign {
-    display: none;
+.title,
+.sign {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
-    .header {
-        height: 80px; 
-    }
+  .header {
+    height: 80px;
+  }
 
-    .title, .sign {
-        display: block;
-        font-size: 18px;
-        line-height: 27px;
-        margin-left: 10px;
-        color: var(--inactive-text-color);
-    }
+  .title,
+  .sign {
+    display: block;
+    font-size: 18px;
+    line-height: 27px;
+    margin-left: 10px;
+    color: var(--inactive-text-color);
+  }
 
-    .sign {
-        font-size: 25px;
-    }
-    
+  .sign {
+    font-size: 25px;
+  }
+
+  .wrap {
+    width: 768px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .wrap {
+    width: 1280px;
+    padding-left: 85px;
+    padding-right: 85px;
+  }
 }

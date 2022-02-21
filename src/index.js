@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
-// import { Provider } from 'react-redux';
-import './index.css';
+import { store, persistor } from './redux/store';
 import App from './App';
-// import store from './redux/store';
+import './index.css';
+
+import Loader from './components/Loader/Loader';
 
 import { defaultModules } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
@@ -17,12 +20,14 @@ const { defaults } = require('@pnotify/core');
 defaults.width = '400px';
 
 ReactDOM.render(
-	<React.StrictMode>
-		{/* <Provider store={store}> */}
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-		{/* </Provider> */}
-	</React.StrictMode>,
-	document.getElementById('root')
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={<Loader />} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

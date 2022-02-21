@@ -1,100 +1,177 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import { stylesSelect } from "./stylesForSelect";
+import "react-datetime/css/react-datetime.css";
+import { useFormik } from "formik";
 
-import { useState } from "react";
-// import { useDispatch } from "react-redux";
-import Button from '../Button';
-import DatePicker from '../DatePicker';
-import styles from './FormAddTransaction.module.css';
+import showModal from "../../redux/modal/modalActions";
+import { transactionsOperations } from "../../redux/transactions";
+import {
+    categoriesOperations,
+    categoriesSelectors,
+} from "../../redux/categories";
 
-export default function FormAddTransaction(props) {
-    const [income, setIncome] = useState(true);
-    const [amount, setAmount] = useState(0);
-    const [date, setDate] = useState("");
-    const [comment, setComment] = useState("");
-    // const dispatch = useDispatch();
+import { ReactComponent as Plus } from "../../icons/plus.svg";
+import { ReactComponent as Minus } from "../../icons/minus.svg";
+import { ReactComponent as CalendarIcon } from "../../icons/calendar.svg";
+import { ReactComponent as Close } from "../../icons/close.svg";
 
-    const handleInputChange = event => {
-        console.log(event.currentTarget.value)
-        const { name, value } = event.currentTarget;
-        console.log(event.currentTarget)
+import Button from "../Button";
+import DatePicker from "../DatePicker";
+import styles from "./FormAddTransaction.module.css";
+import Loader from "../Loader/Loader";
 
-        switch (name) {
-            case 'income':
-                setIncome(value);
-                break;
+import { formAddTransactionSchema } from "../../utils";
 
-            case 'amount':
-                setAmount(value);
-                break;
+export default function ModalAddTransaction(props) {
+    const DEFAULT_TRANSACTION_STATE = {
+        type: false,
+        sum: "",
+        date: new Date(),
+        comment: "",
+        category: "Вasic costs",
+    };
 
-            case 'comment':
-                setComment(value);
-                break;
+    const isLoading = useSelector(categoriesSelectors.getIsLoading);
+    const categories = useSelector(categoriesSelectors.getCategories);
 
-            case 'date':
-                setDate(value);
-                break;
+    const dispatch = useDispatch();
 
-            default:
-                return;
-        }
-    }
+    useEffect(() => {
+        dispatch(categoriesOperations.getCategories());
+    }, [dispatch]);
 
-    const resetForm = (event) => {
-        event.preventDefault();
-        setIncome('');
-        setAmount('');
-        setComment('');
-        setDate('');
-    }
+    const closeModal = (event) => {
+        dispatch(showModal());
+    };
+
+    const formik = useFormik({
+        initialValues: DEFAULT_TRANSACTION_STATE,
+        validationSchema: formAddTransactionSchema,
+        onSubmit: (values) => {
+            const { type, category, sum, date, comment } = values;
+            dispatch(
+                transactionsOperations.createTransaction({
+                    type,
+                    sum: sum * 1,
+                    date: date.toLocaleDateString(),
+                    month: date.getMonth() + 1,
+                    year: date.getFullYear(),
+                    comment: comment ? comment : " ",
+                    category: category.label,
+                })
+            );
+            formik.handleReset();
+            closeModal();
+        },
+    });
+
     return (
-        <form
-            // onSubmit={handleSubmit}
-            className={styles.form} >
-            <h4 className={styles.title}>Добавить транзакцию</h4>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
+            <button
+                type='button'
+                className={styles.closeButton}
+                onClick={(event) => dispatch(showModal())}
+            >
+                <Close />
+            </button>
+            <h4 className={styles.title}>Add transaction</h4>
+
             <div className={styles.swichContainer}>
-                <span className={styles.swichTitle}>Доход</span>
                 <label className={styles.switch}>
+                    <span className={styles.swichTitleIncome}>Income</span>
+
                     <input
-                        type="checkbox"
-                        name="income"
-                        onChange={handleInputChange} />
-                    <span className={styles.slider}></span>
+                        type='checkbox'
+                        name='type'
+                        value={formik.values.type}
+                        onChange={(e) => {
+                            formik.handleChange(e);
+                            formik.handleChange({
+                                type: "change",
+                                target: {
+                                    name: "category",
+                                    value: null,
+                                },
+                            });
+                        }}
+                    />
+                    <div className={styles.slider}>
+                        <div className={styles.indicator}>
+                            {formik.values.type ? <Plus /> : <Minus />}
+                        </div>
+                    </div>
+                    <span className={styles.swichTitleIncome}>Income</span>
+                    <span className={styles.swichTitleExpense}>Expense</span>
                 </label>
-                <span className={styles.swichTitle}>Расход</span>
             </div>
-            <div className={styles.dateContainer}>
-                <label className={styles.labelForm}>
-                    <input
-                        type="text"
-                        name="amount"
-                        placeholder='0.00'
-                        className={styles.inputForm}
-                        onChange={handleInputChange}
-                        required />
-                </label>
-                <DatePicker />
+
+            <div className={styles.categoriesContainer}>
+                <Select
+                    placeholder='Select a category '
+                    options={categories.filter(
+                        (category) => category.type === formik.values.type
+                    )}
+                    styles={stylesSelect()}
+                    onChange={(e) =>
+                        formik.handleChange({
+                            type: "change",
+                            target: {
+                                name: "category",
+                                value: categories.find(
+                                    (category) => category.value === e.value
+                                ),
+                            },
+                        })
+                    }
+                    value={formik.values.category}
+                />
             </div>
+            <div className={styles.amountAndDateContainer}>
+                <div className={styles.dateContainer}>
+                    <label className={styles.labelForm}>
+                        <input
+                            type='text'
+                            name='sum'
+                            placeholder='0.00'
+                            className={styles.inputForm}
+                            onChange={(event) => {
+                                if (
+                                    event.target.value === "" ||
+                                    /^[0-9]*(\.[0-9]?[0-9]?)?$/.test(event.target.value)
+                                ) {
+                                    formik.handleChange(event);
+                                }
+                            }}
+                            value={formik.values.sum}
+                            required
+                        />
+                    </label>
+                </div>
+
+                <div className={styles.datepickerContainer}>
+                    <CalendarIcon className={styles.calendarIcon} />
+                    <DatePicker
+                        date={formik.values.date}
+                        updateDate={formik.handleChange}
+                    />
+                </div>
+            </div>
+
             <label className={styles.labelForm}>
                 <input
-                    type="text"
-                    name="comment"
-                    placeholder='Коментарий'
+                    type='text'
+                    name='comment'
+                    placeholder='Comment'
                     className={styles.inputComment}
-                    onChange={handleInputChange}
-                    required />
+                    onChange={formik.handleChange}
+                    value={formik.values.comment}
+                />
             </label>
-            <Button text="Добавить" color="green" />
-            <Button
-                text="Отмена"
-                color="white"
-                onClick={resetForm} />
-        </form >
-    )
+            <Button type='submit' text='Add' color='green' />
+            <Button type='button' text='Cancel' color='white' onClick={closeModal} />
+            {isLoading && <Loader />}
+        </form>
+    );
 }
-
-
-
-
-
-
-

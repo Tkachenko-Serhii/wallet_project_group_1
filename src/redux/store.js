@@ -1,12 +1,48 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import { transactionApi } from "./transactions/transactionsSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { userSlice } from "./user";
+import { transactionsSlice } from "./transactions";
+import { categoriesSlice } from "./categories";
 
-// const store = configureStore({
-//   reducer: {
-//     [transactionApi.reducerPath]: transactionApi.reducer,
-//   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(transactionApi.middleware),
-// });
+import modalReduser from "./modal/modalReduser";
+import modalLogoutReduser from "./modalLogout/modalLogoutReduser";
+import { teamSlice } from "./team";
 
-// export default store;
+const middleware = (getDefaultMiddleware) => [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
+
+const userPersistConfig = {
+  key: "session",
+  storage,
+  whitelist: ["token"],
+};
+
+export const store = configureStore({
+  reducer: {
+    session: persistReducer(userPersistConfig, userSlice),
+    transactions: transactionsSlice,
+    categories: categoriesSlice,
+    modal: modalReduser,
+    isModalLogoutOpen: modalLogoutReduser,
+    developers: teamSlice,
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === "development",
+});
+
+export const persistor = persistStore(store);

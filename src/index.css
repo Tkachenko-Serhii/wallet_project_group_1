@@ -1,5 +1,6 @@
-@import 'modern-normalize/modern-normalize.css';
-@import './stylesheet/vars.css';
+@import "modern-normalize/modern-normalize.css";
+@import "./stylesheet/vars.css";
+@import "./stylesheet/fonts.css";
 
 body {
   margin: 0;
@@ -8,8 +9,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body#modal-root {
+  overflow: hidden;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
