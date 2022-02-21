@@ -170,12 +170,7 @@ export default function ModalAddTransaction(props) {
         />
       </label>
       <Button type='submit' text='Add' color='green' />
-      <Button
-        type='button'
-        text='Cancel'
-        color='white'
-        onClick={formik.resetForm}
-      />
+      <Button type='button' text='Cancel' color='white' onClick={closeModal} />
       {isLoading && <Loader />}
     </form>
   );
