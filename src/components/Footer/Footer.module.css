@@ -19,7 +19,6 @@
 
   margin-right: 5px;
   margin-left: 5px;
- 
 }
 
 .modalClick {
@@ -79,12 +78,12 @@
 
 .team__img {
   width: 160px;
+  height: 160px;
   border-radius: 50%;
   background-color: rgb(233, 233, 233);
 }
 
 .team__description {
-  margin-bottom: 5px;
   color: #ffffff;
 }
 
@@ -98,8 +97,6 @@
   margin-bottom: 5px;
   font-size: 22px;
 }
-
-
 
 .team__thumb {
   display: block;
@@ -131,29 +128,29 @@
   opacity: 0.5;
 }
 
-.btn_cross{
-    position: absolute;
-    padding: 5px;
-    border-radius: 3px;
-    border: none;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    background-color: #24cca7 ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+.btn_cross {
+  position: absolute;
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #24cca7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn_cross:hover{
+.btn_cross:hover {
   opacity: 0.5;
 }
 
 .btn_cross svg {
-    width: 16px;
-    height: 16px;
-    fill: #ffffff;
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
 }
 
 @media screen and (min-width: 480px) {
@@ -174,7 +171,6 @@
     align-items: center;
   }
 
- 
   .team__modal {
     width: 650px;
   }
@@ -185,7 +181,7 @@
   .team__placeholder {
     height: 80vh;
   }
-  .team__name{
+  .team__name {
     font-size: 16px;
   }
 }
@@ -198,7 +194,7 @@
     flex-basis: calc(100% / 5 - 30px);
   }
 
-  .team__name{
+  .team__name {
     font-size: 19px;
   }
 }
