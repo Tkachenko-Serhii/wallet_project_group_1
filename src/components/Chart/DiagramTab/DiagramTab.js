@@ -3,25 +3,29 @@ import { styled } from "@mui/material";
 import TableFilters from "../Select/Select";
 import Category from "../Category/Category";
 
-export default function DiagramTab({ data }) {
+export default function DiagramTab({ data, setStatistic }) {
   return (
     <>
-      <TableFilters />
-      <CategoryItem>
-        <Title>Категория</Title>
-        <Title>Сумма</Title>
-      </CategoryItem>
+      <TableFilters setStatistic={setStatistic} />
+      {data.categories?.length > 0 && (
+        <>
+          <CategoryItem>
+            <Title>Category</Title>
+            <Title>Amount</Title>
+          </CategoryItem>
 
-      <Category data={data} />
+          <Category data={data} />
 
-      <Amount>
-        <AmountTitle>Расходы</AmountTitle>
-        <Expenses>{data.total.Expenses}</Expenses>
-      </Amount>
-      <Amount>
-        <AmountTitle>Доходы</AmountTitle>
-        <Income>{data.total.Income}</Income>
-      </Amount>
+          <Amount>
+            <AmountTitle>Expenses</AmountTitle>
+            <Expenses>{data?.total?.Expenses}</Expenses>
+          </Amount>
+          <Amount>
+            <AmountTitle>Income</AmountTitle>
+            <Income>{data?.total?.Income}</Income>
+          </Amount>
+        </>
+      )}
     </>
   );
 }

@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material";
 import Select from "react-select";
 import { format } from "date-fns";
-import { ru } from "date-fns/locale";
+import { enUS } from "date-fns/locale";
+import getStatistic from "./../../../API/getStatistic";
 
 import { selectStyles } from "./selectStyles";
 
 const currentMonth = new Date().getMonth() + 1;
 const months = Array.from({ length: 12 }, (item, i) => {
   return format(new Date(0, i), "LLLL", {
-    locale: ru,
+    locale: enUS,
   });
 });
+
+const getRandomColor = () => {
+  return (
+    "#" + (Math.random().toString(16) + "000000").substring(2, 8).toUpperCase()
+  );
+};
 
 const monthOptions = Array(12)
   .fill(null)
@@ -23,14 +30,34 @@ for (let i = currentYear; i >= 2018; i--) {
   years.push({ value: i, label: i.toString() });
 }
 
-function TableFilters() {
+const createDataObj = ({ categories, totalIncome, totalSpent }) => {
+  return {
+    categories: categories.map(({ _id, total }) => ({
+      name: _id,
+      total,
+      color: getRandomColor(),
+    })),
+    total: {
+      Expenses: totalSpent[0]?.spent,
+      Income: totalIncome[0]?.income,
+    },
+  };
+};
+
+function TableFilters({ setStatistic }) {
   const [date, setDate] = useState({
     month: currentMonth,
     year: currentYear,
   });
 
+  useEffect(() => {
+    getStatistic().then((data) => setStatistic(createDataObj(data)));
+  }, [setStatistic]);
+
   const updateDate = (name, value) => {
-    setDate((prev) => ({ ...prev, [name]: value }));
+    const newDate = { ...date, [name]: value };
+    setDate(newDate);
+    getStatistic(newDate).then((data) => setStatistic(createDataObj(data)));
   };
 
   return (

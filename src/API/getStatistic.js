@@ -6,7 +6,5 @@ export default async function getStatistic(date) {
         `/transactions/statistics?month=${date.month}&year=${date.year}`
       )
     : await axios.get("/transactions/statistics");
-
-  console.log(data);
   return data;
 }
