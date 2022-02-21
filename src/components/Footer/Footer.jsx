@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader';
 import { ReactComponent as Love } from '../../icons/love.svg'
 import { ReactComponent as GitHub } from '../../icons/github.svg'
 import { ReactComponent as Linkedin } from '../../icons/linkedin.svg'
+import { ReactComponent as Close } from '../../icons/close.svg';
 import { teamOperations , teamSelectors} from "../../redux/team";
 
 
@@ -36,7 +37,7 @@ export default function Footer (){
 
     return (
         <footer className={s.footer}>
-             <p className={s.copyright}>&copy; 2021 | All Rights Reserved |</p>
+             <p className={s.copyright}>&copy; 2022 | All Rights Reserved |</p>
              <span>Developed with</span>
                <Love />
              <span>by</span>
@@ -51,6 +52,9 @@ export default function Footer (){
                 className={s.team__modal}
                 htmlOpenClassName={s.no_scroll}
             >
+                <button className={s.btn_cross} onClick={closeModal}>
+                    <Close />
+                </button>
               <div className={s.team__placeholder}>
                <ul className={s.team__cards}>
                  { developers.map(developer => {
