@@ -38,11 +38,13 @@ export default function Footer (){
     return (
         <footer className={s.footer}>
              <p className={s.copyright}>&copy; 2022 | All Rights Reserved |</p>
+             <div className={s.developed_by}>
              <span>Developed with</span>
                <Love />
              <span>by</span>
             <div className={s.modalClick} onClick={openModal} >
                 GoIT Students
+            </div>
             </div>
               <Modal
                 isOpen={modalIsOpen}
@@ -62,8 +64,8 @@ export default function Footer (){
                         <a className={s.team__thumb} href={developer.github} > 
                           <img className={s.team__img} src={developer.photo} alt={developer.name}/>
                         </a>
-                   
-                       <p className={s.team__name}>{developer.name}</p>
+                   <div className={s.content_wrapper}>
+                       <h2 className={s.team__name}>{developer.name}</h2>
                        <p className={s.team__description}>{developer.role}</p>
                        <div className={s.links__container}>
                         <a className={s.link_linkedin} href={developer.github}>
@@ -73,6 +75,7 @@ export default function Footer (){
                           <Linkedin />
                         </a>
                        </div>
+                    </div>
                    </li>
                  })}
                </ul>
