@@ -25,6 +25,13 @@ export default function LoginForm() {
     }
   });
 
+  const isError =
+    (formik.touched.password || Boolean(formik.values.password)) &&
+    Boolean(formik.errors.password);
+
+  const shouldErrorTextDisplayed =
+    formik.touched.password || Boolean(formik.values.password);
+
   return (
     <AuthFormWrapper>
       <AuthForm
@@ -39,8 +46,8 @@ export default function LoginForm() {
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          error={isError}
+          helperText={shouldErrorTextDisplayed && formik.errors.password}
           placeholder="Password"
         />
       </AuthForm>

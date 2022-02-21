@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { passwordAttention } from '../../../utils';
 
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
@@ -44,14 +43,6 @@ export default function RegisterForm() {
   );
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      passwordAttention();
-    }, 600);
-
-    return () => clearTimeout(id);
-  }, []);
 
   //========== Formik logic=============
 
@@ -132,6 +123,21 @@ export default function RegisterForm() {
   };
   //================ end of progress bar logic ===============
 
+  const isPasswordError =
+    (formik.touched.password || Boolean(formik.values.password)) &&
+    Boolean(formik.errors.password);
+
+  const shouldPasswordErrorTextDisplayed =
+    formik.touched.password || Boolean(formik.values.password);
+
+  const isConfirmPasswordError =
+    (formik.touched.confirmPassword ||
+      Boolean(formik.values.confirmPassword)) &&
+    Boolean(formik.errors.confirmPassword);
+
+  const shouldConfirmPasswordErrorTextDisplayed =
+    formik.touched.confirmPassword || Boolean(formik.values.confirmPassword);
+
   return (
     <AuthFormWrapper>
       <AuthForm
@@ -148,8 +154,10 @@ export default function RegisterForm() {
           onChange={formik.handleChange}
           onBlur={handleBlur}
           value={formik.values.password}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          error={isPasswordError}
+          helperText={
+            shouldPasswordErrorTextDisplayed && formik.errors.password
+          }
           placeholder="Password"
         />
         <PasswordInputWithFormik
@@ -158,12 +166,10 @@ export default function RegisterForm() {
           onChange={formik.handleChange}
           onBlur={handleBlur}
           value={formik.values.confirmPassword}
-          error={
-            formik.touched.confirmPassword &&
-            Boolean(formik.errors.confirmPassword)
-          }
+          error={isConfirmPasswordError}
           helperText={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
+            shouldConfirmPasswordErrorTextDisplayed &&
+            formik.errors.confirmPassword
           }
           placeholder="Confirm your password"
         />

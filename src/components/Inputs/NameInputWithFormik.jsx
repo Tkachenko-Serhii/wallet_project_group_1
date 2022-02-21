@@ -10,6 +10,13 @@ export default function NameInputWithFormik({
   autoFocus = false,
   onBlur
 }) {
+  const isInputError =
+    (formik.touched.name || Boolean(formik.values.name)) &&
+    Boolean(formik.errors.name);
+
+  const shouldErrorTextDisplayed =
+    formik.touched.name || Boolean(formik.values.name);
+
   return (
     <CustomTextFiledStyled
       fullWidth
@@ -21,8 +28,8 @@ export default function NameInputWithFormik({
       onChange={formik.handleChange}
       onBlur={onBlur}
       value={formik.values.name}
-      error={formik.touched.name && Boolean(formik.errors.name)}
-      helperText={formik.touched.name && formik.errors.name}
+      error={isInputError}
+      helperText={shouldErrorTextDisplayed && formik.errors.name}
       autoFocus={autoFocus}
       InputProps={{
         startAdornment: (
