@@ -87,7 +87,6 @@ export default function ModalAddTransaction(props) {
     };
     // console.log(newTransaction)
     dispatch(transactionsOperations.createTransaction(newTransaction));
-    dispatch(userOperations.fetchCurrentBalance());
 
     resetForm();
   };

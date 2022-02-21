@@ -1,9 +1,9 @@
-import s from "./Dashboard.module.css";
-import { useSelector } from "react-redux";
-import { transactionsSelectors } from "../../redux/transactions";
-import Chart from "./../Chart";
+import s from './Dashboard.module.css';
+import { useSelector } from 'react-redux';
+import { transactionsSelectors } from '../../redux/transactions';
+import Chart from './../Chart';
 
-import DashboardItem from "../DashboardItem";
+import DashboardItem from '../DashboardItem';
 
 export default function Dashboard({ chart, ...props }) {
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
@@ -26,7 +26,7 @@ export default function Dashboard({ chart, ...props }) {
 
             <li className={s.tableitems}>
               {allTransactions.length < 1 ? (
-                "The list is empty"
+                'The list is empty'
               ) : (
                 <ul className={s.transactionsList}>
                   {allTransactions.map((row) => {
