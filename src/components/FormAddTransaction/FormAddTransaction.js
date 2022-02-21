@@ -54,7 +54,7 @@ export default function ModalAddTransaction(props) {
             dispatch(
                 transactionsOperations.createTransaction({
                     type,
-                    sum: sum * 1,
+                    sum: parseFloat(sum) * 100,
                     date: date.toLocaleDateString(),
                     month: date.getMonth() + 1,
                     year: date.getFullYear(),
