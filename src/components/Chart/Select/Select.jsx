@@ -31,17 +31,31 @@ for (let i = currentYear; i >= 2018; i--) {
 }
 
 const createDataObj = ({ categories, totalIncome, totalSpent }) => {
-  return {
-    categories: categories.map(({ _id, total }) => ({
-      name: _id,
-      total,
-      color: getRandomColor(),
-    })),
-    total: {
-      Expenses: totalSpent[0]?.spent,
-      Income: totalIncome[0]?.income,
-    },
-  };
+  return categories?.length > 0
+    ? {
+        categories: categories.map(({ _id, total }) => ({
+          name: _id,
+          total,
+          color: getRandomColor(),
+        })),
+        total: {
+          Expenses: totalSpent[0]?.spent,
+          Income: totalIncome[0]?.income,
+        },
+      }
+    : {
+        categories: [
+          {
+            name: "",
+            total: 1,
+            color: "#777777",
+          },
+        ],
+        total: {
+          Expenses: 0,
+          Income: 0,
+        },
+      };
 };
 
 function TableFilters({ setStatistic }) {

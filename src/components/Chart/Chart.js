@@ -117,7 +117,7 @@ const RightTab = styled("div")`
 
   @media screen and (min-width: 769px) {
     flex-direction: row;
-    align-items: auto;
+    align-items: flex-start;
     justify-content: space-between;
     width: 700px;
     margin-left: 30px;

@@ -7,7 +7,7 @@ export default function DiagramTab({ data, setStatistic }) {
   return (
     <>
       <TableFilters setStatistic={setStatistic} />
-      {data.categories?.length > 0 && (
+      {data?.total?.Expenses > 0 && (
         <>
           <CategoryItem>
             <Title>Category</Title>
