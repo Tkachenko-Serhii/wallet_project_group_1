@@ -7,11 +7,12 @@ import showModal from '../../redux/modal/modalActions';
 import SplitLineDesktop from '../../components/SplitLineDesktop';
 import HomeTabWrapper from '../../components/HomeTabWrapper';
 
-import Container from '../../components/Container';
-import HomeTab from '../../components/HomeTab';
-import ButtonAdd from '../../components/ButtonAdd';
-import { transactionsOperations } from '../../redux/transactions';
-import Header from '../../components/Header';
+import Container from "../../components/Container";
+import HomeTab from "../../components/HomeTab";
+import ButtonAdd from "../../components/ButtonAdd";
+import { transactionsOperations } from "../../redux/transactions";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer"
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function DashboardPage() {
         </HomeTabWrapper>
         <ButtonAdd onClick={(event) => dispatch(showModal())}></ButtonAdd>
       </Container>
+      <Footer />
     </div>
   );
 }
