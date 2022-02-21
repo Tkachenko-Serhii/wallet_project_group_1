@@ -14,6 +14,10 @@ export default function ModalLogout() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.body.style.overflow = "hidden";
+    });
+
+    useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
     });
 
