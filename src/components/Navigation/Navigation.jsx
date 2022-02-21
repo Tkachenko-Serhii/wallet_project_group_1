@@ -22,7 +22,7 @@ export default function Navigation() {
           end
           to="/home"
         >
-          Главная
+          Main
         </NavLink>
       </li>
       <li className={s.iconWrapper}>
@@ -38,7 +38,7 @@ export default function Navigation() {
           className={({ isActive }) => (isActive ? s.navLinkActive : s.navLink)}
           to="chart"
         >
-          Статистика
+          Statistics
         </NavLink>
       </li>
       <li className={s.iconWrapper}>

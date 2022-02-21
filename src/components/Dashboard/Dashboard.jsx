@@ -1,12 +1,13 @@
 import s from "./Dashboard.module.css";
+import { useSelector } from "react-redux";
+import { transactionsSelectors } from "../../redux/transactions";
 import Chart from "./../Chart";
-// import { useSelector } from 'react-redux';
-// import { transactionsSelectors } from '../../redux/transactions';
 
-// import DashboardItem from '../DashboardItem';
+import DashboardItem from "../DashboardItem";
 
 export default function Dashboard({ chart, ...props }) {
-  // const allTransactions = useSelector(transactionsSelectors.getTransactions);
+  const allTransactions = useSelector(transactionsSelectors.getTransactions);
+
   return (
     <>
       {!chart && (
@@ -23,17 +24,17 @@ export default function Dashboard({ chart, ...props }) {
               </ul>
             </li>
 
-            {/* <li className={s.tableitems}>
-          {allTransactions.length < 1 ? (
-            'The list is empty'
-          ) : (
-            <ul className={s.transactionsList}>
-              {allTransactions.map((row) => {
-                return <DashboardItem key={row._id} row={row} />;
-              })}
-            </ul>
-          )}
-        </li> */}
+            <li className={s.tableitems}>
+              {allTransactions.length < 1 ? (
+                "The list is empty"
+              ) : (
+                <ul className={s.transactionsList}>
+                  {allTransactions.map((row) => {
+                    return <DashboardItem key={row._id} row={row} />;
+                  })}
+                </ul>
+              )}
+            </li>
           </ul>
         </div>
       )}

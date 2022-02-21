@@ -1,46 +1,14 @@
 import s from './TransactionMobile.module.css';
+import { useSelector } from 'react-redux';
+import { transactionsSelectors } from '../../redux/transactions';
 
 export default function TransactionMobile(props) {
-  const operations = [
-    {
-      id: 1,
-      date: '13.12.12',
-      type: false,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 2,
-      date: '12.12.12',
-      type: true,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 3,
-      date: '15.12.12',
-      type: true,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-    {
-      id: 4,
-      date: '16.12.12',
-      type: false,
-      category: 'qwert',
-      comment: 'asfg',
-      value: 214567,
-      balance: 56789876,
-    },
-  ];
+  const allTransactions = useSelector(transactionsSelectors.getTransactions);
 
-  return operations.map((operation) => {
+  return allTransactions.map((operation) => {
+    const splitedDate = operation.date.split('.');
+    const cuted = splitedDate[2].substr(-2);
+    const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
     return (
       <ul
         key={operation.id}
@@ -53,36 +21,34 @@ export default function TransactionMobile(props) {
       >
         <li className={s.transactionDetailsRowMobile}>
           <p className={s.transactionDetailsRowLabelMobile}>Date</p>
-          <p className={s.transactionDetailsRowValueMobile}>{operation.date}</p>
+          <p className={s.transactionDetailsRowValueMobile}>{formatedDate}</p>
         </li>
 
         <li className={s.transactionDetailsRowMobile}>
-          <p className={s.transactionDetailsRowLabelMobile}>Тип</p>
+          <p className={s.transactionDetailsRowLabelMobile}>Type</p>
           <p className={s.transactionDetailsRowValueMobile}>
             {operation.type ? '+' : '-'}
           </p>
         </li>
 
         <li className={s.transactionDetailsRowMobile}>
-          <p className={s.transactionDetailsRowLabelMobile}>Категория</p>
+          <p className={s.transactionDetailsRowLabelMobile}>Category</p>
           <p className={s.transactionDetailsRowValueMobile}>
             {operation.category}
           </p>
         </li>
         <li className={s.transactionDetailsRowMobile}>
-          <p className={s.transactionDetailsRowLabelMobile}>Комментарий</p>
+          <p className={s.transactionDetailsRowLabelMobile}>Comment</p>
           <p className={s.transactionDetailsRowValueMobile}>
             {operation.comment}
           </p>
         </li>
         <li className={s.transactionDetailsRowMobile}>
-          <p className={s.transactionDetailsRowLabelMobile}>Сумма</p>
-          <p className={s.transactionDetailsRowValueMobile}>
-            {operation.value}
-          </p>
+          <p className={s.transactionDetailsRowLabelMobile}>Amount</p>
+          <p className={s.transactionDetailsRowValueMobile}>{operation.sum}</p>
         </li>
         <li className={s.transactionDetailsRowMobile}>
-          <p className={s.transactionDetailsRowLabelMobile}>Баланс</p>
+          <p className={s.transactionDetailsRowLabelMobile}>Balance</p>
           <p className={s.transactionDetailsRowValueMobile}>
             {operation.balance}
           </p>
