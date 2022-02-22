@@ -3,13 +3,13 @@ import { createPortal } from 'react-dom';
 import { useDispatch } from "react-redux";
 
 
-import showModal from '../../redux/modal/modalActions';
+import showModalFooter from '../../redux/modalFooter/modalFooterActions';
 
-import styles from "./Modal.module.css"
+import styles from "./ModalFooter.module.css"
 
-const modalRoot = document.querySelector('#modal-root');
+const modalRootFooter = document.querySelector('#modal-root-footer');
 
-export default function Modal({ children, onClose }) {
+export default function ModalFooter({ children, onClose }) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -29,7 +29,7 @@ export default function Modal({ children, onClose }) {
   const dispatch = useDispatch();
 
   const toggleModal = (event) => {
-    dispatch(showModal());
+    dispatch(showModalFooter());
     document.body.style.overflow = "visible";
   };
 
@@ -49,7 +49,7 @@ export default function Modal({ children, onClose }) {
     <div className={styles.overlay} onClick={handleBackdropClick}>
       <div className={styles.modal}>{children}</div>
     </div>,
-    modalRoot,
+    modalRootFooter,
   );
 }
 
