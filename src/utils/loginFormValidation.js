@@ -11,7 +11,7 @@ const loginFormValidationSchema = yup.object().shape({
     .string('Enter your password')
     .matches(
       passwordRegExp,
-      'Password should contains minimum 6 and maximum 12 characters and at least one uppercase letter, one lowercase letter, one number and one special character of @, $, !, %, *, ?, &'
+      'From 6 to 12 chars, Uppercase and lowercase, numbers, @,$,!,%,*,?,&'
     )
     .required('Password is required')
 });

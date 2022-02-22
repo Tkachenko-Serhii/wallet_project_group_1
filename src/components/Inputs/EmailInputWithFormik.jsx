@@ -28,7 +28,7 @@ export default function EmailInputWithFormik({
       onBlur={onBlur}
       value={formik.values.email}
       error={isInputError}
-      helperText={shouldErrorTextDisplayed && formik.errors.email}
+      helperText={(shouldErrorTextDisplayed && formik.errors.email) || ' '}
       autoFocus={autoFocus}
       InputProps={{
         startAdornment: (
