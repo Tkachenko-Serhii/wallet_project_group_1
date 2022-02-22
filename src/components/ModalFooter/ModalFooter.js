@@ -46,8 +46,10 @@ export default function ModalFooter({ children, onClose }) {
   };
 
   return createPortal(
-    <div className={styles.overlay} onClick={handleBackdropClick}>
-      <div className={styles.modal}>{children}</div>
+    <div className={styles.container}>
+      <div className={styles.overlay} onClick={handleBackdropClick}>
+        <div className={styles.modal}>{children}</div>
+      </div>
     </div>,
     modalRootFooter,
   );

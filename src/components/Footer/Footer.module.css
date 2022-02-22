@@ -37,6 +37,13 @@
 }
 
 .team__placeholder {
+    backdrop-filter: blur(10px);
+    background-color: var(--blur-backgroud-color);
+    border-radius: 10px;
+    -webkit-box-shadow: 3px 2px 6px 0px rgba(84, 95, 103, 0.2);
+    -moz-box-shadow: 3px 2px 6px 0px rgba(84, 95, 103, 0.2);
+    box-shadow: 3px 2px 6px 0px rgba(84, 95, 103, 0.2);
+  
   position: relative;
   width: 100%;
   padding: 50px 0px 10px 0px;

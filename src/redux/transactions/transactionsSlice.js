@@ -20,7 +20,7 @@ const transactionSlice = createSlice({
       state.isLoading = false;
     },
     [transactionsOperations.createTransaction.fulfilled](state, { payload }) {
-      state.all = [payload, ...state.all];
+      state.all = [...state.all, payload];
       state.isLoading = false;
     },
     [transactionsOperations.editTransaction.fulfilled](state, { payload }) {
@@ -44,7 +44,7 @@ const transactionSlice = createSlice({
       state.isLoading = false;
     },
     [transactionsOperations.createTransaction.rejected](state, { payload }) {
-      state.all = [];
+      // state.all = [];
       state.isLoading = false;
       state.serverError = {
         status: payload.status,
