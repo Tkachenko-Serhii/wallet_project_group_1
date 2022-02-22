@@ -4,9 +4,11 @@ import Select from "react-select";
 import { stylesSelect } from "./stylesForSelect";
 import "react-datetime/css/react-datetime.css";
 import { useFormik } from "formik";
+import { alert } from "@pnotify/core";
 
 import showModal from "../../redux/modal/modalActions";
 import { transactionsOperations } from "../../redux/transactions";
+import { handleError } from "../../redux/transactions/transactionsOperations"
 import {
     categoriesOperations,
     categoriesSelectors,
@@ -46,24 +48,59 @@ export default function ModalAddTransaction(props) {
         dispatch(showModal());
     };
 
+    const findCategory = (event) => {
+        const SelectedCategory = categories.find(
+            (category) => category.value === event.value)
+        return SelectedCategory ? SelectedCategory :
+            alert({
+                type: "warning",
+                text: `Category is required`,
+            });
+    }
+
+    // const formik = useFormik({
+    //     initialValues: DEFAULT_TRANSACTION_STATE,
+    //     validationSchema: formAddTransactionSchema,
+    //     onSubmit: (values) => {
+    //         const { type, category, sum, date, comment } = values;
+    //         dispatch(
+    //             transactionsOperations.createTransaction({
+    //                 type,
+    //                 sum: parseFloat(sum) * 100,
+    //                 date: date.toLocaleDateString(),
+    //                 month: date.getMonth() + 1,
+    //                 year: date.getFullYear(),
+    //                 comment: comment ? comment : " ",
+    //                 category: category.label,
+    //             })
+    //         );
+    //         formik.handleReset();
+    //         closeModal();
+    //     },
+    // });
+
     const formik = useFormik({
         initialValues: DEFAULT_TRANSACTION_STATE,
         validationSchema: formAddTransactionSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             const { type, category, sum, date, comment } = values;
-            dispatch(
-                transactionsOperations.createTransaction({
-                    type,
-                    sum: parseFloat(sum) * 100,
-                    date: date.toLocaleDateString(),
-                    month: date.getMonth() + 1,
-                    year: date.getFullYear(),
-                    comment: comment ? comment : " ",
-                    category: category.label,
-                })
-            );
-            formik.handleReset();
-            closeModal();
+            try {
+                await dispatch(
+                    transactionsOperations.createTransaction({
+                        type,
+                        sum: parseFloat(sum) * 100,
+                        date: date.toLocaleDateString(),
+                        month: date.getMonth() + 1,
+                        year: date.getFullYear(),
+                        comment: comment ? comment : " ",
+                        category: category.label,
+                    })
+                ).unwrap()
+                formik.handleReset();
+                closeModal();
+            } catch (error) {
+                console.log(() => transactionsOperations.handleError)
+            }
         },
     });
 
@@ -114,14 +151,15 @@ export default function ModalAddTransaction(props) {
                         (category) => category.type === formik.values.type
                     )}
                     styles={stylesSelect()}
-                    onChange={(e) =>
+                    onChange={(event) =>
                         formik.handleChange({
                             type: "change",
                             target: {
                                 name: "category",
                                 value: categories.find(
-                                    (category) => category.value === e.value
+                                    (category) => category.value === event.value
                                 ),
+                                // value: findCategory(event)
                             },
                         })
                     }
