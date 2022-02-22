@@ -4,7 +4,8 @@ export default function DashboardItem({ row }) {
   const splitedDate = row.date.split('.');
   const cuted = splitedDate[2].substr(-2);
   const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
-
+  const formatedSum = row.sum / 100;
+  const formatedBalance = row.balance / 100;
   return (
     <li className={s.transactionRowWrapper}>
       <ul className={s.transactionRow}>
@@ -16,10 +17,10 @@ export default function DashboardItem({ row }) {
           className={s.transactionCellSum}
           style={row.type ? { color: 'green' } : { color: 'red' }}
         >
-          {row.sum.toLocaleString().replace(/,/i, '.')}
+          {formatedSum.toLocaleString().replace(/,/i, '.')}
         </li>
         <li className={s.transactionCellBalance}>
-          {row.balance.toLocaleString().replace(/,/i, '.')}
+          {formatedBalance.toLocaleString().replace(/,/i, '.')}
         </li>
       </ul>
     </li>

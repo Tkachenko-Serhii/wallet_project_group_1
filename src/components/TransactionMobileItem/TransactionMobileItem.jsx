@@ -33,11 +33,13 @@ export default function TransactionMobileItem({ data }) {
       </li>
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Amount</p>
-        <p className={s.transactionDetailsRowValueMobile}>{data.sum}</p>
+        <p className={s.transactionDetailsRowValueMobile}>{data.sum / 100}</p>
       </li>
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Balance</p>
-        <p className={s.transactionDetailsRowValueMobile}>{data.balance}</p>
+        <p className={s.transactionDetailsRowValueMobile}>
+          {data.balance / 100}
+        </p>
       </li>
     </ul>
   );

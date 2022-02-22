@@ -1,31 +1,31 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, lazy, Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import "./App.css";
-import Loader from "./components/Loader/Loader";
-import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
-import Dashboard from "./components/Dashboard";
-import Currency from "./components/Currency";
-import TransactionMobile from "./components/TransactionMobile";
-import Modal from "./components/Modal";
-import Form from "./components/FormAddTransaction";
+import './App.css';
+import Loader from './components/Loader/Loader';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import Dashboard from './components/Dashboard';
+import Currency from './components/Currency';
+import TransactionMobile from './components/TransactionMobile';
+import Modal from './components/Modal';
+import Form from './components/FormAddTransaction';
 
-import PublicRoute from "./components/PublicRoute";
-import PrivateRoute from "./components/PrivateRoute";
-import { userOperations } from "./redux/user";
-import { useMediaQuery } from "@mui/material";
-import { userSelectors } from "./redux/user";
-import { transactionsSelectors } from "./redux/transactions";
+import PublicRoute from './components/PublicRoute';
+import PrivateRoute from './components/PrivateRoute';
+import { userOperations } from './redux/user';
+import { useMediaQuery } from '@mui/material';
+import { userSelectors } from './redux/user';
+import { transactionsSelectors } from './redux/transactions';
 
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 
 function App() {
   const dispatch = useDispatch();
-  const matches = useMediaQuery("(min-width:768px)");
+  const matches = useMediaQuery('(min-width:768px)');
   const showModal = useSelector((state) => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
   const isLoadingSession = useSelector(userSelectors.getUserIsLoading);
@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       {showLoader && <Loader />}
-      <div className='App'>
+      <div className="App">
         <Routes>
           <Route
             path="/"
