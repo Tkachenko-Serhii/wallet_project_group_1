@@ -10,6 +10,7 @@ import { teamOperations, teamSelectors } from "../../redux/team";
 
 import ModalFooter from "../ModalFooter/ModalFooter";
 import  isModalFooterOpen from "../../redux/modalFooter/modalFooterActions";
+import heard from "../../images/heart.svg"
 
 
 export default function Footer() {
@@ -31,9 +32,14 @@ export default function Footer() {
     <footer className={s.footer}>
       <p className={s.copyright}>&copy; 2022 | All Rights Reserved </p>
       <div className={s.developed_by}>
-        <span >Developed with</span>
-        <Love className={s.love}/>
-        <span>by</span>
+        <span className={s.developed}>Developed with</span>
+        {/* <Love className={s.love}/> */}
+        <span className={s.favorite}>
+      <svg className={s.favoriteIcon}>
+       <Love className={s.love}/>
+      </svg>
+    </span>
+        <span className={s.by}>by</span>
         <div className={s.modalClick} onClick={toggleModalFooter}>
           GoIT Students
         </div>

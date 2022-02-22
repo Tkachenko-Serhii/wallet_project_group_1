@@ -1,8 +1,10 @@
 .modalContainer {
   position: relative;
 }
+
 .modalOverlay {
-  position: fixed;
+  /* position: fixed; */
+  overflow: scroll;
   top: 0;
   left: 0;
   right: 0;

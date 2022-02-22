@@ -14,6 +14,7 @@
   background-color: var(--background-color);
   background-position-x: -54px, 196px;
   background-position-y: 520px, -309px;
+  overflow-y: scroll;
 }
 
 @media screen and (min-width: 768px) {
