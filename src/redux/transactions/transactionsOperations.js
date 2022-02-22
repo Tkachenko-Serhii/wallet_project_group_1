@@ -54,10 +54,10 @@ const deleteTransaction = createAsyncThunk(
 function handleError(error, rejectWithValue) {
   const { status } = error.response;
   const { message } = error.response.data;
-  showError(message || error?.response?.data);
+  showError(message || error.response.data);
   const resError = {
     status,
-    message,
+    message: message || error.response.data,
   };
   return rejectWithValue(resError);
 }
