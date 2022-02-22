@@ -15,7 +15,7 @@
     url(/src/images/bg/bgEllipse2.png);
   background-repeat: no-repeat;
   background-color: var(--background-color);
-  background-position-x: -54px, 196px; 
+  background-position-x: -54px, 196px;
   background-position-y: 520px, -309px;
 }
 
@@ -34,5 +34,6 @@
   .overlay {
     background-position-x: -110px, 110%;
     background-position-y: 520px, -180px;
+    min-height: 100vh;
   }
 }

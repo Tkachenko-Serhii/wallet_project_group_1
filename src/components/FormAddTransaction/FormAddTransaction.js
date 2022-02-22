@@ -4,11 +4,9 @@ import Select from "react-select";
 import { stylesSelect } from "./stylesForSelect";
 import "react-datetime/css/react-datetime.css";
 import { useFormik } from "formik";
-import { alert } from "@pnotify/core";
 
 import showModal from "../../redux/modal/modalActions";
 import { transactionsOperations } from "../../redux/transactions";
-import { handleError } from "../../redux/transactions/transactionsOperations"
 import {
     categoriesOperations,
     categoriesSelectors,
@@ -22,11 +20,8 @@ import { ReactComponent as Close } from "../../icons/close.svg";
 import Button from "../Button";
 import DatePicker from "../DatePicker";
 import styles from "./FormAddTransaction.module.css";
-import Loader from "../Loader/Loader";
 
 import { formAddTransactionSchema } from "../../utils";
-
-const modalRoot = document.querySelector('#modal-root');
 
 export default function ModalAddTransaction(props) {
     const DEFAULT_TRANSACTION_STATE = {
@@ -37,7 +32,6 @@ export default function ModalAddTransaction(props) {
         category: "Вasic costs",
     };
 
-    const isLoading = useSelector(categoriesSelectors.getIsLoading);
     const categories = useSelector(categoriesSelectors.getCategories);
 
     const dispatch = useDispatch();
@@ -50,37 +44,6 @@ export default function ModalAddTransaction(props) {
         dispatch(showModal());
         document.body.style.overflow = "visible";
     };
-
-    const findCategory = (event) => {
-        const SelectedCategory = categories.find(
-            (category) => category.value === event.value)
-        return SelectedCategory ? SelectedCategory :
-            alert({
-                type: "warning",
-                text: `Category is required`,
-            });
-    }
-
-    // const formik = useFormik({
-    //     initialValues: DEFAULT_TRANSACTION_STATE,
-    //     validationSchema: formAddTransactionSchema,
-    //     onSubmit: (values) => {
-    //         const { type, category, sum, date, comment } = values;
-    //         dispatch(
-    //             transactionsOperations.createTransaction({
-    //                 type,
-    //                 sum: parseFloat(sum) * 100,
-    //                 date: date.toLocaleDateString(),
-    //                 month: date.getMonth() + 1,
-    //                 year: date.getFullYear(),
-    //                 comment: comment ? comment : " ",
-    //                 category: category.label,
-    //             })
-    //         );
-    //         formik.handleReset();
-    //         closeModal();
-    //     },
-    // });
 
     const formik = useFormik({
         initialValues: DEFAULT_TRANSACTION_STATE,
@@ -102,7 +65,7 @@ export default function ModalAddTransaction(props) {
                 formik.handleReset();
                 closeModal();
             } catch (error) {
-                // console.log(() => transactionsOperations.handleError)
+                // console.log(error)
             }
         },
     });
@@ -162,7 +125,6 @@ export default function ModalAddTransaction(props) {
                                 value: categories.find(
                                     (category) => category.value === event.value
                                 ),
-                                // value: findCategory(event)
                             },
                         })
                     }
