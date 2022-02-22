@@ -24,6 +24,7 @@ export default function Footer() {
 
   function toggleModalFooter() {
     dispatch( isModalFooterOpen());
+    document.body.style.overflow = "visible";
   }
 
   return (

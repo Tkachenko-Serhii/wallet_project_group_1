@@ -28,15 +28,20 @@ export default function Modal({ children, onClose }) {
 
   const dispatch = useDispatch();
 
+  const toggleModal = (event) => {
+    dispatch(showModal());
+    document.body.style.overflow = "visible";
+  };
+
   const handleKeyDown = event => {
     if (event.code === 'Escape') {
-      dispatch(showModal())
+      toggleModal()
     }
   };
 
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
-      dispatch(showModal())
+      toggleModal()
     }
   };
 

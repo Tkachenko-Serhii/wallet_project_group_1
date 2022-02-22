@@ -24,6 +24,8 @@ import Loader from "../Loader/Loader";
 
 import { formAddTransactionSchema } from "../../utils";
 
+const modalRoot = document.querySelector('#modal-root');
+
 export default function ModalAddTransaction(props) {
     const DEFAULT_TRANSACTION_STATE = {
         type: false,
@@ -44,6 +46,7 @@ export default function ModalAddTransaction(props) {
 
     const closeModal = (event) => {
         dispatch(showModal());
+        document.body.style.overflow = "visible";
     };
 
     const formik = useFormik({
@@ -72,7 +75,7 @@ export default function ModalAddTransaction(props) {
             <button
                 type='button'
                 className={styles.closeButton}
-                onClick={(event) => dispatch(showModal())}
+                onClick={closeModal}
             >
                 <Close />
             </button>
@@ -164,6 +167,7 @@ export default function ModalAddTransaction(props) {
                     type='text'
                     name='comment'
                     placeholder='Comment'
+                    // autoComplete="off"
                     className={styles.inputComment}
                     onChange={formik.handleChange}
                     value={formik.values.comment}
