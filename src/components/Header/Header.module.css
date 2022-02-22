@@ -3,6 +3,8 @@
   align-items: center;
   height: 60px;
   background-color: var(--main-background-color);
+  position: sticky;
+  z-index: 2000;
 }
 
 .inner {
@@ -71,3 +73,11 @@
     padding-right: 85px;
   }
 }
+
+@media screen and (min-width: 764px) {
+  .header {
+    position: static;
+    z-index: 0;
+  }
+}
+
