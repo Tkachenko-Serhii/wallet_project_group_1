@@ -52,7 +52,7 @@ export default function ModalLogout() {
                     <Close />
                 </button>
                 <h4 className={css.title}>Are you sure you want to logout?</h4>
-                <Button type="button" text="Continue" color="green" onClick={toggleModal} />
+                <Button type="button" text="Continue" color="green" onClick={() => dispatch(userOperations.logout())} />
                 <Button
                     text="Cancel"
                     color="white"
