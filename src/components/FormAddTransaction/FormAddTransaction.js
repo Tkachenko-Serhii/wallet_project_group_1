@@ -99,7 +99,7 @@ export default function ModalAddTransaction(props) {
                 formik.handleReset();
                 closeModal();
             } catch (error) {
-                console.log(() => transactionsOperations.handleError)
+                // console.log(() => transactionsOperations.handleError)
             }
         },
     });
