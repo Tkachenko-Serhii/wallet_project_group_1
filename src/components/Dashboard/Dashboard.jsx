@@ -4,9 +4,11 @@ import { transactionsSelectors } from '../../redux/transactions';
 import Chart from './../Chart';
 
 import DashboardItem from '../DashboardItem';
+import { date } from 'yup';
 
 export default function Dashboard({ chart, ...props }) {
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
+
 
   return (
     <>

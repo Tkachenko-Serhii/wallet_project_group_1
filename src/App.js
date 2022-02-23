@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
 import Loader from './components/Loader/Loader';
+
 import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
 import Currency from './components/Currency';
@@ -21,6 +22,7 @@ import { userSelectors } from './redux/user';
 import { transactionsSelectors } from './redux/transactions';
 
 const LoginPage = lazy(() => import('./pages/LoginPage'));
+
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 
 function App() {
