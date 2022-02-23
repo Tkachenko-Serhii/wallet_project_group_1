@@ -37,7 +37,7 @@ export default function PasswordInputWithFormik({
       onBlur={onBlur}
       value={value}
       error={error}
-      helperText={helperText}
+      helperText={helperText || ' '}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">

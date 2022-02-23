@@ -29,7 +29,7 @@ export default function NameInputWithFormik({
       onBlur={onBlur}
       value={formik.values.name}
       error={isInputError}
-      helperText={shouldErrorTextDisplayed && formik.errors.name}
+      helperText={(shouldErrorTextDisplayed && formik.errors.name) || ' '}
       autoFocus={autoFocus}
       InputProps={{
         startAdornment: (

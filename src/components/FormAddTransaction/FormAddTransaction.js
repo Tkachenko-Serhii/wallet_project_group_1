@@ -20,11 +20,8 @@ import { ReactComponent as Close } from '../../icons/close.svg';
 import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
-import Loader from '../Loader/Loader';
 
 import { formAddTransactionSchema } from '../../utils';
-
-const modalRoot = document.querySelector('#modal-root');
 
 export default function ModalAddTransaction(props) {
   const DEFAULT_TRANSACTION_STATE = {
@@ -35,7 +32,6 @@ export default function ModalAddTransaction(props) {
     category: 'Вasic costs',
   };
 
-  const isLoading = useSelector(categoriesSelectors.getIsLoading);
   const categories = useSelector(categoriesSelectors.getCategories);
 
   const dispatch = useDispatch();
@@ -52,21 +48,25 @@ export default function ModalAddTransaction(props) {
   const formik = useFormik({
     initialValues: DEFAULT_TRANSACTION_STATE,
     validationSchema: formAddTransactionSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const { type, category, sum, date, comment } = values;
-      dispatch(
-        transactionsOperations.createTransaction({
-          type,
-          sum: parseFloat(sum) * 100,
-          date: date.toLocaleDateString(),
-          month: date.getMonth() + 1,
-          year: date.getFullYear(),
-          comment: comment ? comment : ' ',
-          category: category.label,
-        })
-      );
-      formik.handleReset();
-      closeModal();
+      try {
+        await dispatch(
+          transactionsOperations.createTransaction({
+            type,
+            sum: parseFloat(sum) * 100,
+            date: date.toLocaleDateString(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear(),
+            comment: comment ? comment : ' ',
+            category: category.label,
+          })
+        ).unwrap();
+        formik.handleReset();
+        closeModal();
+      } catch (error) {
+        // console.log(error)
+      }
     },
   });
 
@@ -113,13 +113,13 @@ export default function ModalAddTransaction(props) {
             (category) => category.type === formik.values.type
           )}
           styles={stylesSelect()}
-          onChange={(e) =>
+          onChange={(event) =>
             formik.handleChange({
               type: 'change',
               target: {
                 name: 'category',
                 value: categories.find(
-                  (category) => category.value === e.value
+                  (category) => category.value === event.value
                 ),
               },
             })
