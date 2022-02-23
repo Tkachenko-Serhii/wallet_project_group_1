@@ -64,13 +64,6 @@ export default function ModalAddTransaction(props) {
     }
   }
 
-  const checkCategory = () => {
-    console.log(selectedСategory)
-    if (selectedСategory === "") {
-      setDisabled(true)
-    }
-  }
-
   const closeModal = (event) => {
     dispatch(showModal());
     setDisabled(false);
@@ -157,7 +150,7 @@ export default function ModalAddTransaction(props) {
               },
             })
           }}
-          onBlur={checkCategory}
+          // onBlur={checkCategory}
           value={formik.values.category}
         />
       </div>
@@ -209,7 +202,7 @@ export default function ModalAddTransaction(props) {
         type="submit"
         text="Add"
         color="green"
-        disabled={disabled} />
+        disabled={!formik.values.category || disabled} />
 
       <Button
         text="Сancel"
