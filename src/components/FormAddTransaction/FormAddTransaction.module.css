@@ -1,8 +1,10 @@
 .modalContainer {
   position: relative;
 }
+
 .modalOverlay {
-  position: fixed;
+  /* position: fixed; */
+  overflow: scroll;
   top: 0;
   left: 0;
   right: 0;
@@ -21,6 +23,7 @@
   padding: 20px 20px 20px;
   position: relative;
   background-color: var(--main-background-color);
+  margin-top: 90px;
 }
 
 .title {
@@ -145,17 +148,20 @@ input:checked ~ .swichTitleIncome {
   width: 280px;
   border: none;
   border-bottom: 2px solid var(--border-color);
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   line-height: 100%;
-  color: #bdbdbd;
+  color: var(--main-text-color);
   outline: 0;
   outline-offset: 0;
   margin-bottom: 40px;
   overflow: hidden;
   -webkit-box-shadow: inset 0 0 0 50px #fff;
-  -webkit-text-fill-color: #bdbdbd;
   font-family: Circe, sans-serif;
+}
+
+.inputForm::placeholder {
+  color: #bdbdbd;
 }
 
 .inputComment {
@@ -240,7 +246,6 @@ select {
 @media screen and (min-width: 321px) {
   .form {
     border-radius: 15px;
-
     -webkit-box-shadow: 0px 4px 4px 0px var(--shadow-extra-color);
     -moz-box-shadow: 0px 4px 4px 0px var(--shadow-extra-color);
     box-shadow: 0px 4px 4px 0px var(--shadow-extra-color);
@@ -251,6 +256,7 @@ select {
   .form {
     max-width: 540px;
     padding: 40px 64px 60px;
+    margin-top: 0;
   }
 
   .title {
@@ -262,6 +268,7 @@ select {
   .inputForm {
     width: 190px;
     margin-bottom: 0px;
+    text-align: left;
   }
   .inputComment {
     width: 410px;

@@ -1,10 +1,12 @@
 import s from './DashboardItem.module.css';
 
 export default function DashboardItem({ row }) {
-  const splitedDate = row.date.split('.');
-  const cuted = splitedDate[2].substr(-2);
-  const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
-
+  const dateToFormat = new Date(row.date);
+  const splitedDate = dateToFormat.toLocaleDateString().split('.');
+  const cuttedYear = splitedDate[2].substr(-2);
+  const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuttedYear;
+  const formatedSum = row.sum / 100;
+  const formatedBalance = row.balance / 100;
   return (
     <li className={s.transactionRowWrapper}>
       <ul className={s.transactionRow}>
@@ -16,10 +18,10 @@ export default function DashboardItem({ row }) {
           className={s.transactionCellSum}
           style={row.type ? { color: 'green' } : { color: 'red' }}
         >
-          {row.sum.toLocaleString().replace(/,/i, '.')}
+          {formatedSum.toFixed(2).toLocaleString().replace(/,/i, '.')}
         </li>
         <li className={s.transactionCellBalance}>
-          {row.balance.toLocaleString().replace(/,/i, '.')}
+          {formatedBalance.toFixed(2).toLocaleString().replace(/,/i, '.')}
         </li>
       </ul>
     </li>

@@ -27,15 +27,20 @@ export default function ModalLogout() {
         };
     });
 
+    const toggleModal = (event) => {
+        dispatch(isModalLogoutOpen());
+        document.body.style.overflow = "visible";
+    };
+
     const handleKeyDown = event => {
         if (event.code === 'Escape') {
-            dispatch(isModalLogoutOpen())
+            toggleModal()
         }
     };
 
     const handleBackdropClick = event => {
         if (event.currentTarget === event.target) {
-            dispatch(isModalLogoutOpen())
+            toggleModal()
         }
     };
 
@@ -43,7 +48,7 @@ export default function ModalLogout() {
         <div className={css.overlay} onClick={handleBackdropClick}>
             <div className={css.modal}>
                 <Logo />
-                <button className={css.closeButton} onClick={() => dispatch(isModalLogoutOpen())}>
+                <button className={css.closeButton} onClick={toggleModal}>
                     <Close />
                 </button>
                 <h4 className={css.title}>Are you sure you want to logout?</h4>
@@ -52,7 +57,7 @@ export default function ModalLogout() {
                     text="Cancel"
                     color="white"
                     type="button"
-                    onClick={() => dispatch(isModalLogoutOpen())}
+                    onClick={toggleModal}
                 />
             </div>
         </div>,

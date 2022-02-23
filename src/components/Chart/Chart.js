@@ -58,7 +58,7 @@ export default function Chart() {
             <ChartBlock>
               <Doughnut data={data} options={options} />
               <Balance>
-                <p>&#x20b4; {balance}</p>
+                <p>&#x20b4; {(balance / 100).toFixed(2)}</p>
               </Balance>
             </ChartBlock>
           )}
@@ -77,7 +77,7 @@ const Wrapper = styled("div")`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     display: block;
     width: 700px;
   }
@@ -88,7 +88,7 @@ const ChartBlock = styled("div")`
   width: 280px;
   height: 280px;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 320px;
     height: 320px;
     margin-right: 30px;
@@ -104,7 +104,7 @@ const Balance = styled("div")`
   font-size: 18px;
   text-align: center;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     top: 150px;
     left: 83px;
   }
@@ -115,7 +115,7 @@ const RightTab = styled("div")`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
@@ -132,7 +132,7 @@ const Title = styled("p")`
   line-height: 1.5;
   margin-bottom: 20px;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     margin-left: 30px;
   }
 `;
@@ -140,7 +140,7 @@ const Title = styled("p")`
 const LegendWrapper = styled("div")`
   width: 280px;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 350px;
   }
 `;

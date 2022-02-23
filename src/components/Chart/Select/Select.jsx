@@ -110,7 +110,7 @@ const Container = styled("div")`
   margin-right: auto;
   width: 350px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     margin-top: 30px;
     margin-right: auto;
     flex-direction: column;

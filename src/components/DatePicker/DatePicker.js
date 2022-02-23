@@ -6,7 +6,7 @@ export default function DatePicker({ date, updateDate }) {
     return (
         <Datetime
             className={styles.input}
-            dateFormat="DD-MM-YYYY"
+            dateFormat="DD.MM.YYYY"
             timeFormat={false}
             value={date}
             onChange={(moment) => {

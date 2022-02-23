@@ -2,11 +2,18 @@ import s from './Dashboard.module.css';
 import { useSelector } from 'react-redux';
 import { transactionsSelectors } from '../../redux/transactions';
 import Chart from './../Chart';
+import Loader from '../Loader/Loader';
 
 import DashboardItem from '../DashboardItem';
 
 export default function Dashboard({ chart, ...props }) {
+  const isLoading = useSelector(transactionsSelectors.getIsLoading);
+
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
+  const toSort = [...allTransactions];
+  const toRender = toSort.sort((a, b) =>
+    a.date > b.date ? -1 : b.date > a.date ? 1 : 0
+  );
 
   return (
     <>
@@ -25,14 +32,20 @@ export default function Dashboard({ chart, ...props }) {
             </li>
 
             <li className={s.tableitems}>
-              {allTransactions.length < 1 ? (
-                'The list is empty'
+              {isLoading ? (
+                <Loader />
               ) : (
-                <ul className={s.transactionsList}>
-                  {allTransactions.map((row) => {
-                    return <DashboardItem key={row._id} row={row} />;
-                  })}
-                </ul>
+                <>
+                  {toRender.length < 1 ? (
+                    'The list is empty'
+                  ) : (
+                    <ul className={s.transactionsList}>
+                      {toRender.map((row) => {
+                        return <DashboardItem key={row._id} row={row} />;
+                      })}
+                    </ul>
+                  )}
+                </>
               )}
             </li>
           </ul>

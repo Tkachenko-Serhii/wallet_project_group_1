@@ -2,6 +2,8 @@
   width: 688px;
 }
 .table {
+  font-family: 'Circe';
+
   position: relative;
 }
 .tableitems {
@@ -15,6 +17,8 @@
   position: sticky;
 }
 .tableHeader {
+  font-family: 'Circe';
+
   font-weight: 700;
   height: 58px;
   align-items: center;

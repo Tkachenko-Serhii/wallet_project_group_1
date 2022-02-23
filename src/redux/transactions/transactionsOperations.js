@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { userOperations } from '../../redux/user';
+import { error as showError} from "@pnotify/core";
 
 axios.defaults.baseURL = 'https://wallet-project-group-1.herokuapp.com';
 
@@ -53,9 +54,10 @@ const deleteTransaction = createAsyncThunk(
 function handleError(error, rejectWithValue) {
   const { status } = error.response;
   const { message } = error.response.data;
+  showError(message || error.response.data);
   const resError = {
     status,
-    message,
+    message: message || error.response.data,
   };
   return rejectWithValue(resError);
 }

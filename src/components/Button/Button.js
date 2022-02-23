@@ -5,10 +5,11 @@ export default function Button({
   type = 'submit',
   text,
   color = 'green',
-  onClick
+  onClick,
+  disabled
 }) {
   return (
-    <button type={type} className={`${styles[color]}`} onClick={onClick}>
+    <button type={type} className={`${styles[color]}`} onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );
@@ -18,5 +19,6 @@ Button.prototypes = {
   type: propTypes.string,
   text: propTypes.string,
   color: propTypes.oneOf(['green', 'white']),
-  onClick: propTypes.func
+  onClick: propTypes.func,
+  disabled: propTypes.bool
 };
