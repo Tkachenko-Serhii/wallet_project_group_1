@@ -18,11 +18,11 @@ export default function DiagramTab({ data, setStatistic }) {
 
           <Amount>
             <AmountTitle>Expenses</AmountTitle>
-            <Expenses>{data?.total?.Expenses}</Expenses>
+            <Expenses>{(data.total.Expenses / 100).toFixed(2)}</Expenses>
           </Amount>
           <Amount>
             <AmountTitle>Income</AmountTitle>
-            <Income>{data?.total?.Income}</Income>
+            <Income>{(data.total.Income / 100).toFixed(2)}</Income>
           </Amount>
         </>
       )}
