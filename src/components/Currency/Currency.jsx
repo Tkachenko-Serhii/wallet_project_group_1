@@ -22,8 +22,6 @@ const useStyles = makeStyles({
     width: '280px',
     height: '174px',
     borderRadius: '30px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
     '@media (min-width: 768px) and (max-width: 1279px)': {
       width: '334px'
     },

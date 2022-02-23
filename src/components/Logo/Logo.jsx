@@ -15,7 +15,7 @@ export default function Logo() {
           height="40"
         />
 
-        <h1 className={styles.logoText}>Wallet</h1>
+        <h1 className={styles.logoText}>Moneyflow</h1>
       </div>
     </Link>
   );
