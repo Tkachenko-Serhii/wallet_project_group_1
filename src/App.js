@@ -11,8 +11,6 @@ import DashboardPage from './pages/DashboardPage';
 import Dashboard from './components/Dashboard';
 import Currency from './components/Currency';
 import TransactionMobile from './components/TransactionMobile';
-import Modal from './components/Modal';
-import Form from './components/FormAddTransaction';
 
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -28,7 +26,6 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 function App() {
   const dispatch = useDispatch();
   const matches = useMediaQuery('(min-width:768px)');
-  const showModal = useSelector((state) => state.modal.modal);
   useEffect(() => dispatch(userOperations.fetchCurrentUser()), [dispatch]);
   const isLoadingSession = useSelector(userSelectors.getUserIsLoading);
   const isLoadingTransactions = useSelector(transactionsSelectors.getIsLoading);
@@ -135,11 +132,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
-      {showModal && (
-        <Modal>
-          <Form />
-        </Modal>
-      )}
       <ToastContainer autoClose={2500} />
     </>
   );
