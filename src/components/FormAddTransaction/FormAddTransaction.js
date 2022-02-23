@@ -1,9 +1,14 @@
+
+import { useState } from "react";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { stylesSelect } from './stylesForSelect';
 import 'react-datetime/css/react-datetime.css';
 import { useFormik } from 'formik';
+import { alert } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+
 
 import showModal from '../../redux/modal/modalActions';
 import { transactionsOperations } from '../../redux/transactions';
@@ -33,6 +38,9 @@ export default function ModalAddTransaction(props) {
   };
 
   const categories = useSelector(categoriesSelectors.getCategories);
+  const userBalanse = useSelector((state) => state.session.user.balance);
+
+  const [disabled, setDisabled] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -40,8 +48,23 @@ export default function ModalAddTransaction(props) {
     dispatch(categoriesOperations.getCategories());
   }, [dispatch]);
 
+  const checkAmount = (event) => {
+    if (userBalanse < event.target.value) {
+      setDisabled(true)
+      alert({
+        type: "error",
+        text: "Sorry, but it appears your account has insufficient funds.",
+        delay: 2000,
+        animateSpeed: 'fast'
+      });
+    } else {
+      setDisabled(false)
+    }
+  }
+
   const closeModal = (event) => {
     dispatch(showModal());
+    setDisabled(false);
     document.body.style.overflow = 'visible';
   };
 
@@ -133,6 +156,7 @@ export default function ModalAddTransaction(props) {
             <input
               type="text"
               name="sum"
+              autoComplete="off"
               placeholder="0.00"
               className={styles.inputForm}
               onChange={(event) => {
@@ -141,6 +165,7 @@ export default function ModalAddTransaction(props) {
                   /^[0-9]*(\.[0-9]?[0-9]?)?$/.test(event.target.value)
                 ) {
                   formik.handleChange(event);
+                  checkAmount(event);
                 }
               }}
               value={formik.values.sum}
@@ -169,8 +194,17 @@ export default function ModalAddTransaction(props) {
           value={formik.values.comment}
         />
       </label>
-      <Button type="submit" text="Add" color="green" />
-      <Button type="button" text="Cancel" color="white" onClick={closeModal} />
+      <Button
+        type="submit"
+        text="Add"
+        color="green"
+        disabled={disabled} />
+
+      <Button
+        text="Сancel"
+        type="button"
+        color="white"
+        onClick={closeModal} />
     </form>
   );
 }
