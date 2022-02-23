@@ -27,6 +27,7 @@ import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
 
 import { formAddTransactionSchema } from '../../utils';
+// import { Check } from "@mui/icons-material";
 
 export default function ModalAddTransaction(props) {
   const DEFAULT_TRANSACTION_STATE = {
@@ -34,13 +35,14 @@ export default function ModalAddTransaction(props) {
     sum: '',
     date: new Date(),
     comment: '',
-    category: 'Вasic costs',
+    category: '',
   };
 
   const categories = useSelector(categoriesSelectors.getCategories);
   const userBalanse = useSelector((state) => state.session.user.balance);
 
   const [disabled, setDisabled] = useState(false);
+  const [selectedСategory, setSelectedСategory] = useState("");
 
   const dispatch = useDispatch();
 
@@ -59,6 +61,13 @@ export default function ModalAddTransaction(props) {
       });
     } else {
       setDisabled(false)
+    }
+  }
+
+  const checkCategory = () => {
+    console.log(selectedСategory)
+    if (selectedСategory === "") {
+      setDisabled(true)
     }
   }
 
@@ -108,8 +117,8 @@ export default function ModalAddTransaction(props) {
             type="checkbox"
             name="type"
             value={formik.values.type}
-            onChange={(e) => {
-              formik.handleChange(e);
+            onChange={(event) => {
+              formik.handleChange(event);
               formik.handleChange({
                 type: 'change',
                 target: {
@@ -136,7 +145,8 @@ export default function ModalAddTransaction(props) {
             (category) => category.type === formik.values.type
           )}
           styles={stylesSelect()}
-          onChange={(event) =>
+          onChange={(event) => {
+            setSelectedСategory(event.value);
             formik.handleChange({
               type: 'change',
               target: {
@@ -146,7 +156,8 @@ export default function ModalAddTransaction(props) {
                 ),
               },
             })
-          }
+          }}
+          onBlur={checkCategory}
           value={formik.values.category}
         />
       </div>
