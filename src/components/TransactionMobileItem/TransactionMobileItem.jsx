@@ -1,9 +1,11 @@
 import s from './TransactionMobileItem.module.css';
 
 export default function TransactionMobileItem({ data }) {
-  // const splitedDate = data.date.split('.');
-  // const cuted = splitedDate[2].substr(-2);
-  // const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
+  const dateToFormat = new Date(data.date);
+  const splitedDate = dateToFormat.toLocaleDateString().split('.');
+  const cuttedYear = splitedDate[2].substr(-2);
+  const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuttedYear;
+
   return (
     <ul
       className={s.transactionDetailsMobile}
@@ -13,7 +15,7 @@ export default function TransactionMobileItem({ data }) {
     >
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Date</p>
-        <p className={s.transactionDetailsRowValueMobile}>{data.date}</p>
+        <p className={s.transactionDetailsRowValueMobile}>{formatedDate}</p>
       </li>
 
       <li className={s.transactionDetailsRowMobile}>
@@ -33,12 +35,14 @@ export default function TransactionMobileItem({ data }) {
       </li>
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Amount</p>
-        <p className={s.transactionDetailsRowValueMobile}>{data.sum / 100}</p>
+        <p className={s.transactionDetailsRowValueMobile}>
+          {(data.sum / 100).toFixed(2)}
+        </p>
       </li>
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Balance</p>
         <p className={s.transactionDetailsRowValueMobile}>
-          {data.balance / 100}
+          {(data.balance / 100).toFixed(2)}
         </p>
       </li>
     </ul>
