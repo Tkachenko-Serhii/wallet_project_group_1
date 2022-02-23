@@ -18,7 +18,7 @@ export default function Category({ data }) {
               ></span>
               <Name>{item.name}</Name>
             </LeftTab>
-            <Name>{item.total}</Name>{" "}
+            <Name>{(item.total / 100).toFixed(2)}</Name>{" "}
           </Container>
         </li>
       ))}
@@ -47,7 +47,7 @@ const Container = styled("div")`
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 350px;
   }
 `;
