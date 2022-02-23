@@ -37,7 +37,7 @@ export default function Dashboard({ chart, ...props }) {
               ) : (
                 <>
                   {toRender.length < 1 ? (
-                    'The list is empty'
+                    <p className={s.empty}>'The list is empty'</p>
                   ) : (
                     <ul className={s.transactionsList}>
                       {toRender.map((row) => {
