@@ -1,9 +1,9 @@
 import s from './TransactionMobileItem.module.css';
 
 export default function TransactionMobileItem({ data }) {
-  const splitedDate = data.date.split('.');
-  const cuted = splitedDate[2].substr(-2);
-  const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
+  // const splitedDate = data.date.split('.');
+  // const cuted = splitedDate[2].substr(-2);
+  // const formatedDate = splitedDate[0] + '.' + splitedDate[1] + '.' + cuted;
   return (
     <ul
       className={s.transactionDetailsMobile}
@@ -13,7 +13,7 @@ export default function TransactionMobileItem({ data }) {
     >
       <li className={s.transactionDetailsRowMobile}>
         <p className={s.transactionDetailsRowLabelMobile}>Date</p>
-        <p className={s.transactionDetailsRowValueMobile}>{formatedDate}</p>
+        <p className={s.transactionDetailsRowValueMobile}>{data.date}</p>
       </li>
 
       <li className={s.transactionDetailsRowMobile}>
