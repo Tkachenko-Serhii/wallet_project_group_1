@@ -54,6 +54,6 @@
   -webkit-box-shadow: 0px 6px 15px 0px var(--shadow-color);
   -moz-box-shadow: 0px 6px 15px 0px var(--shadow-color);
   box-shadow: 0px 6px 15px 0px var(--shadow-color);
-  background-color: rgb(209 209 209);
+  background-color: rgb(146 194 183);
   transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
