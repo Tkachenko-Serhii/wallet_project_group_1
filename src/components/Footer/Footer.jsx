@@ -1,5 +1,5 @@
 import s from './Footer.module.css';
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { ReactComponent as Love } from "../../icons/love.svg";
@@ -10,8 +10,6 @@ import { teamOperations, teamSelectors } from "../../redux/team";
 
 import ModalFooter from "../ModalFooter/ModalFooter";
 import  isModalFooterOpen from "../../redux/modalFooter/modalFooterActions";
-import heard from "../../images/heart.svg"
-
 
 export default function Footer() {
   const openModal = useSelector((state) => state.isModalFooterOpen.modalFooter);
