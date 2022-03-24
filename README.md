@@ -1,10 +1,10 @@
-# Wallet
+# MoneyFlow
 
-Финальный проект по курсу **React.js/Node.js** группы №1 (JS#34, GoIT).
+Final project after the course React.js/Node.js group №1 (JS#34, GoIT).
 
 ## Tech stack
 
-Для реализации проекта были использованы следующие технологии: JavaScript (66.8%), CSS3 (29.9%), HTML5 (3.3%)
+The following technologies were used to implement the project: JavaScript (66.8%), CSS3 (29.9%), HTML5 (3.3%)
 
 ## Developers
 
