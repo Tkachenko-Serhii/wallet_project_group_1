@@ -1,7 +1,7 @@
-import React from "react";
-import { styled } from "@mui/material";
-import TableFilters from "../Select/Select";
-import Category from "../Category/Category";
+import React from 'react';
+import { styled } from '@mui/material';
+import TableFilters from '../Select/Select';
+import Category from '../Category/Category';
 
 export default function DiagramTab({ data, setStatistic }) {
   return (
@@ -22,7 +22,11 @@ export default function DiagramTab({ data, setStatistic }) {
           </Amount>
           <Amount>
             <AmountTitle>Income</AmountTitle>
-            <Income>{(data.total.Income / 100).toFixed(2)}</Income>
+            <Income>
+              {data.total.Income
+                ? (data.total.Income / 100).toFixed(2)
+                : (0).toFixed(2)}
+            </Income>
           </Amount>
         </>
       )}
@@ -30,7 +34,7 @@ export default function DiagramTab({ data, setStatistic }) {
   );
 }
 
-const CategoryItem = styled("div")`
+const CategoryItem = styled('div')`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -39,7 +43,7 @@ const CategoryItem = styled("div")`
   border-radius: 30px;
 `;
 
-const Title = styled("div")`
+const Title = styled('div')`
   font-weight: 800;
   font-size: 18px;
   line-height: 1.16;
@@ -50,7 +54,7 @@ const Title = styled("div")`
   color: #000000;
 `;
 
-const Amount = styled("div")`
+const Amount = styled('div')`
   width: 100%;
   margin-top: 15px;
   display: flex;
@@ -59,20 +63,20 @@ const Amount = styled("div")`
   padding-right: 40px;
 `;
 
-const AmountTitle = styled("div")`
+const AmountTitle = styled('div')`
   font-weight: 800;
   font-size: 16px;
   line-height: 19px;
 `;
 
-const Expenses = styled("div")`
+const Expenses = styled('div')`
   font-weight: 800;
   font-size: 16px;
   line-height: 19px;
   color: #ff6596;
 `;
 
-const Income = styled("span")`
+const Income = styled('span')`
   font-weight: 800;
   font-size: 16px;
   line-height: 19px;
