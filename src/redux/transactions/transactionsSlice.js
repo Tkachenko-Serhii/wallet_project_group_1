@@ -69,7 +69,7 @@ const transactionSlice = createSlice({
     },
 
     [transactionsOperations.getTransactions.pending](state, { payload }) {
-      state.isLoading = true;
+      state.isLoading = false;
       state.serverError = {
         status: null,
         message: null,
