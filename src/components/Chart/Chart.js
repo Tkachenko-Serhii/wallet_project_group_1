@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { styled } from "@mui/material";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import React, { useState } from 'react';
+import { styled } from '@mui/material';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 
-import DiagramTab from "./DiagramTab";
-import { useSelector } from "react-redux";
-import { userSelectors } from "./../../redux/user";
+import DiagramTab from './DiagramTab';
+import { useSelector } from 'react-redux';
+import { userSelectors } from './../../redux/user';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -28,7 +28,7 @@ export default function Chart() {
     labels: [...arrName],
     datasets: [
       {
-        label: "# of Votes",
+        label: '# of Votes',
         data: [...arrTotal],
         backgroundColor: [...arrColor],
         borderWidth: 0,
@@ -41,7 +41,7 @@ export default function Chart() {
     plugins: {
       title: {
         display: true,
-        text: "24000",
+        text: '24000',
       },
       legend: {
         display: false,
@@ -71,11 +71,14 @@ export default function Chart() {
   );
 }
 
-const Wrapper = styled("div")`
+const Wrapper = styled('div')`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 
   @media screen and (min-width: 768px) {
     display: block;
@@ -83,7 +86,7 @@ const Wrapper = styled("div")`
   }
 `;
 
-const ChartBlock = styled("div")`
+const ChartBlock = styled('div')`
   position: relative;
   width: 280px;
   height: 280px;
@@ -95,7 +98,7 @@ const ChartBlock = styled("div")`
   }
 `;
 
-const Balance = styled("div")`
+const Balance = styled('div')`
   position: absolute;
   top: 130px;
   left: 60px;
@@ -110,7 +113,7 @@ const Balance = styled("div")`
   }
 `;
 
-const RightTab = styled("div")`
+const RightTab = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,17 +130,21 @@ const RightTab = styled("div")`
   }
 `;
 
-const Title = styled("p")`
+const Title = styled('p')`
   font-size: 30px;
   line-height: 1.5;
   margin-bottom: 20px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 767px) {
+    margin-left: 20px;
+    margin-right: auto;
+  }
+  @media screen and (min-width: 1280px) {
     margin-left: 30px;
   }
 `;
 
-const LegendWrapper = styled("div")`
+const LegendWrapper = styled('div')`
   width: 280px;
 
   @media screen and (min-width: 768px) {
