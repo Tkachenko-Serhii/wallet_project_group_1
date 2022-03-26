@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -90,7 +89,6 @@ export default function ModalAddTransaction(props) {
         formik.handleReset();
         closeModal();
       } catch (error) {
-        // console.log(error)
       }
     },
   });
@@ -150,7 +148,6 @@ export default function ModalAddTransaction(props) {
               },
             })
           }}
-          // onBlur={checkCategory}
           value={formik.values.category}
         />
       </div>

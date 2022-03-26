@@ -1,4 +1,4 @@
-# Wallet
+# MoneyFlow
 
 Финальный проект по курсу **React.js/Node.js** группы №1 (JS#34, GoIT).
 
