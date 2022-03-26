@@ -11,11 +11,11 @@
   font-family: 'Segoe UI';
   font-weight: bold;
   font-size: 20px;
-  line-height: 30px;
+  line-height: 1.5;
 }
 .logoImg {
   display: block;
-  margin-right: 16px;
+  margin-right: 10px;
   height: 30px;
   width: 30px;
 }

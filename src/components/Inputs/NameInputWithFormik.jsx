@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 import { InputAdornment } from '@mui/material';
 import { AccountBox as AccountBoxIcon } from '@mui/icons-material';
 
@@ -10,6 +10,8 @@ export default function NameInputWithFormik({
   autoFocus = false,
   onBlur
 }) {
+  const { t, i18n } = useTranslation();
+
   const isInputError =
     (formik.touched.name || Boolean(formik.values.name)) &&
     Boolean(formik.errors.name);
@@ -23,7 +25,7 @@ export default function NameInputWithFormik({
       type="text"
       id="name"
       name="name"
-      placeholder="Your name"
+      placeholder={t('name')}
       variant="standard"
       onChange={formik.handleChange}
       onBlur={onBlur}

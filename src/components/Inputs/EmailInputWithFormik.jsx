@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 import { InputAdornment } from '@mui/material';
 import CustomTextFiledStyled from './CustomTextFiledStyled';
 import { Email as EmailIcon } from '@mui/icons-material';
@@ -9,6 +9,7 @@ export default function EmailInputWithFormik({
   autoFocus = false,
   onBlur
 }) {
+  const { t, i18n } = useTranslation();
   const isInputError =
     (formik.touched.email || Boolean(formik.values.email)) &&
     Boolean(formik.errors.email);
@@ -22,7 +23,7 @@ export default function EmailInputWithFormik({
       type="email"
       id="email"
       name="email"
-      placeholder="E-mail"
+      placeholder={t('email')}
       variant="standard"
       onChange={formik.handleChange}
       onBlur={onBlur}

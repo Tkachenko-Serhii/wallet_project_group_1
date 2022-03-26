@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import {
   Table,
   TableBody,
@@ -86,7 +86,7 @@ const useStyles = makeStyles({
     fontFamily: 'Circe',
     fontWeight: 700,
     fontSize: '18px',
-    padding: '0px, 0px, 0px, 12px',
+    padding: '6px 16px 6px 16px',
     color: '#ffff',
     borderBottom: '0px',
   },
@@ -117,6 +117,7 @@ const useStyles = makeStyles({
 });
 
 const Currency = () => {
+  const { t, i18n } = useTranslation();
   const [currency, setCurrency] = useState([]);
   const styles = useStyles();
 
@@ -149,14 +150,14 @@ const Currency = () => {
             <TableHead className={styles.currency_head}>
               <TableRow className={styles.currency_head_row}>
                 <TableCell className={styles.currency_header}>
-                  Currency
+                  {t("currency")}
                 </TableCell>
 
                 <TableCell align="center" className={styles.currency_header}>
-                  Buy
+                  {t("buy")}
                 </TableCell>
                 <TableCell align="center" className={styles.currency_header}>
-                  Sale
+                  {t("sale")}
                 </TableCell>
               </TableRow>
             </TableHead>

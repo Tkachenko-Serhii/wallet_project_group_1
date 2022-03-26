@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  align-items: center;
   height: 60px;
   background-color: var(--main-background-color);
   position: sticky;
@@ -9,6 +8,7 @@
 
 .inner {
   display: flex;
+  align-items: center;
   color: var(--inactive-text-color);
 }
 
@@ -17,10 +17,11 @@
   line-height: 27px;
   margin-right: 10px;
   display: flex;
+  align-items: center;
 }
 .wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   min-width: 320px;
   margin: 0 auto;
@@ -34,6 +35,36 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-right: 5px;
+}
+
+.containerBtn {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.lang {
+  width: 30px;
+  height: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid var(--inactive-text-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ua {
+  composes: lang;
+  background-image: url('../../icons/ua.svg');
+  margin-bottom: 5px;
+}
+
+.en {
+  composes: lang;
+  background-image: url('../../icons/en.svg');
+  
 }
 
 .title,
@@ -55,7 +86,7 @@
   .sign {
     display: block;
     font-size: 18px;
-    line-height: 27px;
+    line-height: 1.5;
     margin-left: 10px;
     color: var(--inactive-text-color);
   }

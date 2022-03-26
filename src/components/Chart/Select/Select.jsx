@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material";
 import Select from "react-select";
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { enUS, uk } from "date-fns/locale";
 import getStatistic from "./../../../API/getStatistic";
-
+import { useTranslation } from 'react-i18next';
 import { selectStyles } from "./selectStyles";
 
 const currentMonth = new Date().getMonth() + 1;
@@ -59,6 +59,7 @@ const createDataObj = ({ categories, totalIncome, totalSpent }) => {
 };
 
 function TableFilters({ setStatistic }) {
+  const { t, i18n } = useTranslation();
   const [date, setDate] = useState({
     month: currentMonth,
     year: currentYear,
@@ -79,7 +80,7 @@ function TableFilters({ setStatistic }) {
       <Select
         styles={selectStyles}
         options={monthOptions}
-        placeholder="Month"
+        placeholder={t("month")}
         onChange={(option) => {
           updateDate("month", option.value);
         }}
@@ -89,7 +90,7 @@ function TableFilters({ setStatistic }) {
       <Select
         styles={selectStyles}
         options={years}
-        placeholder="Year"
+        placeholder={t("year")}
         onChange={(option) => {
           updateDate("year", option.value);
         }}

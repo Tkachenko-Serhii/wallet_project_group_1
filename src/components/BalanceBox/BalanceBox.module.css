@@ -18,15 +18,12 @@
 .balanceLable {
   color: #a6a6a6;
   margin-bottom: 5px;
-  /* font-family: 'Segoe UI', sans-serif; */
   font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
   text-transform: uppercase;
 }
 .balanceValue {
-  /* font-family: 'Segoe UI', sans-serif; */
-
   font-size: 30px;
   font-weight: 700;
 }
@@ -40,7 +37,6 @@
     padding-left: 30px;
 
     margin-bottom: 30px;
-    /* font-family: 'Segoe UI', sans-serif; */
     width: 334px;
     height: 80px;
     background-color: #fff;
@@ -51,14 +47,12 @@
     color: #a6a6a6;
     margin-bottom: 5px;
 
-    /* font-family: 'Roboto', sans-serif; */
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
     text-transform: uppercase;
   }
   .balanceSum {
-    /* font-family: 'Roboto', sans-serif; */
     font-size: 30px;
     font-weight: 400;
   }
