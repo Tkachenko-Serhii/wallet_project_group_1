@@ -1,6 +1,6 @@
 {
-  "short_name": "Wallet App",
-  "name": "Create Wallet App Sample",
+  "short_name": "MoneyFlow",
+  "name": "Create MoneyFlow App Sample",
   "icons": [
     {
       "src": "favicon.ico",
