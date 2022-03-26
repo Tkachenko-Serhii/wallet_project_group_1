@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from "react-redux";
 import { ReactComponent as Close } from '../../icons/close.svg';
+import { useTranslation } from 'react-i18next';
 import isModalLogoutOpen from '../../redux/modalLogout/modalLogoutAction';
 import css from "./ModalLogout.module.css";
 import Button from '../Button';
@@ -12,7 +13,7 @@ const modalRoot = document.querySelector('#modal-logout-root');
 
 export default function ModalLogout() {
     const dispatch = useDispatch();
-
+    const { t, i18n } = useTranslation();
     useEffect(() => {
         document.body.style.overflow = "hidden";
     });
@@ -51,10 +52,10 @@ export default function ModalLogout() {
                 <button className={css.closeButton} onClick={toggleModal}>
                     <Close />
                 </button>
-                <h4 className={css.title}>Are you sure you want to logout?</h4>
-                <Button type="button" text="Continue" color="green" onClick={() => dispatch(userOperations.logout())} />
+                <h4 className={css.title}>{t("sure")}</h4>
+                <Button type="button" text={t("continue")} color="green" onClick={() => dispatch(userOperations.logout())} />
                 <Button
-                    text="Cancel"
+                    text={t("cancel")}
                     color="white"
                     type="button"
                     onClick={toggleModal}

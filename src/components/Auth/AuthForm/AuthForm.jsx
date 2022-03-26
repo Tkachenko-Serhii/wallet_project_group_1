@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Button';
 import styles from './AuthForm.module.css';
@@ -11,6 +11,7 @@ export default function AuthForm({
   secondaryBtnText,
   navigateTo
 }) {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -21,10 +22,10 @@ export default function AuthForm({
     >
       <div className={styles.inputsWrapper}>{children}</div>
       <div className={styles.btnGroup}>
-        <Button text={primaryBtnText} />
+        <Button text={t(primaryBtnText)} />
         <Button
           type="button"
-          text={secondaryBtnText}
+          text={t(secondaryBtnText)}
           color="white"
           onClick={() => navigate(navigateTo)}
         />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-
+import { useTranslation } from 'react-i18next';
 import DiagramTab from './DiagramTab';
 import { useSelector } from 'react-redux';
 import { userSelectors } from './../../redux/user';
@@ -10,6 +10,7 @@ import { userSelectors } from './../../redux/user';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Chart() {
+  const { t, i18n } = useTranslation();
   const balance = useSelector(userSelectors.getUserBalance);
   const [statistic, setStatistic] = useState([]);
 
@@ -52,7 +53,7 @@ export default function Chart() {
   return (
     <>
       <Wrapper>
-        <Title>Statistics</Title>
+        <Title>{t("statistics")}</Title>
         <RightTab>
           {statistic?.categories?.length > 0 && (
             <ChartBlock>

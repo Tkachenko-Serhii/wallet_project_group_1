@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { transactionsSelectors } from '../../redux/transactions';
 import Chart from './../Chart';
 import Loader from '../Loader/Loader';
-
+import { useTranslation } from 'react-i18next';
 import DashboardItem from '../DashboardItem';
 
 export default function Dashboard({ chart, ...props }) {
   const isLoading = useSelector(transactionsSelectors.getIsLoading);
-
+  const { t, i18n } = useTranslation();
   const allTransactions = useSelector(transactionsSelectors.getTransactions);
   const toSort = [...allTransactions];
   const toRender = toSort.sort((a, b) =>
@@ -22,12 +22,12 @@ export default function Dashboard({ chart, ...props }) {
           <ul className={s.table}>
             <li>
               <ul className={s.tableHeader}>
-                <li className={s.tableHeaderItemDate}>Date</li>
-                <li className={s.tableHeaderItemType}>Type</li>
-                <li className={s.tableHeaderItemCategory}>Category</li>
-                <li className={s.tableHeaderItemComment}>Comment</li>
-                <li className={s.tableHeaderItemAmount}>Amount</li>
-                <li className={s.tableHeaderItemBalance}>Balance</li>
+                <li className={s.tableHeaderItemDate}>{t("date")}</li>
+                <li className={s.tableHeaderItemType}>{t("type")}</li>
+                <li className={s.tableHeaderItemCategory}>{t("category")}</li>
+                <li className={s.tableHeaderItemComment}>{t("comment")}</li>
+                <li className={s.tableHeaderItemAmount}>{t("amount")}</li>
+                <li className={s.tableHeaderItemBalance}>{t("balanceTab")}</li>
               </ul>
             </li>
 
@@ -37,7 +37,7 @@ export default function Dashboard({ chart, ...props }) {
               ) : (
                 <>
                   {toRender.length < 1 ? (
-                    <span className={s.text}>The list is empty</span>) : (
+                      <span className={s.text}>{t("emptyList")}</span>) : (
                     <ul className={s.transactionsList}>
                       {toRender.map((row) => {
                         return <DashboardItem key={row._id} row={row} />;

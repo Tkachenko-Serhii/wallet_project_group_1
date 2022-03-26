@@ -1,5 +1,6 @@
 import s from './Footer.module.css';
 import React, { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { ReactComponent as Love } from "../../icons/love.svg";
@@ -12,6 +13,7 @@ import ModalFooter from "../ModalFooter/ModalFooter";
 import  isModalFooterOpen from "../../redux/modalFooter/modalFooterActions";
 
 export default function Footer() {
+  const { t, i18n } = useTranslation();
   const openModal = useSelector((state) => state.isModalFooterOpen.modalFooter);
 
   const dispatch = useDispatch();
@@ -28,18 +30,17 @@ export default function Footer() {
 
   return (
     <footer className={s.footer}>
-      <p className={s.copyright}>&copy; 2022 | All Rights Reserved </p>
+      <p className={s.copyright}>&copy; 2022 | {t("rights")} </p>
       <div className={s.developed_by}>
-        <span className={s.developed}>Developed with</span>
-        {/* <Love className={s.love}/> */}
+        <span className={s.developed}>{t("devs")}</span>
         <span className={s.favorite}>
       <svg className={s.favoriteIcon}>
        <Love className={s.love}/>
       </svg>
     </span>
-        <span className={s.by}>by</span>
+        <span className={s.by}>{t("by")}</span>
         <div className={s.modalClick} onClick={toggleModalFooter}>
-          GoIT Students
+          {t("students")}
         </div>
       </div>
 
@@ -50,8 +51,8 @@ export default function Footer() {
         <button className={s.btn_cross} onClick={toggleModalFooter}>
           <Close />
         </button>
-        <h2 className={s.team__title}>Our team</h2>
-        <span className={s.team__subtitle}>We can do a lot on our own, but together we can do everything.</span> 
+        <h2 className={s.team__title}>{t("team")}</h2>
+        <span className={s.team__subtitle}>{t("motto")}</span> 
           <ul className={s.team__cards}>
             {developers.map((developer) => {
               return (

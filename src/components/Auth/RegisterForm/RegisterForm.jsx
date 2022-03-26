@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
 import {
@@ -37,6 +37,7 @@ const PROGRESS_VALUES = {
 };
 
 export default function RegisterForm() {
+  const { t, i18n } = useTranslation();
   const [progress, setProgress] = useState(PROGRESS_VALUES.zero);
   const [isFieldFilled, setFieldFilled] = useState(
     INITIAL_IS_FIELD_FILLED_VALUES
@@ -158,7 +159,7 @@ export default function RegisterForm() {
           helperText={
             shouldPasswordErrorTextDisplayed && formik.errors.password
           }
-          placeholder="Password"
+          placeholder={t("password")}
         />
         <PasswordInputWithFormik
           id="confirmPassword"
@@ -171,7 +172,7 @@ export default function RegisterForm() {
             shouldConfirmPasswordErrorTextDisplayed &&
             formik.errors.confirmPassword
           }
-          placeholder="Confirm your password"
+          placeholder={t("confirmPass")}
         />
         <div className={styles.progressBarWrapper}>
           <ProgressBar progress={progress} />

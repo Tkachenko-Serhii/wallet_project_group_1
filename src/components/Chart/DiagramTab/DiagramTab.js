@@ -2,26 +2,28 @@ import React from 'react';
 import { styled } from '@mui/material';
 import TableFilters from '../Select/Select';
 import Category from '../Category/Category';
+import { useTranslation } from 'react-i18next';
 
 export default function DiagramTab({ data, setStatistic }) {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <TableFilters setStatistic={setStatistic} />
       {data?.total?.Expenses > 0 && (
         <>
           <CategoryItem>
-            <Title>Category</Title>
-            <Title>Amount</Title>
+            <Title>{t("category")}</Title>
+            <Title>{t("amount")}</Title>
           </CategoryItem>
 
           <Category data={data} />
 
           <Amount>
-            <AmountTitle>Expenses</AmountTitle>
+            <AmountTitle>{t("expense")}</AmountTitle>
             <Expenses>{(data.total.Expenses / 100).toFixed(2)}</Expenses>
           </Amount>
           <Amount>
-            <AmountTitle>Income</AmountTitle>
+            <AmountTitle>{t("income")}</AmountTitle>
             <Income>
               {data.total.Income
                 ? (data.total.Income / 100).toFixed(2)

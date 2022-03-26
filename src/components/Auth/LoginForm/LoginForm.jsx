@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import AuthFormWrapper from '../AuthFormWrapper';
 import AuthForm from '../AuthForm';
 import { EmailInputWithFormik, PasswordInputWithFormik } from '../../Inputs';
@@ -10,7 +10,7 @@ import { userOperations } from '../../../redux/user';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-
+  const { t, i18n } = useTranslation();
   const initialValues = {
     email: '',
     password: ''
@@ -40,7 +40,7 @@ export default function LoginForm() {
         secondaryBtnText="register"
         navigateTo="/register"
       >
-        <EmailInputWithFormik formik={formik} autoFocus />
+        <EmailInputWithFormik formik={formik} autoFocus/>
         <PasswordInputWithFormik
           id="password"
           name="password"
@@ -48,7 +48,7 @@ export default function LoginForm() {
           value={formik.values.password}
           error={isError}
           helperText={shouldErrorTextDisplayed && formik.errors.password}
-          placeholder="Password"
+          placeholder={t('password')}
         />
       </AuthForm>
     </AuthFormWrapper>

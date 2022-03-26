@@ -3,8 +3,10 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import s from './Navigation.module.css';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Navigation() {
+  const { t, i18n } = useTranslation();
   return (
     <ul className={s.navigation}>
       <li className={s.iconWrapper}>
@@ -22,7 +24,7 @@ export default function Navigation() {
           end
           to="/home"
         >
-          Main
+          {t("main")}
         </NavLink>
       </li>
       <li className={s.iconWrapper}>
@@ -38,7 +40,7 @@ export default function Navigation() {
           className={({ isActive }) => (isActive ? s.navLinkActive : s.navLink)}
           to="chart"
         >
-          Statistics
+          {t("statistics")}
         </NavLink>
       </li>
       <li className={s.iconWrapper}>

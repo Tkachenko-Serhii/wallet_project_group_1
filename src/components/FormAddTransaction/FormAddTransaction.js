@@ -20,13 +20,12 @@ import { ReactComponent as Plus } from '../../icons/plus.svg';
 import { ReactComponent as Minus } from '../../icons/minus.svg';
 import { ReactComponent as CalendarIcon } from '../../icons/calendar.svg';
 import { ReactComponent as Close } from '../../icons/close.svg';
-
+import { useTranslation } from 'react-i18next';
 import Button from '../Button';
 import DatePicker from '../DatePicker';
 import styles from './FormAddTransaction.module.css';
 
 import { formAddTransactionSchema } from '../../utils';
-// import { Check } from "@mui/icons-material";
 
 export default function ModalAddTransaction(props) {
   const DEFAULT_TRANSACTION_STATE = {
@@ -36,7 +35,7 @@ export default function ModalAddTransaction(props) {
     comment: '',
     category: '',
   };
-
+  const { t, i18n } = useTranslation();
   const categories = useSelector(categoriesSelectors.getCategories);
   const userBalanse = useSelector((state) => state.session.user.balance);
 
@@ -98,11 +97,11 @@ export default function ModalAddTransaction(props) {
       <button type="button" className={styles.closeButton} onClick={closeModal}>
         <Close />
       </button>
-      <h4 className={styles.title}>Add transaction</h4>
+      <h4 className={styles.title}>{t("add")}</h4>
 
       <div className={styles.swichContainer}>
         <label className={styles.switch}>
-          <span className={styles.swichTitleIncome}>Income</span>
+          <span className={styles.swichTitleIncome}>{t("income")}</span>
 
           <input
             type="checkbox"
@@ -124,14 +123,14 @@ export default function ModalAddTransaction(props) {
               {formik.values.type ? <Plus /> : <Minus />}
             </div>
           </div>
-          <span className={styles.swichTitleIncome}>Income</span>
-          <span className={styles.swichTitleExpense}>Expense</span>
+          <span className={styles.swichTitleIncome}>{t("income")}</span>
+          <span className={styles.swichTitleExpense}>{t("expense")}</span>
         </label>
       </div>
 
       <div className={styles.categoriesContainer}>
         <Select
-          placeholder="Select a category "
+          placeholder={t("selectCategory")}
           options={categories.filter(
             (category) => category.type === formik.values.type
           )}
@@ -188,7 +187,7 @@ export default function ModalAddTransaction(props) {
         <input
           type="text"
           name="comment"
-          placeholder="Comment"
+          placeholder={t("comment")}
           autoComplete="off"
           className={styles.inputComment}
           onChange={formik.handleChange}
@@ -197,12 +196,12 @@ export default function ModalAddTransaction(props) {
       </label>
       <Button
         type="submit"
-        text="Add"
+        text={t("add")}
         color="green"
         disabled={!formik.values.category || disabled} />
 
       <Button
-        text="Сancel"
+        text={t("cancel")}
         type="button"
         color="white"
         onClick={closeModal} />
