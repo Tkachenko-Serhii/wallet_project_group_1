@@ -8,11 +8,13 @@ import isModalLogoutOpen from '../../redux/modalLogout/modalLogoutAction';
 import { useDispatch } from "react-redux";
 import ModalLogout from '../ModalLogout/ModalLogout';
 
-const changeLang = (ln) => {
-    return () => { i18n.changeLanguage(ln) };
-}
-
 export default function Header() {
+    const changeLang = (ln) => {
+        return () => {
+            i18n.changeLanguage(ln);
+            localStorage.setItem("lg", ln)
+        };
+    }
     const activeUser = useSelector(userSelectors.getUserName);
     const dispatch = useDispatch();
     const openModal = useSelector((state) => state.isModalLogoutOpen.modalLogout);
@@ -30,12 +32,11 @@ export default function Header() {
                         <p className={css.title}>{t("logout")}</p>
                     </button>
                      <div className={css.containerBtn}>
-                <button className={css.ua} onClick={changeLang("ua")}></button>
+                        <button className={css.ua} onClick={changeLang("ua")}></button>
                 <button className={css.en} onClick={changeLang("en")}></button>
             </div>
                 </div>               
             </div>
-           
             {openModal && <ModalLogout />}
         </header>);
 }

@@ -9,8 +9,15 @@ import { selectStyles } from "./selectStyles";
 
 const currentMonth = new Date().getMonth() + 1;
 const months = Array.from({ length: 12 }, (item, i) => {
-  return format(new Date(0, i), "LLLL", {
+  let lang = localStorage.getItem('lg')
+  if (!lang) {
+    lang = "en"
+}
+  if (lang === "en") {return format(new Date(0, i), "LLLL", {
     locale: enUS,
+  });}
+  return format(new Date(0, i), "LLLL", {
+    locale: uk,
   });
 });
 

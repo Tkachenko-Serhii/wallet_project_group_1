@@ -13,9 +13,14 @@ const resources = {
     }
 };
 
+let baseLg = localStorage.getItem("lg");
+if (!baseLg) {
+    baseLg = "en"
+}
+
 i18n.use(initReactI18next).init({
     resources,
-    lng: 'ua',
+    lng: baseLg,
     keySeparator: false,
     interpolation: {
         escapeValue: false
